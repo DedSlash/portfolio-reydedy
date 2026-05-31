@@ -18,6 +18,7 @@ interface SkillGroup {
   templateUrl: './about.component.html',
 })
 export class AboutComponent {
+  protected photoError = false;
   protected readonly timeline: TimelineEntry[] = [
     {
       period: '2024 — Présent',

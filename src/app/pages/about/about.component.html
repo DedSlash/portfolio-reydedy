@@ -1,9 +1,20 @@
 <!-- SECTION 1 — Intro + photo -->
 <section class="layout-container pt-20 md:pt-28 pb-16">
   <div class="grid md:grid-cols-[260px_1fr] gap-10 items-start">
-    <!-- Photo placeholder -->
-    <div class="w-full aspect-square rounded-2xl surface-card flex items-center justify-center overflow-hidden">
-      <span class="font-serif text-7xl text-accent/40">RD</span>
+    <!-- Photo with fallback -->
+    <div class="group w-full aspect-square rounded-2xl surface-card flex items-center justify-center overflow-hidden
+                transition-shadow duration-300 hover:shadow-lg hover:shadow-accent/20 hover:ring-2 hover:ring-accent/40">
+      @if (!photoError) {
+        <img
+          src="assets/photo-rey.jpeg"
+          alt="Rey Dedy Pangou — développeur fullstack"
+          loading="lazy"
+          class="w-full h-full object-cover"
+          (error)="photoError = true"
+        />
+      } @else {
+        <span class="font-serif text-7xl text-accent/40">RD</span>
+      }
     </div>
 
     <div>
