@@ -1,0 +1,77 @@
+<header
+  class="sticky top-0 z-50 transition-colors duration-300"
+  [class.backdrop-blur-xl]="scrolled()"
+  [style.background-color]="scrolled() ? 'rgba(7,7,11,0.72)' : 'transparent'"
+  [style.border-bottom]="scrolled() ? '1px solid var(--border)' : '1px solid transparent'"
+>
+  <div class="layout-container flex items-center justify-between py-5">
+
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-2.5 group" (click)="closeMobile()">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform"></span>
+      <span class="font-serif text-[17px] tracking-tight text-text-primary">
+        Rey <span class="text-text-dim">·</span> Dedy Pangou
+      </span>
+    </a>
+
+    <!-- Nav desktop -->
+    <nav class="hidden md:flex items-center gap-1">
+      @for (item of [
+        {label: 'Projets', path: '/projets'},
+        {label: 'Services', path: '/services'},
+        {label: 'À propos', path: '/a-propos'}
+      ]; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="text-accent"
+          class="px-4 py-2 text-sm text-text-muted hover:text-text-primary transition-colors"
+        >{{ item.label }}</a>
+      }
+    </nav>
+
+    <!-- Actions droite -->
+    <div class="flex items-center gap-3">
+      <a routerLink="/contact" class="hidden sm:inline-flex btn-primary text-sm py-2.5 px-5">
+        Démarrer un projet
+        <span aria-hidden="true">→</span>
+      </a>
+      <app-theme-toggle/>
+      <!-- Hamburger mobile -->
+      <button
+        type="button"
+        class="md:hidden w-9 h-9 rounded-lg border border-border-base flex items-center justify-center text-text-muted"
+        (click)="toggleMobile()"
+        [attr.aria-label]="mobileOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
+      >
+        @if (!mobileOpen()) {
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        } @else {
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        }
+      </button>
+    </div>
+  </div>
+
+  <!-- Drawer mobile -->
+  @if (mobileOpen()) {
+    <div class="md:hidden border-t border-border-base bg-bg-surface">
+      <nav class="layout-container flex flex-col py-4">
+        @for (item of [
+          {label: 'Accueil', path: '/'},
+          {label: 'Projets', path: '/projets'},
+          {label: 'Services', path: '/services'},
+          {label: 'À propos', path: '/a-propos'},
+          {label: 'Contact', path: '/contact'}
+        ]; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="text-accent"
+            [routerLinkActiveOptions]="{exact: item.path === '/'}"
+            (click)="closeMobile()"
+            class="py-3 text-text-muted hover:text-text-primary border-b border-border-base last:border-0"
+          >{{ item.label }}</a>
+        }
+      </nav>
+    </div>
+  }
+</header>

@@ -1,0 +1,93 @@
+<!-- HERO -->
+<section class="layout-container pt-20 md:pt-28 pb-12">
+  <p class="kicker mb-6">Services</p>
+  <h1 class="font-serif text-h1-mobile md:text-h1-desktop text-text-primary mb-6 max-w-[820px]">
+    Trois formules claires. Tarifs assumés.
+  </h1>
+  <p class="max-w-prose text-text-muted text-lg leading-relaxed">
+    Pas de page de vente interminable. Voici ce que je fais, à quel prix, en combien de temps.
+    Si vous voulez du sur-mesure, demandez un devis — réponse personnelle sous 24h.
+  </p>
+</section>
+
+<!-- GRILLE SERVICES -->
+<section class="layout-container py-12">
+  <div class="grid md:grid-cols-3 gap-6">
+    @for (s of services; track s.num) {
+      <article class="surface-card p-7 flex flex-col" [class.border-strong]="s.popular">
+        <div class="flex items-center justify-between mb-5">
+          <span class="font-serif text-sm text-accent">{{ s.num }}</span>
+          @if (s.popular) {
+            <span class="text-[10px] tracking-widest uppercase px-2 py-1 rounded-full"
+                  [style.background]="'var(--accent)'"
+                  [style.color]="'var(--bg-primary)'">
+              Populaire
+            </span>
+          }
+        </div>
+
+        <h3 class="font-serif text-2xl text-text-primary mb-2">{{ s.title }}</h3>
+        <p class="text-text-muted text-sm mb-6 leading-relaxed">{{ s.pitch }}</p>
+
+        <ul class="space-y-2 text-sm text-text-muted mb-8 flex-1">
+          @for (b of s.bullets; track b) {
+            <li class="flex gap-2.5">
+              <span class="text-accent shrink-0">▸</span>
+              <span>{{ b }}</span>
+            </li>
+          }
+        </ul>
+
+        <div class="pt-6 border-t border-border-base">
+          <div class="font-serif text-xl text-accent-light">{{ s.priceFcfa }}</div>
+          <div class="text-sm text-text-muted">{{ s.priceUsd }}</div>
+          <div class="text-xs text-text-dim mt-3">Délai : {{ s.delay }}</div>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- INCLUS -->
+<section class="layout-container py-20 border-t border-border-base">
+  <p class="kicker mb-3">Ce qui est inclus dans toutes les formules</p>
+  <h2 class="font-serif text-h2-mobile md:text-h2-desktop text-text-primary mb-10">
+    Pas de mauvaises surprises.
+  </h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+    @for (i of included; track i) {
+      <div class="flex gap-3 items-start">
+        <span class="w-5 h-5 rounded-full bg-accent/10 border border-accent text-accent flex items-center justify-center text-xs shrink-0 mt-0.5">✓</span>
+        <span class="text-text-muted">{{ i }}</span>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- PROCESSUS -->
+<section class="layout-container py-20 border-t border-border-base">
+  <p class="kicker mb-3">Mon processus</p>
+  <h2 class="font-serif text-h2-mobile md:text-h2-desktop text-text-primary mb-12">
+    Quatre étapes, zéro flou.
+  </h2>
+  <div class="grid md:grid-cols-4 gap-6">
+    @for (p of process; track p.n) {
+      <div class="surface-card p-6">
+        <div class="font-serif text-3xl text-accent mb-3">{{ p.n }}</div>
+        <h3 class="font-serif text-lg text-text-primary mb-2">{{ p.title }}</h3>
+        <p class="text-sm text-text-muted leading-relaxed">{{ p.body }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="layout-container py-24 text-center">
+  <h2 class="font-serif text-3xl md:text-5xl text-text-primary mb-6">Devis gratuit en 24h</h2>
+  <p class="text-text-muted mb-8 max-w-prose mx-auto">
+    Décrivez votre projet dans le formulaire — je vous réponds personnellement avec une estimation et des idées concrètes.
+  </p>
+  <a routerLink="/contact" class="btn-primary">
+    Demander un devis <span aria-hidden="true">→</span>
+  </a>
+</section>

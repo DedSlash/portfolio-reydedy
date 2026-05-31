@@ -1,0 +1,21 @@
+# Configuration Netlify pour Angular SPA
+[build]
+  command = "npm run build"
+  publish = "dist/portfolio-reydedy/browser"
+  # ↑ Angular 17+ application builder met le bundle dans /browser/
+
+# Fallback SPA — toute route inconnue retourne index.html (le router Angular prend le relais)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Caching agressif pour les bundles hashés
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
