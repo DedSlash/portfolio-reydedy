@@ -2,7 +2,7 @@
 
 Portfolio personnel d'un développeur fullstack Java/Spring/Angular basé à Dakar.
 
-**En ligne :** _(URL Netlify à venir)_
+**En ligne :** https://portfolio-reydedy.netlify.app
 
 ## Stack
 
