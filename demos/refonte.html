@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refonte de site — Avant / Après · Rey Dedy Pangou</title>
+<meta name="description" content="Démonstration du service de refonte : avant / après interactif, résultats mesurables, audit gratuit." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f1419;
+    --bg-2: #1a212b;
+    --surface: #232b38;
+    --line: rgba(255,255,255,0.08);
+    --accent: #f06236;
+    --accent-light: #ff7d50;
+    --accent-soft: rgba(240,98,54,0.12);
+    --white: #ffffff;
+    --grey: #8d99ab;
+    --grey-dim: #5f6b7d;
+    --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--white); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--white); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .back-badge {
+    position: fixed; top: 18px; left: 18px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: rgba(35,43,56,0.8); color: var(--white);
+    padding: 8px 14px; border-radius: 999px;
+    backdrop-filter: blur(8px); border: 1px solid var(--line);
+  }
+  .back-badge:hover { border-color: var(--accent); color: var(--accent-light); }
+
+  /* nav */
+  nav.top {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    background: rgba(15,20,25,0.8);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 50;
+  }
+  nav.top .inner { display: flex; justify-content: space-between; align-items: center; }
+  .brand {
+    font-family: var(--display); font-weight: 700; font-size: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand::before {
+    content: ''; width: 26px; height: 26px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    border-radius: 7px;
+  }
+  .nav-cta {
+    background: var(--accent); color: var(--white);
+    padding: 10px 18px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 600; font-family: var(--display);
+  }
+  .nav-cta:hover { background: var(--accent-light); }
+
+  /* hero */
+  .hero { padding: 80px 0 50px; text-align: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft); color: var(--accent-light);
+    padding: 7px 14px; border-radius: 999px;
+    font-family: var(--display); font-size: 12.5px; font-weight: 600;
+    border: 1px solid rgba(240,98,54,0.25);
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.05; letter-spacing: -0.03em;
+    max-width: 22ch; margin: 0 auto 20px;
+  }
+  .hero h1 .strike {
+    color: var(--grey); text-decoration: line-through; text-decoration-color: var(--accent);
+    font-weight: 600;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead {
+    font-size: 17px; color: var(--grey); max-width: 56ch;
+    margin: 0 auto 14px;
+  }
+  .hero .hint { font-size: 13.5px; color: var(--grey-dim); margin-top: 18px; }
+  .hero .hint b { color: var(--accent-light); }
+
+  /* SLIDER AVANT/APRÈS */
+  .slider-section { padding: 50px 0 80px; }
+  .slider-wrap {
+    position: relative;
+    aspect-ratio: 16/10;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    user-select: none;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  }
+  .pane {
+    position: absolute; top: 0; left: 0; height: 100%; width: 100%;
+    overflow: hidden;
+  }
+  .pane.after { z-index: 1; }
+  .pane.before { z-index: 2; clip-path: inset(0 50% 0 0); }
+  .pane-inner {
+    width: 100%; height: 100%;
+    padding: 20px;
+    display: flex; flex-direction: column;
+  }
+
+  /* AVANT — vieux site 2018 */
+  .old-site {
+    background: #d9c89e;
+    color: #000;
+    font-family: 'Times New Roman', serif;
+    height: 100%; padding: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+  .old-banner {
+    background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+    color: #ffff00;
+    text-align: center; padding: 8px;
+    font-weight: bold; font-size: 14px;
+    text-shadow: 1px 1px 0 #000;
+    border: 2px outset #ff6600;
+    margin-bottom: 10px;
+  }
+  .old-banner marquee { display: inline-block; }
+  .old-title {
+    color: #0000ff; font-size: 26px; text-align: center;
+    text-decoration: underline; font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #ffcc00;
+  }
+  .old-table {
+    width: 100%; border-collapse: collapse;
+    background: #fffacd; border: 3px ridge #800080;
+  }
+  .old-table td { border: 1px solid #800080; padding: 6px; font-size: 11px; vertical-align: top; color: #000; }
+  .old-menu td { background: #00ffff; font-weight: bold; }
+  .old-menu td a { color: #ff00ff; font-size: 12px; text-decoration: underline; }
+  .old-content { background: #ffffe0; padding: 10px; font-size: 12px; line-height: 1.4; }
+  .old-content h3 { color: #ff0000; font-size: 15px; margin-bottom: 6px; }
+  .old-content img { float: left; margin: 0 8px 4px 0; }
+  .old-blink { color: #ff0000; font-weight: bold; animation: blink 0.7s infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .old-counter {
+    background: #000; color: #00ff00;
+    font-family: 'Courier New', monospace; font-size: 10px;
+    padding: 3px 6px; display: inline-block;
+    border: 1px solid #00ff00; margin-top: 6px;
+  }
+  .old-footer {
+    margin-top: 8px; text-align: center;
+    font-size: 9.5px; color: #800080;
+  }
+
+  /* APRÈS — version moderne */
+  .new-site {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+    color: #0f1419;
+    font-family: var(--display);
+    height: 100%; padding: 26px 30px;
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative;
+  }
+  .new-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(15,20,25,0.08);
+  }
+  .new-brand { font-weight: 800; font-size: 17px; color: #0f1419; }
+  .new-brand span { color: var(--accent); }
+  .new-nav .links { display: flex; gap: 16px; font-size: 12.5px; color: #5f6b7d; font-weight: 500; }
+  .new-hero {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; align-items: center;
+    flex: 1;
+  }
+  .new-hero h2 {
+    font-size: clamp(20px, 3vw, 30px); font-weight: 800;
+    color: #0f1419; line-height: 1.15; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .new-hero h2 span { color: var(--accent); }
+  .new-hero p { font-size: 12.5px; color: #5f6b7d; margin-bottom: 12px; }
+  .new-hero .ctab {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #0f1419; color: #fff;
+    padding: 9px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  }
+  .new-img {
+    aspect-ratio: 4/3; border-radius: 10px;
+    background:
+      linear-gradient(135deg, rgba(240,98,54,0.2), transparent 60%),
+      url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=60') center/cover;
+  }
+  .new-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    border-top: 1px solid rgba(15,20,25,0.08); padding-top: 10px;
+  }
+  .new-stats div { text-align: center; }
+  .new-stats b { display: block; font-size: 15px; color: var(--accent); font-weight: 800; }
+  .new-stats span { font-size: 9.5px; color: #5f6b7d; font-weight: 500; }
+
+  /* curseur */
+  .handle {
+    position: absolute; top: 0; left: 50%; height: 100%;
+    width: 4px; background: var(--accent); z-index: 5;
+    transform: translateX(-50%);
+    cursor: ew-resize;
+    box-shadow: 0 0 24px rgba(240,98,54,0.6);
+  }
+  .handle-grab {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--accent); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 700;
+    box-shadow: 0 6px 20px rgba(240,98,54,0.5);
+    cursor: grab;
+  }
+  .handle-grab:active { cursor: grabbing; }
+  .label {
+    position: absolute; top: 18px; padding: 7px 14px;
+    border-radius: 999px;
+    font-family: var(--display); font-weight: 700;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    z-index: 4;
+  }
+  .label.before { left: 18px; background: rgba(0,0,0,0.7); color: #fff; }
+  .label.after { right: 18px; background: var(--accent); color: var(--white); }
+  .slider-cap {
+    text-align: center; margin-top: 22px;
+    font-size: 13.5px; color: var(--grey);
+  }
+  .slider-cap b { color: var(--accent-light); }
+
+  /* sections */
+  section { padding: 90px 0; }
+  .sec-head { text-align: center; margin-bottom: 50px; }
+  .sec-head .eyebrow {
+    display: inline-block; font-family: var(--display); font-weight: 600;
+    background: var(--accent-soft); color: var(--accent-light);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .sec-head h2 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 42px);
+    letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .sec-head p { color: var(--grey); margin-top: 12px; max-width: 56ch; margin-left: auto; margin-right: auto; }
+
+  /* stats */
+  #results { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 22px;
+    text-align: center;
+  }
+  .stat-card .from {
+    font-size: 13px; color: var(--grey-dim); margin-bottom: 6px;
+    text-decoration: line-through;
+  }
+  .stat-card .to {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(28px, 4vw, 36px);
+    color: var(--accent-light); letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-card .lab {
+    font-size: 12.5px; color: var(--grey); margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+  .stat-card .arrow { color: var(--accent); font-size: 14px; margin: 0 4px; }
+
+  /* compare list */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 760px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-col {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 30px;
+  }
+  .compare-col.before { border-color: rgba(255,255,255,0.05); opacity: 0.85; }
+  .compare-col.after { border-color: var(--accent); }
+  .compare-col h3 {
+    font-family: var(--display); font-weight: 700;
+    font-size: 19px; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .compare-col.before h3 { color: var(--grey); }
+  .compare-col.before h3::before {
+    content: '✕'; width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .compare-col.after h3 { color: var(--accent-light); }
+  .compare-col.after h3::before {
+    content: '✓'; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+  }
+  .compare-col ul { list-style: none; }
+  .compare-col li {
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+    font-size: 14.5px; color: var(--grey); display: flex; align-items: flex-start; gap: 10px;
+  }
+  .compare-col li:last-child { border-bottom: none; }
+  .compare-col.after li { color: var(--white); }
+  .compare-col li::before {
+    content: '•'; color: var(--accent); font-weight: 700;
+  }
+
+  /* CTA */
+  #cta {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(240,98,54,0.1) 0%, transparent 70%);
+  }
+  #cta h2 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(32px, 5vw, 50px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    max-width: 22ch; margin: 0 auto 18px;
+  }
+  #cta h2 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  #cta p { color: var(--grey); max-width: 50ch; margin: 0 auto 30px; font-size: 16px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 28px; border-radius: 10px;
+    font-family: var(--display); font-weight: 600; font-size: 15px;
+    cursor: pointer; border: 1px solid transparent; transition: all .2s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(240,98,54,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(240,98,54,0.45); }
+  .btn-ghost { border-color: var(--line); color: var(--white); background: transparent; }
+  .btn-ghost:hover { border-color: var(--white); }
+  .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .reassure {
+    margin-top: 22px; color: var(--grey-dim); font-size: 13px;
+  }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    color: var(--grey-dim); font-size: 13px;
+    text-align: center;
+  }
+  footer a { color: var(--grey); }
+  footer a:hover { color: var(--accent-light); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<nav class="top">
+  <div class="wrap inner">
+    <div class="brand">Refonte<span style="color:var(--accent);">.</span>studio</div>
+    <a class="nav-cta" href="#cta">Audit gratuit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">Démonstration en temps réel</span>
+    <h1><span class="strike">Votre vieux site</span><br><span class="grad">repensé pour 2026.</span></h1>
+    <p class="lead">Beaucoup d'entreprises au Sénégal traînent un site fait il y a 5 ou 10 ans : lent, illisible sur téléphone, invisible sur Google. Voici exactement à quoi ressemble une refonte sérieuse.</p>
+    <p class="hint">👉 <b>Glissez le curseur</b> pour voir le avant / après ci-dessous</p>
+  </div>
+</section>
+
+<!-- SLIDER -->
+<section class="slider-section">
+  <div class="wrap">
+    <div class="slider-wrap" id="sliderWrap">
+      <span class="label after">Après</span>
+      <span class="label before">Avant (2018)</span>
+
+      <!-- APRÈS (fond) -->
+      <div class="pane after">
+        <div class="pane-inner">
+          <div class="new-site">
+            <div class="new-nav">
+              <div class="new-brand">Restaurant<span>Téranga</span></div>
+              <div class="links"><span>Carte</span><span>Réserver</span><span>Contact</span></div>
+            </div>
+            <div class="new-hero">
+              <div>
+                <h2>Une cuisine sénégalaise, <span>servie comme un art.</span></h2>
+                <p>Plats du marché, réservation en ligne, ouvert tous les jours.</p>
+                <span class="ctab">Réserver une table →</span>
+              </div>
+              <div class="new-img"></div>
+            </div>
+            <div class="new-stats">
+              <div><b>4,9 ★</b><span>184 avis Google</span></div>
+              <div><b>1,2 s</b><span>chargement</span></div>
+              <div><b>100%</b><span>mobile-friendly</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVANT (clip) -->
+      <div class="pane before">
+        <div class="pane-inner">
+          <div class="old-site">
+            <div class="old-banner">★ ★ ★ BIENVENUE SUR NOTRE SITE WEB !!! ★ ★ ★</div>
+            <div class="old-title">Restaurant Teranga !!!</div>
+            <table class="old-table">
+              <tr class="old-menu">
+                <td><a href="#">ACCUEIL</a></td>
+                <td><a href="#">MENU</a></td>
+                <td><a href="#">PHOTOS</a></td>
+                <td><a href="#">LIVRE D'OR</a></td>
+                <td><a href="#">CONTACT</a></td>
+              </tr>
+              <tr>
+                <td colspan="5" class="old-content">
+                  <h3>♨ Notre Restaurant ♨</h3>
+                  <p>Bienvenue sur le site officiel du Restaurant Teranga ! Situe a Dakar, nous vous proposons les meilleurs plats senegalais depuis 2008.</p>
+                  <p style="margin-top:4px;">Pour reserver une table, telephonez au <span class="old-blink">33 825 47 12</span></p>
+                  <p style="margin-top:4px;font-size:11px;">Heures d'ouverture : Lundi-Dimanche, 12h-22h</p>
+                  <div class="old-counter">Visiteurs : 00012847 </div>
+                </td>
+              </tr>
+            </table>
+            <div class="old-footer">Site mis a jour le 14/03/2018 - Best viewed in Internet Explorer 6 - © Tous droits reserves</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- curseur -->
+      <div class="handle" id="handle">
+        <div class="handle-grab">⇄</div>
+      </div>
+    </div>
+    <p class="slider-cap">Le site de gauche est <b>réel</b> : c'est le genre de page qui pénalise une entreprise sénégalaise sur Google et sur mobile en 2026.</p>
+  </div>
+</section>
+
+<!-- RÉSULTATS -->
+<section id="results">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Résultats mesurés</span>
+      <h2>Ce qu'on gagne, concrètement.</h2>
+      <p>Exemple chiffré sur un client réel : restaurant à Dakar, refonte livrée en 3 semaines.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="from">12 s</div>
+        <div class="to">1,2 s</div>
+        <div class="lab">Chargement mobile <span class="arrow">↓ 90%</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="from">2 / 10</div>
+        <div class="to">95 / 100</div>
+        <div class="lab">Score mobile Google</div>
+      </div>
+      <div class="stat-card">
+        <div class="from">450 visites</div>
+        <div class="to">1 890 visites</div>
+        <div class="lab">Trafic / mois <span class="arrow">↑ 320%</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="from">7 RDV / mois</div>
+        <div class="to">38 RDV / mois</div>
+        <div class="lab">Conversion réelle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Avant / Après</span>
+      <h2>Ce qui change, point par point.</h2>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col before">
+        <h3>Le vieux site</h3>
+        <ul>
+          <li>Mise en page bâtie sur des tableaux HTML — illisible sur téléphone</li>
+          <li>12 secondes de chargement, blacklisté par Google Mobile</li>
+          <li>Aucune réservation en ligne, tout passe par téléphone</li>
+          <li>Couleurs criardes, polices datées, design 2008</li>
+        </ul>
+      </div>
+      <div class="compare-col after">
+        <h3>La refonte 2026</h3>
+        <ul>
+          <li>Responsive impeccable, testé sur 30+ appareils</li>
+          <li>1,2 seconde de chargement — meilleurs scores Google</li>
+          <li>Réservation en 30 secondes, notifications WhatsApp</li>
+          <li>Design moderne, identité forte, hiérarchie claire</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="wrap">
+    <h2>Votre site mérite mieux qu'<span>une cure de jouvence en deux clics.</span></h2>
+    <p>Je fais un audit gratuit de votre site actuel et je vous envoie un rapport personnel sous 48h : ce qui pénalise, ce qui peut être sauvé, et combien coûte une refonte sérieuse.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://wa.me/221781602037?text=Bonjour%20Rey%2C%20je%20souhaite%20un%20audit%20gratuit%20de%20mon%20site.">💬 Demander mon audit gratuit</a>
+      <a class="btn btn-ghost" href="../exemples.html">Voir le catalogue</a>
+    </div>
+    <div class="reassure">✓ Audit gratuit · ✓ Sans engagement · ✓ Réponse sous 48h</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Réalisé par <a href="../exemples.html">Rey Dedy Pangou</a> — Développeur fullstack · Dakar · +221 78 160 20 37
+  </div>
+</footer>
+
+<script>
+  // Slider avant/après
+  const sliderWrap = document.getElementById('sliderWrap');
+  const handle = document.getElementById('handle');
+  const beforePane = document.querySelector('.pane.before');
+  let dragging = false;
+
+  function setPosition(x) {
+    const rect = sliderWrap.getBoundingClientRect();
+    let pct = ((x - rect.left) / rect.width) * 100;
+    pct = Math.max(2, Math.min(98, pct));
+    handle.style.left = pct + '%';
+    beforePane.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+  }
+
+  function startDrag(e) {
+    dragging = true;
+    e.preventDefault();
+  }
+  function endDrag() { dragging = false; }
+  function move(e) {
+    if (!dragging) return;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    setPosition(x);
+  }
+
+  handle.addEventListener('mousedown', startDrag);
+  handle.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchend', endDrag);
+  document.addEventListener('mousemove', move);
+  document.addEventListener('touchmove', move, { passive: true });
+
+  // clic direct dans la zone
+  sliderWrap.addEventListener('click', (e) => {
+    if (e.target.closest('.handle')) return;
+    setPosition(e.clientX);
+  });
+
+  // clavier
+  handle.tabIndex = 0;
+  handle.setAttribute('role', 'slider');
+  handle.setAttribute('aria-label', 'Curseur avant / après');
+  handle.addEventListener('keydown', (e) => {
+    const rect = sliderWrap.getBoundingClientRect();
+    let pct = parseFloat(handle.style.left || '50');
+    if (e.key === 'ArrowLeft') { pct -= 4; e.preventDefault(); }
+    if (e.key === 'ArrowRight') { pct += 4; e.preventDefault(); }
+    pct = Math.max(2, Math.min(98, pct));
+    handle.style.left = pct + '%';
+    beforePane.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+  });
+</script>
+</body>
+</html>

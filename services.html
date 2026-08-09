@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services &amp; tarifs — Rey Dedy Pangou</title>
+  <meta name="description" content="Trois formules claires : création de site, refonte design, refonte technique. Tarifs assumés, délais indicatifs, devis gratuit sous 24h." />
+  <meta name="theme-color" content="#07070b" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Services &amp; tarifs — Rey Dedy Pangou" />
+  <meta property="og:description" content="Trois formules claires. Tarifs assumés. Devis gratuit sous 24h." />
+  <meta property="og:image" content="assets/img/photo-rey.jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = saved || (prefersLight ? 'light' : 'dark');
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(theme);
+      } catch (e) { document.documentElement.classList.add('dark'); }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <style>
+    .page-hero { padding: 80px 0 32px; }
+    .page-hero h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.06; letter-spacing: -0.01em;
+      max-width: 20ch;
+      margin: 22px 0 20px;
+    }
+    .page-hero .lead {
+      color: var(--text-muted);
+      font-size: clamp(15px, 2vw, 18px);
+      max-width: 62ch; line-height: 1.7;
+    }
+
+    /* Grille services */
+    .grid-svc {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 900px) { .grid-svc { grid-template-columns: 1fr; } }
+
+    .card-svc {
+      background: var(--surface);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 30px 28px 28px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+    .card-svc:hover {
+      border-color: var(--gold-dim);
+      transform: translateY(-3px);
+      background: var(--surface-2);
+    }
+    .card-svc.popular {
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.08), var(--surface));
+      border-color: var(--border);
+    }
+    .card-svc .top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .card-svc .num {
+      font-family: var(--mono); font-size: 12px;
+      color: var(--gold); letter-spacing: 0.15em;
+    }
+    .card-svc .pop {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 999px;
+      background: var(--gold); color: #07070b;
+    }
+    .card-svc h3 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 24px; color: var(--text); margin-bottom: 8px;
+    }
+    .card-svc .pitch {
+      color: var(--text-muted); font-size: 14px;
+      line-height: 1.6; margin-bottom: 22px;
+    }
+    .card-svc ul {
+      list-style: none;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .card-svc ul li {
+      display: flex; gap: 10px;
+      font-size: 13.5px; color: var(--text-muted);
+      line-height: 1.55; margin-bottom: 8px;
+    }
+    .card-svc ul li::before {
+      content: '▸';
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .card-svc .price-block {
+      padding-top: 20px;
+      border-top: 1px solid var(--line-soft);
+    }
+    .card-svc .price {
+      font-family: var(--serif); font-size: 20px;
+      color: var(--gold-light); margin-bottom: 4px;
+    }
+    .card-svc .price-usd { font-size: 13px; color: var(--text-muted); }
+    .card-svc .delay {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-dim); margin-top: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* Inclus */
+    .included .grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 820px) { .included .grid { grid-template-columns: 1fr; } }
+    .included .item {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .included .item .check {
+      width: 22px; height: 22px; border-radius: 999px;
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .included .item span { color: var(--text-muted); font-size: 14.5px; }
+
+    /* Processus */
+    .process .grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 900px) { .process .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .process .grid { grid-template-columns: 1fr; } }
+    .process .step {
+      background: var(--surface);
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .process .step .n {
+      font-family: var(--serif); font-size: 28px;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .process .step h3 {
+      font-family: var(--serif); font-size: 17px;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .process .step p {
+      font-size: 13px; color: var(--text-muted); line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta-final {
+      text-align: center; padding: 90px 0;
+    }
+    .cta-final h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(28px, 4.5vw, 44px);
+      margin-bottom: 14px;
+    }
+    .cta-final p {
+      color: var(--text-muted);
+      max-width: 48ch; margin: 0 auto 24px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap-wide bar">
+    <a href="index.html" class="logo" data-nav="/">
+      <span class="dot"></span>
+      <span>Rey <span class="sep">·</span> Dedy Pangou</span>
+    </a>
+    <nav class="desktop">
+      <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+      <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+      <a href="services.html" data-nav="/services.html">Services</a>
+    </nav>
+    <div class="actions">
+      <a href="devis.html" class="btn btn-primary">Démarrer un projet <span class="arrow">→</span></a>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Basculer le thème">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button type="button" class="hamburger" data-hamburger aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer">
+    <div class="wrap-wide">
+      <nav>
+        <a href="index.html" data-nav="/">Accueil</a>
+        <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+        <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+        <a href="services.html" data-nav="/services.html">Services</a>
+        <a href="devis.html" data-nav="/devis.html">Devis</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="page-hero">
+  <div class="wrap-wide">
+    <span class="eyebrow reveal">Services</span>
+    <h1 class="reveal">Trois formules claires. Tarifs assumés.</h1>
+    <p class="lead reveal">
+      Pas de page de vente interminable. Voici ce que je fais, à quel prix, en combien de temps.
+      Si vous voulez du sur-mesure, demandez un devis — réponse personnelle sous 24h.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FORMULES ============ -->
+<section style="padding-top: 8px;">
+  <div class="wrap-wide">
+    <div class="grid-svc">
+
+      <article class="card-svc popular reveal">
+        <div class="top">
+          <span class="num">01</span>
+          <span class="pop">Populaire</span>
+        </div>
+        <h3>Création de site</h3>
+        <p class="pitch">Site vitrine, e-commerce, ou application web complète.</p>
+        <ul>
+          <li>Design responsive et soigné</li>
+          <li>Intégration paiement locale (Wave, Orange Money, Stripe)</li>
+          <li>Backend Spring Boot et frontend Angular si besoin</li>
+        </ul>
+        <div class="price-block">
+          <div class="price">à partir de 150 000 F</div>
+          <div class="price-usd">$250</div>
+          <div class="delay">DÉLAI · 2-4 SEMAINES</div>
+        </div>
+      </article>
+
+      <article class="card-svc reveal">
+        <div class="top">
+          <span class="num">02</span>
+        </div>
+        <h3>Refonte design</h3>
+        <p class="pitch">Nouveau look, UI/UX moderne, responsive mobile sur site existant.</p>
+        <ul>
+          <li>Travail sur votre site actuel (WordPress, sur-mesure, etc.)</li>
+          <li>Livraison rapide, focus mobile</li>
+          <li>Améliorations UX concrètes</li>
+        </ul>
+        <div class="price-block">
+          <div class="price">à partir de 80 000 F</div>
+          <div class="price-usd">$130</div>
+          <div class="delay">DÉLAI · 1-2 SEMAINES</div>
+        </div>
+      </article>
+
+      <article class="card-svc reveal">
+        <div class="top">
+          <span class="num">03</span>
+        </div>
+        <h3>Refonte technique</h3>
+        <p class="pitch">Nouvelles fonctionnalités, APIs, intégrations tierces, optimisations.</p>
+        <ul>
+          <li>Performance, SEO, sécurité</li>
+          <li>APIs REST + intégrations (paiement, email, analytics)</li>
+          <li>Migration de stack, refactoring de code existant</li>
+        </ul>
+        <div class="price-block">
+          <div class="price">à partir de 100 000 F</div>
+          <div class="price-usd">$165</div>
+          <div class="delay">DÉLAI · 2-3 SEMAINES</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ INCLUS ============ -->
+<section class="included" style="border-top: 1px solid var(--line-soft);">
+  <div class="wrap-wide">
+    <div class="section-head reveal">
+      <span class="eyebrow">Ce qui est inclus dans toutes les formules</span>
+      <h2>Pas de mauvaises surprises.</h2>
+    </div>
+    <div class="grid">
+      <div class="item reveal"><span class="check">✓</span><span>Design responsive (mobile, tablette, desktop)</span></div>
+      <div class="item reveal"><span class="check">✓</span><span>Backend robuste Spring Boot</span></div>
+      <div class="item reveal"><span class="check">✓</span><span>Déploiement Docker / CI-CD automatisé</span></div>
+      <div class="item reveal"><span class="check">✓</span><span>Livraison sous 2-4 semaines</span></div>
+      <div class="item reveal"><span class="check">✓</span><span>Support et maintenance après livraison</span></div>
+      <div class="item reveal"><span class="check">✓</span><span>Devis gratuit en 24h</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESSUS ============ -->
+<section class="process" style="border-top: 1px solid var(--line-soft);">
+  <div class="wrap-wide">
+    <div class="section-head reveal">
+      <span class="eyebrow">Mon processus</span>
+      <h2>Quatre étapes, zéro flou.</h2>
+    </div>
+    <div class="grid">
+      <div class="step reveal">
+        <div class="n">01</div>
+        <h3>Cadrage</h3>
+        <p>On définit ensemble votre besoin, vos contraintes, vos délais. Devis ferme sous 24h.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">02</div>
+        <h3>Conception</h3>
+        <p>Maquettes, architecture, validation des choix techniques avant la moindre ligne de code.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">03</div>
+        <h3>Développement</h3>
+        <p>Cycles courts, démos régulières. Vous voyez l'avancement chaque semaine.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">04</div>
+        <h3>Livraison &amp; support</h3>
+        <p>Mise en production, formation, support pendant 1 mois inclus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-final" style="border-top: 1px solid var(--line-soft);">
+  <div class="wrap-wide">
+    <h2 class="reveal">Devis gratuit en 24h</h2>
+    <p class="reveal">Décrivez votre projet dans le formulaire — je vous réponds personnellement avec une estimation et des idées concrètes.</p>
+    <a href="devis.html" class="btn btn-primary reveal">Demander un devis <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap-wide cols">
+    <p>© <span data-year>2026</span> Rey Dedy Pangou — Développeur fullstack · Dakar</p>
+    <div class="links">
+      <a href="https://github.com/DedSlash" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/rey-dedy-pangou/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/221781602037" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:dedypangou@gmail.com">Email</a>
+    </div>
+    <p class="credit">Entreprise individuelle · <span class="accent">Sénégal</span></p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

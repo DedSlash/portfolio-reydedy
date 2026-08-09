@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exemples — Maquettes de démonstration · Rey Dedy Pangou</title>
+  <meta name="description" content="Six maquettes de démonstration illustrant les types de sites que je peux concevoir : restaurant, boutique, cabinet médical, portfolio créatif, startup, refonte. Ce ne sont pas des livraisons client." />
+  <meta name="theme-color" content="#07070b" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Exemples — Maquettes de démonstration" />
+  <meta property="og:description" content="Ce que je peux concevoir pour vous, illustré par six démos cliquables." />
+  <meta property="og:image" content="assets/img/photo-rey.jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = saved || (prefersLight ? 'light' : 'dark');
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(theme);
+      } catch (e) { document.documentElement.classList.add('dark'); }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <style>
+    .page-hero { padding: 72px 0 24px; }
+    .page-hero h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.06; letter-spacing: -0.01em;
+      max-width: 20ch;
+      margin: 22px 0 20px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold-light); }
+    .page-hero .lead {
+      color: var(--text-muted);
+      font-size: clamp(15px, 2vw, 18px);
+      max-width: 62ch; line-height: 1.7;
+    }
+    .page-hero .lead strong { color: var(--text); font-weight: 500; }
+
+    /* Bandeau d'avertissement explicite */
+    .notice {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.09), transparent 90%);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin: 32px 0 20px;
+    }
+    .notice .ico {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .notice p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .notice p strong { color: var(--text); font-weight: 500; }
+    .notice a { color: var(--gold-light); border-bottom: 1px solid var(--gold-dim); }
+    .notice a:hover { border-bottom-color: var(--gold); }
+
+    /* Grille cartes */
+    .grid-demo {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 24px 0 60px;
+    }
+    @media (max-width: 860px) { .grid-demo { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .grid-demo { grid-template-columns: 1fr; } }
+
+    .card-demo {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      padding: 26px 24px 22px;
+      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+      display: flex; flex-direction: column;
+      min-height: 220px;
+    }
+    .card-demo:hover {
+      border-color: var(--gold-dim);
+      transform: translateY(-3px);
+      background: var(--surface-2);
+    }
+    .card-demo .row-top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 10px; margin-bottom: 14px;
+    }
+    .card-demo .num {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-dim); letter-spacing: 0.1em;
+    }
+    .card-demo .tag-demo {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+      padding: 3px 8px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+    }
+    .card-demo h3 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 21px; margin-bottom: 8px;
+      color: var(--text);
+    }
+    .card-demo .desc {
+      font-size: 13.5px; color: var(--text-muted);
+      line-height: 1.6; flex: 1;
+    }
+    .card-demo .link {
+      margin-top: 18px;
+      font-family: var(--mono); font-size: 12px;
+      color: var(--gold);
+      display: inline-flex; align-items: center; gap: 7px;
+      letter-spacing: 0.5px;
+    }
+    .card-demo .link .arrow { transition: transform 0.2s ease; }
+    .card-demo:hover .link .arrow { transform: translateX(4px); }
+    .card-demo.featured {
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.08), var(--surface));
+      border-color: var(--border);
+    }
+    .card-demo.featured h3 { color: var(--gold-light); }
+
+    /* Manifesto strip */
+    .manifesto {
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      padding: 40px 0;
+      margin-top: 20px;
+    }
+    .manifesto p {
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.8vw, 26px);
+      font-weight: 400;
+      line-height: 1.45;
+      max-width: 34ch;
+    }
+    .manifesto p .q { color: var(--gold); }
+
+    /* CTA final */
+    .final {
+      text-align: center;
+      padding: 90px 0;
+    }
+    .final h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(28px, 4.5vw, 44px);
+      max-width: 20ch; margin: 12px auto 16px;
+      line-height: 1.15;
+    }
+    .final p {
+      color: var(--text-muted);
+      max-width: 48ch;
+      margin: 0 auto 26px;
+    }
+    .final .cta-row {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap-wide bar">
+    <a href="index.html" class="logo" data-nav="/">
+      <span class="dot"></span>
+      <span>Rey <span class="sep">·</span> Dedy Pangou</span>
+    </a>
+    <nav class="desktop">
+      <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+      <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+      <a href="services.html" data-nav="/services.html">Services</a>
+    </nav>
+    <div class="actions">
+      <a href="devis.html" class="btn btn-primary">Démarrer un projet <span class="arrow">→</span></a>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Basculer le thème">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button type="button" class="hamburger" data-hamburger aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer">
+    <div class="wrap-wide">
+      <nav>
+        <a href="index.html" data-nav="/">Accueil</a>
+        <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+        <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+        <a href="services.html" data-nav="/services.html">Services</a>
+        <a href="devis.html" data-nav="/devis.html">Devis</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="page-hero">
+  <div class="wrap-wide">
+    <span class="eyebrow reveal">Exemples de conception</span>
+    <h1 class="reveal">Votre site, pensé comme un <em>système</em> — pas assemblé comme un template.</h1>
+    <p class="lead reveal">
+      Aujourd'hui, n'importe qui sort un site en dix minutes avec une IA.
+      <strong>La vraie question, c'est ce qui se passe après :</strong> est-ce que ça tient,
+      est-ce que c'est rapide, sécurisé, et est-ce que ça grandit avec vous ?
+      Choisissez votre métier ci-dessous, voyez ce qui est possible, et parlons-en.
+    </p>
+
+    <!-- Bandeau explicite -->
+    <div class="notice reveal">
+      <span class="ico">✦</span>
+      <p>
+        <strong>Ces six pages sont des maquettes de démonstration.</strong> Elles illustrent
+        les types de projets que je peux concevoir — pas des sites livrés à des clients.
+        Pour mes réalisations en production, voir <a href="realisations.html">Réalisations</a>
+        (Joseph Yusuf, Lets-Travel, Neo4flix, et quatre autres systèmes).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATALOGUE ============ -->
+<section style="padding-top: 24px;">
+  <div class="wrap-wide">
+    <div class="section-head reveal">
+      <span class="eyebrow">Par métier</span>
+      <h2>Trouvez le vôtre</h2>
+      <p>Chaque rubrique mène à une démo réelle et cliquable — pas une image, un vrai site que vous pouvez manipuler.</p>
+    </div>
+
+    <div class="grid-demo">
+
+      <a class="card-demo reveal" href="demos/restaurant.html">
+        <div class="row-top">
+          <span class="num">01 · Restaurant</span>
+          <span class="tag-demo">Démo</span>
+        </div>
+        <h3>Vitrine &amp; réservation</h3>
+        <p class="desc">Menu en ligne, galerie de plats, réservation en 30 secondes depuis le téléphone. Pensé pour convertir le passant en client.</p>
+        <span class="link">Voir la démo <span class="arrow">→</span></span>
+      </a>
+
+      <a class="card-demo reveal" href="demos/boutique.html">
+        <div class="row-top">
+          <span class="num">02 · Commerce</span>
+          <span class="tag-demo">Démo</span>
+        </div>
+        <h3>Boutique en ligne</h3>
+        <p class="desc">Catalogue, panier, paiement Wave / Orange Money, tableau de bord vendeur. Votre boutique ouverte 24h/24.</p>
+        <span class="link">Voir la démo <span class="arrow">→</span></span>
+      </a>
+
+      <a class="card-demo reveal" href="demos/cabinet.html">
+        <div class="row-top">
+          <span class="num">03 · Libéral</span>
+          <span class="tag-demo">Démo</span>
+        </div>
+        <h3>Profession &amp; RDV</h3>
+        <p class="desc">Médecin, avocat, coach : présentation claire, prise de rendez-vous en ligne, notifications automatiques.</p>
+        <span class="link">Voir la démo <span class="arrow">→</span></span>
+      </a>
+
+      <a class="card-demo reveal" href="demos/portfolio.html">
+        <div class="row-top">
+          <span class="num">04 · Créatif</span>
+          <span class="tag-demo">Démo</span>
+        </div>
+        <h3>Portfolio visuel</h3>
+        <p class="desc">Galerie immersive et filtrable pour designers, photographes, vidéastes. Votre travail enfin hors d'Instagram.</p>
+        <span class="link">Voir la démo <span class="arrow">→</span></span>
+      </a>
+
+      <a class="card-demo reveal" href="demos/startup.html">
+        <div class="row-top">
+          <span class="num">05 · Startup</span>
+          <span class="tag-demo">Démo</span>
+        </div>
+        <h3>Page de lancement</h3>
+        <p class="desc">Landing produit qui capture vos premiers utilisateurs : accroche, démo, inscription, FAQ. Valider avant de tout construire.</p>
+        <span class="link">Voir la démo <span class="arrow">→</span></span>
+      </a>
+
+      <a class="card-demo reveal" href="demos/refonte.html">
+        <div class="row-top">
+          <span class="num">06 · Refonte</span>
+          <span class="tag-demo">Démo</span>
+        </div>
+        <h3>Avant / Après</h3>
+        <p class="desc">Site lent, daté, invisible sur Google ? Modernisation complète : performance, mobile, sécurité, référencement.</p>
+        <span class="link">Voir la démo <span class="arrow">→</span></span>
+      </a>
+
+      <a class="card-demo featured reveal" href="realisations.html">
+        <div class="row-top">
+          <span class="num">07 · Sur-mesure</span>
+          <span class="tag-demo">Réel</span>
+        </div>
+        <h3>Plateforme &amp; SaaS</h3>
+        <p class="desc">Application web, microservices, architecture. Quand le besoin dépasse la vitrine — voici mes systèmes en production réelle.</p>
+        <span class="link">Voir les réalisations <span class="arrow">→</span></span>
+      </a>
+
+    </div>
+
+    <div class="manifesto reveal">
+      <p>« Un site, c'est la partie facile. Ce qui fait la différence, c'est <span class="q">la réflexion qui se cache derrière</span> — et la capacité de le mettre en production pour de vrai. »</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="final">
+  <div class="wrap-wide">
+    <span class="eyebrow reveal">Parlons-en</span>
+    <h2 class="reveal">Dites-moi ce que vous voulez accomplir.</h2>
+    <p class="reveal">Décrivez votre projet en trois minutes. Je vous réponds personnellement sous 24h, avec une estimation et des idées concrètes — pas un copier-coller.</p>
+    <div class="cta-row reveal">
+      <a href="devis.html" class="btn btn-primary">Décrivez votre projet <span class="arrow">→</span></a>
+      <a href="https://wa.me/221781602037" class="btn btn-ghost" target="_blank" rel="noopener">WhatsApp · +221 78 160 20 37</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap-wide cols">
+    <p>© <span data-year>2026</span> Rey Dedy Pangou — Développeur fullstack · Dakar</p>
+    <div class="links">
+      <a href="https://github.com/DedSlash" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/rey-dedy-pangou/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/221781602037" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:dedypangou@gmail.com">Email</a>
+    </div>
+    <p class="credit">Entreprise individuelle · <span class="accent">Sénégal</span></p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

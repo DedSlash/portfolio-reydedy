@@ -44,3 +44,7 @@ Thumbs.db
 
 # Netlify CLI
 .netlify/
+
+# Archives des anciens sites fusionnés (Angular + sources HTML héritées)
+_legacy_angular/
+_legacy_sources/

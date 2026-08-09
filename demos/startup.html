@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DelivPay — Le paiement mobile, simplifié.</title>
+<meta name="description" content="Payer, recevoir, transférer. Tout depuis votre téléphone, sans frais cachés. DelivPay arrive bientôt au Sénégal." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-2: #161c26;
+    --surface: #1c2230;
+    --line: rgba(255,255,255,0.08);
+    --violet: #6d5ef0;
+    --violet-light: #8b7bff;
+    --mint: #2ee6a6;
+    --mint-dark: #1ccb8c;
+    --white: #ffffff;
+    --grey: #99a1b3;
+    --grey-dim: #6c7689;
+    --display: 'Sora', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--white); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--violet); color: var(--white); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .back-badge {
+    position: fixed; top: 18px; left: 18px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: rgba(28,34,48,0.78); color: var(--white);
+    padding: 8px 14px; border-radius: 999px;
+    backdrop-filter: blur(8px); border: 1px solid var(--line);
+  }
+  .back-badge:hover { border-color: var(--mint); color: var(--mint); }
+
+  /* nav */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  nav.top .inner { display: flex; justify-content: space-between; align-items: center; }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--display); font-weight: 700; font-size: 20px;
+  }
+  .brand .logo {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--mint) 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bg); font-weight: 800; font-size: 16px;
+  }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; color: var(--grey); }
+  .nav-links a:hover { color: var(--white); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+  .nav-cta {
+    background: var(--mint); color: var(--bg);
+    padding: 10px 18px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 600;
+  }
+  .nav-cta:hover { background: var(--mint-dark); }
+
+  /* hero */
+  .hero {
+    padding: 90px 0 110px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -30%; right: -20%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(109,94,240,0.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -30%; left: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(46,230,166,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 50px; } }
+  .pill-launch {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(46,230,166,0.12); color: var(--mint);
+    padding: 7px 14px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600;
+    border: 1px solid rgba(46,230,166,0.2);
+    margin-bottom: 22px;
+  }
+  .pill-launch::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--mint); box-shadow: 0 0 0 4px rgba(46,230,166,0.2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 8px rgba(46,230,166,0); } }
+  .hero h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(40px, 6.5vw, 72px);
+    line-height: 1.04; letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--violet-light) 0%, var(--mint) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead {
+    font-size: 18px; color: var(--grey); max-width: 50ch;
+    margin-bottom: 30px;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 26px; border-radius: 10px;
+    font-family: var(--display); font-weight: 600; font-size: 14.5px;
+    cursor: pointer; border: 1px solid transparent; transition: all .2s ease;
+  }
+  .btn-primary { background: var(--mint); color: var(--bg); }
+  .btn-primary:hover { background: var(--mint-dark); transform: translateY(-1px); }
+  .btn-ghost { border-color: var(--line); color: var(--white); background: transparent; }
+  .btn-ghost:hover { border-color: var(--white); }
+  .btn-violet { background: var(--violet); color: var(--white); }
+  .btn-violet:hover { background: var(--violet-light); }
+
+  .micro-trust { margin-top: 22px; font-size: 12.5px; color: var(--grey-dim); }
+  .micro-trust b { color: var(--mint); }
+
+  /* phone mockup */
+  .phone-wrap {
+    display: flex; justify-content: center;
+    perspective: 1200px;
+  }
+  .phone {
+    width: 290px;
+    aspect-ratio: 9/19;
+    background: linear-gradient(160deg, #1c2230 0%, #0d1117 100%);
+    border-radius: 38px;
+    border: 8px solid #1c2230;
+    box-shadow:
+      0 30px 80px rgba(109,94,240,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.06);
+    padding: 18px 16px;
+    position: relative;
+    transform: rotate(-3deg);
+  }
+  .phone::before {
+    content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 22px; background: #050709;
+    border-radius: 999px;
+  }
+  .phone-screen { padding: 38px 4px 0; }
+  .phone-hello { color: var(--grey); font-size: 11.5px; }
+  .phone-name { font-family: var(--display); font-weight: 700; font-size: 17px; margin-top: 2px; }
+  .phone-balance {
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--violet) 0%, #4a3dd5 100%);
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .phone-balance .lab { font-size: 10.5px; opacity: 0.75; letter-spacing: 1px; text-transform: uppercase; }
+  .phone-balance .amt {
+    font-family: var(--display); font-weight: 700;
+    font-size: 26px; margin-top: 4px; letter-spacing: -0.02em;
+  }
+  .phone-balance .amt small { font-size: 13px; opacity: 0.7; font-weight: 500; }
+  .phone-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+  .pa {
+    background: rgba(255,255,255,0.05); border-radius: 10px;
+    padding: 10px 4px; text-align: center;
+    font-size: 9.5px; color: var(--grey); display: flex; flex-direction: column; gap: 5px; align-items: center;
+  }
+  .pa .ic { font-size: 16px; }
+  .phone-txn-title { margin-top: 18px; font-size: 11px; color: var(--grey-dim); letter-spacing: 0.5px; }
+  .phone-tx {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 11.5px;
+  }
+  .phone-tx .tx-ic { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .phone-tx .tx-info { flex: 1; }
+  .phone-tx .tx-info b { display: block; font-size: 12px; }
+  .phone-tx .tx-info span { color: var(--grey-dim); font-size: 10px; }
+  .phone-tx .amt-tx { font-weight: 600; font-size: 12px; }
+  .phone-tx .amt-tx.in { color: var(--mint); }
+
+  /* sections */
+  section { padding: 90px 0; position: relative; }
+  .sec-head { text-align: center; margin-bottom: 60px; }
+  .sec-head .eyebrow {
+    font-family: var(--display); display: inline-block;
+    background: rgba(109,94,240,0.15); color: var(--violet-light);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .sec-head h2 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(30px, 4.5vw, 44px); letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .sec-head p { color: var(--grey); margin-top: 14px; max-width: 56ch; margin-left: auto; margin-right: auto; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 32px 28px;
+    position: relative;
+  }
+  .step .n {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--mint) 100%);
+    color: var(--bg); font-family: var(--display); font-weight: 800; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+  }
+  .step h3 { font-family: var(--display); font-weight: 700; font-size: 19px; margin-bottom: 8px; }
+  .step p { color: var(--grey); font-size: 14.5px; }
+
+  /* counter band */
+  #counter {
+    background: linear-gradient(135deg, rgba(109,94,240,0.15) 0%, rgba(46,230,166,0.1) 100%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+  #counter .num-big {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(72px, 12vw, 140px);
+    line-height: 1; letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--mint) 0%, var(--violet-light) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin: 12px 0;
+  }
+  #counter .live {
+    display: inline-flex; gap: 8px; align-items: center;
+    font-size: 13px; color: var(--mint);
+    font-family: var(--display); font-weight: 600;
+  }
+  #counter .live::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--mint); animation: pulse 2s infinite;
+  }
+  #counter h3 { font-family: var(--display); font-size: 18px; color: var(--grey); font-weight: 500; margin-top: 8px; }
+
+  /* signup */
+  #signup .form-box {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 44px;
+    max-width: 580px; margin: 0 auto;
+    text-align: center;
+  }
+  #signup h2 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  #signup p { color: var(--grey); margin-bottom: 26px; }
+  .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .form-row input {
+    flex: 1; min-width: 200px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--white);
+    padding: 15px 18px; border-radius: 10px;
+    font-family: var(--sans); font-size: 14.5px;
+  }
+  .form-row input:focus { outline: 2px solid var(--violet); border-color: transparent; }
+  .form-row button { flex-shrink: 0; }
+  .legal { margin-top: 14px; color: var(--grey-dim); font-size: 12px; }
+
+  /* faq */
+  #faq { background: var(--bg-2); }
+  .faq-list { max-width: 780px; margin: 0 auto; }
+  .faq-item {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; padding: 20px 22px;
+    background: transparent; border: none; color: var(--white);
+    font-family: var(--display); font-weight: 600; font-size: 15px;
+    text-align: left; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  }
+  .faq-q .plus { color: var(--mint); font-size: 22px; transition: transform .2s ease; }
+  .faq-item.open .plus { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height .25s ease;
+    color: var(--grey); font-size: 14.5px; line-height: 1.7;
+  }
+  .faq-a-inner { padding: 0 22px 20px; }
+  .faq-item.open .faq-a { max-height: 300px; }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    color: var(--grey-dim); font-size: 13px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  }
+  footer a:hover { color: var(--mint); }
+
+  /* modale */
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(13,17,23,0.85);
+    display: none; align-items: center; justify-content: center; z-index: 200;
+    padding: 24px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 16px; padding: 40px 32px;
+    max-width: 460px; width: 100%; text-align: center;
+  }
+  .modal .check {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--mint) 100%);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 30px; font-weight: 700;
+  }
+  .modal h3 { font-family: var(--display); font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+  .modal p { color: var(--grey); margin-bottom: 22px; }
+  .modal .place-num {
+    background: rgba(46,230,166,0.1); color: var(--mint);
+    border: 1px solid rgba(46,230,166,0.25);
+    padding: 14px; border-radius: 10px;
+    font-family: var(--display); font-weight: 700; font-size: 17px;
+    margin-bottom: 22px;
+  }
+  .modal .btn-primary { width: 100%; justify-content: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<nav class="top">
+  <div class="wrap inner">
+    <div class="brand">
+      <div class="logo">D</div>
+      DelivPay
+    </div>
+    <div class="nav-links">
+      <a href="#how">Fonctionnement</a>
+      <a href="#counter">Lancement</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="#signup">Réserver ma place</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill-launch">Lancement officiel · septembre 2026</span>
+      <h1>Le paiement mobile, <span class="grad">enfin sans friction.</span></h1>
+      <p class="lead">Payer, recevoir, transférer. Tout depuis votre téléphone. Compatible Wave et Orange Money, frais 5× moins chers, instantané partout au Sénégal.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#signup">Réserver ma place gratuite</a>
+        <a class="btn btn-ghost" href="#how">Comment ça marche →</a>
+      </div>
+      <div class="micro-trust">🔒 Agrément BCEAO en cours · Aucune carte bancaire requise · <b>14 jours d'avance</b> pour les premiers inscrits</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-hello">Bonjour 👋</div>
+          <div class="phone-name">Awa Sow</div>
+          <div class="phone-balance">
+            <div class="lab">Solde disponible</div>
+            <div class="amt">142 350 <small>FCFA</small></div>
+          </div>
+          <div class="phone-actions">
+            <div class="pa"><span class="ic">↗</span>Envoyer</div>
+            <div class="pa"><span class="ic">↙</span>Recevoir</div>
+            <div class="pa"><span class="ic">≡</span>Payer</div>
+            <div class="pa"><span class="ic">+</span>Recharger</div>
+          </div>
+          <div class="phone-txn-title">RÉCENT</div>
+          <div class="phone-tx">
+            <div class="tx-ic">🛒</div>
+            <div class="tx-info"><b>Marché Sandaga</b><span>Aujourd'hui · 14:22</span></div>
+            <div class="amt-tx">−4 500</div>
+          </div>
+          <div class="phone-tx">
+            <div class="tx-ic">👤</div>
+            <div class="tx-info"><b>De Mamadou D.</b><span>Hier · 19:08</span></div>
+            <div class="amt-tx in">+15 000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Comment ça marche</span>
+      <h2>En 3 étapes, c'est plié.</h2>
+      <p>Pas de paperasse, pas d'agence à visiter. Vous téléchargez, vous identifiez, vous payez.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Téléchargez DelivPay</h3>
+        <p>Disponible sur Android et iPhone. 12 Mo. Inscription en 2 minutes avec votre numéro et une pièce d'identité.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Rechargez votre compte</h3>
+        <p>Depuis Wave, Orange Money, ou en cash chez l'un de nos 800+ points partenaires partout au Sénégal.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Payez, transférez, vivez.</h3>
+        <p>Chez le commerçant via QR code, en ligne, ou à un proche. Toujours instantané, jamais plus de 150 FCFA de frais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER -->
+<section id="counter">
+  <div class="wrap">
+    <div class="live">EN DIRECT</div>
+    <div class="num-big" id="counterNum">2 847</div>
+    <h3>Sénégalais ont déjà réservé leur place</h3>
+    <p style="color:var(--grey-dim);max-width:50ch;margin:14px auto 0;font-size:13.5px;">Plus que <b style="color:var(--white);">7 153 places</b> avant le lancement public. Les premiers inscrits bénéficient des frais à <b style="color:var(--mint);">0 FCFA</b> pendant 3 mois.</p>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section id="signup">
+  <div class="wrap">
+    <div class="form-box">
+      <h2>Réservez votre place gratuite</h2>
+      <p>Aucun engagement. On vous prévient quand l'app est dispo. Et vous gardez votre avantage à vie.</p>
+      <form id="signupForm" novalidate>
+        <div class="form-row">
+          <input id="email" type="email" placeholder="votre@email.com" required>
+          <button type="submit" class="btn btn-primary">Réserver ma place →</button>
+        </div>
+      </form>
+      <div class="legal">En vous inscrivant, vous acceptez de recevoir nos actualités. Désinscription en un clic.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions fréquentes</h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+    <span>© 2026 DelivPay — En phase de lancement</span>
+    <span>contact@delivpay.sn · +221 78 000 00 00</span>
+  </div>
+</footer>
+
+<!-- Modale -->
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="check">✓</div>
+    <h3>Merci, votre place est réservée 🎉</h3>
+    <p>Vous faites partie des <b style="color:var(--white);">premiers utilisateurs</b> de DelivPay.</p>
+    <div class="place-num" id="placeNum">VOTRE NUMÉRO : #2 848</div>
+    <p style="font-size:13.5px;">On vous envoie un email dès que l'app est prête à être téléchargée. 3 mois de frais offerts.</p>
+    <button class="btn btn-primary" onclick="closeModal()">Parfait, merci !</button>
+  </div>
+</div>
+
+<script>
+  // Compteur animé au scroll
+  const counterEl = document.getElementById('counterNum');
+  const target = 2847;
+  let counted = false;
+  function animateCounter() {
+    if (counted) return;
+    counted = true;
+    let n = 2400;
+    const tick = () => {
+      n += Math.ceil((target - n) / 15);
+      if (n >= target) { counterEl.textContent = target.toLocaleString('fr-FR').replace(/,/g,' '); return; }
+      counterEl.textContent = n.toLocaleString('fr-FR').replace(/,/g,' ');
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) animateCounter(); });
+  }, { threshold: 0.4 });
+  io.observe(document.getElementById('counter'));
+
+  // FAQ
+  const faqs = [
+    { q:"DelivPay, c'est gratuit ?", a:"L'application est entièrement gratuite. Les frais de transaction sont parmi les plus bas du marché — 5× moins que les opérateurs classiques — et offerts pendant 3 mois pour les premiers inscrits." },
+    { q:"Est-ce que je peux envoyer de l'argent à un compte Wave ou Orange Money ?", a:"Oui. DelivPay est interopérable dès le lancement avec Wave et Orange Money. Vous pouvez envoyer et recevoir entre les trois services sans aucun frais supplémentaire." },
+    { q:"Mes données sont-elles en sécurité ?", a:"Toutes vos données sont chiffrées de bout en bout. DelivPay est en cours d'obtention de l'agrément BCEAO et applique les standards de la finance internationale (PCI-DSS niveau 1)." },
+    { q:"Quand l'application sera-t-elle disponible ?", a:"Lancement officiel prévu en septembre 2026. Les inscrits sur cette liste auront accès en avant-première 14 jours avant tout le monde." },
+    { q:"Y a-t-il un plafond de transaction ?", a:"100 000 FCFA par jour pour un compte standard, 1 500 000 FCFA pour un compte vérifié (KYC complet). Aucun plafond mensuel." },
+  ];
+  const faqList = document.getElementById('faqList');
+  faqs.forEach((f, i) => {
+    const el = document.createElement('div');
+    el.className = 'faq-item';
+    el.innerHTML = `
+      <button class="faq-q" aria-expanded="false">
+        <span>${f.q}</span>
+        <span class="plus">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>`;
+    el.querySelector('.faq-q').addEventListener('click', () => {
+      el.classList.toggle('open');
+    });
+    faqList.appendChild(el);
+  });
+
+  // Formulaire
+  document.getElementById('signupForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    if (!email) return;
+    const next = target + Math.floor(Math.random() * 4) + 1;
+    document.getElementById('placeNum').textContent = `VOTRE NUMÉRO : #${next.toLocaleString('fr-FR').replace(/,/g,' ')}`;
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('email').value = '';
+  });
+
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  document.getElementById('modal').addEventListener('click', e => { if (e.target.id==='modal') closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -1,21 +1,21 @@
-# Configuration Netlify pour Angular SPA
+# Site statique — pas de build step
+# Netlify publie directement les fichiers HTML/CSS/JS/img depuis la racine.
 [build]
-  command = "npm run build"
-  publish = "dist/portfolio-reydedy/browser"
-  # ↑ Angular 17+ application builder met le bundle dans /browser/
+  publish = "."
 
-# Fallback SPA — toute route inconnue retourne index.html (le router Angular prend le relais)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# URLs propres : /realisations → /realisations.html, etc.
+# Ne pas ajouter de fallback SPA — c'est un site multi-pages.
 
-# Caching agressif pour les bundles hashés
+# Cache long sur les assets statiques (images, CV, JS partagé)
 [[headers]]
-  for = "/*.js"
+  for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=604800"
+
+# En-têtes de sécurité minimaux
 [[headers]]
-  for = "/*.css"
+  for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réalisations — Rey Dedy Pangou</title>
+  <meta name="description" content="Mes projets réels en production : Joseph Yusuf (SaaS multi-microservices), Le Petit Mag (CMS éditorial), Lets-Travel, Neo4flix, et quatre autres systèmes livrés." />
+  <meta name="theme-color" content="#07070b" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Réalisations — Rey Dedy Pangou" />
+  <meta property="og:description" content="Huit systèmes livrés : du SaaS multi-microservices au CMS éditorial sur mesure, en passant par des APIs petit-format soignées." />
+  <meta property="og:image" content="assets/img/photo-rey.jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = saved || (prefersLight ? 'light' : 'dark');
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(theme);
+      } catch (e) { document.documentElement.classList.add('dark'); }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <style>
+    .page-hero { padding: 80px 0 32px; }
+    .page-hero h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.06; letter-spacing: -0.01em;
+      max-width: 20ch;
+      margin: 22px 0 20px;
+    }
+    .page-hero .lead {
+      color: var(--text-muted);
+      font-size: clamp(15px, 2vw, 18px);
+      max-width: 60ch; line-height: 1.7;
+    }
+
+    .grid-proj {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      padding-bottom: 48px;
+    }
+    @media (max-width: 820px) { .grid-proj { grid-template-columns: 1fr; } }
+
+    .card-proj {
+      background: var(--surface);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 28px 28px 24px;
+      display: flex; flex-direction: column; gap: 18px;
+      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+    .card-proj:hover {
+      border-color: var(--gold-dim);
+      transform: translateY(-3px);
+      background: var(--surface-2);
+    }
+    .card-proj.large { grid-column: 1 / -1; padding: 34px 34px 30px; }
+    .card-proj.featured {
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.08), var(--surface));
+      border-color: var(--border);
+    }
+    .card-proj .head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .card-proj .cat {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .card-proj .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .card-proj .badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--gold-light);
+      border: 1px solid var(--border-strong);
+    }
+    .card-proj h3 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 26px;
+      color: var(--text);
+    }
+    .card-proj.large h3 { font-size: 30px; }
+    .card-proj .pitch { color: var(--text-muted); line-height: 1.7; font-size: 15px; }
+    .card-proj .status {
+      font-size: 12px;
+      color: var(--success);
+      font-style: italic;
+      border-left: 2px solid rgba(52, 211, 153, 0.4);
+      padding: 4px 0 4px 12px;
+    }
+    .card-proj ul.hi {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 6px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .card-proj ul.hi li { display: flex; gap: 8px; }
+    .card-proj ul.hi li::before {
+      content: '▸';
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .card-proj .stack {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .card-proj .creds {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 8px;
+    }
+    .card-proj .creds .lbl {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .card-proj .creds .row { color: var(--text-muted); }
+    .card-proj .creds .row b { color: var(--text); font-weight: 500; font-family: var(--mono); }
+    .card-proj .links {
+      display: flex; gap: 20px; padding-top: 14px;
+      margin-top: auto;
+      border-top: 1px solid var(--line-soft);
+    }
+    .card-proj .links a {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    .card-proj .links a:hover { color: var(--gold-light); }
+    .card-proj .links .live { color: var(--gold-light); }
+    .card-proj .links svg { width: 14px; height: 14px; }
+
+    .card-proj .visual {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid var(--line-soft);
+      background: var(--surface-2);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap-wide bar">
+    <a href="index.html" class="logo" data-nav="/">
+      <span class="dot"></span>
+      <span>Rey <span class="sep">·</span> Dedy Pangou</span>
+    </a>
+    <nav class="desktop">
+      <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+      <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+      <a href="services.html" data-nav="/services.html">Services</a>
+    </nav>
+    <div class="actions">
+      <a href="devis.html" class="btn btn-primary">Démarrer un projet <span class="arrow">→</span></a>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Basculer le thème">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button type="button" class="hamburger" data-hamburger aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer">
+    <div class="wrap-wide">
+      <nav>
+        <a href="index.html" data-nav="/">Accueil</a>
+        <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+        <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+        <a href="services.html" data-nav="/services.html">Services</a>
+        <a href="devis.html" data-nav="/devis.html">Devis</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="page-hero">
+  <div class="wrap-wide">
+    <span class="eyebrow reveal">Mes projets</span>
+    <h1 class="reveal">Huit systèmes, huit terrains de jeu.</h1>
+    <p class="lead reveal">
+      Du SaaS multi-microservices en production aux APIs petit-format soignées, voici les projets qui
+      composent ma pratique. Chacun a son repo public, sa stack assumée, et — pour certains — sa démo live.
+    </p>
+  </div>
+</section>
+
+<!-- ============ GRILLE ============ -->
+<section style="padding-top:16px;">
+  <div class="wrap-wide">
+    <div class="grid-proj">
+
+      <!-- Joseph Yusuf — large -->
+      <article class="card-proj large featured reveal">
+        <div class="head">
+          <span class="cat">SaaS en production</span>
+          <div class="badges">
+            <span class="badge">★ PROJET PHARE</span>
+            <span class="badge">● EN PRODUCTION</span>
+          </div>
+        </div>
+        <div>
+          <h3>Joseph Yusuf</h3>
+          <p class="pitch">
+            SaaS de gestion des revenus pour freelances et salariés à revenus variables —
+            Afrique francophone et diaspora.
+          </p>
+        </div>
+        <p class="status">En production publique depuis mai 2026 · monétisation Q3 2026</p>
+        <ul class="hi">
+          <li>10 microservices Spring Boot 3 orchestrés via Eureka + Spring Cloud Gateway</li>
+          <li>Frontends séparés admin et utilisateur, design system PrimeNG</li>
+          <li>CI/CD complet : Jenkins multi-pipeline, SonarQube, déploiement Ansible</li>
+          <li>Modèle SaaS : essai gratuit + abonnement payant + facturation automatisée</li>
+          <li>Hébergement Hetzner VPS, monitoring custom, observabilité centralisée</li>
+        </ul>
+        <div class="stack">
+          <span class="tech-tag">10 microservices</span>
+          <span class="tech-tag">Spring Boot 3</span>
+          <span class="tech-tag">Spring Cloud</span>
+          <span class="tech-tag">Angular 17</span>
+          <span class="tech-tag">PrimeNG</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Kafka</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">Jenkins</span>
+          <span class="tech-tag">SonarQube</span>
+          <span class="tech-tag">Ansible</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Hetzner VPS</span>
+        </div>
+        <div class="creds">
+          <div class="lbl">Démo live</div>
+          <div class="row">user · <b>demo.portfolio@josephyusuf.com</b></div>
+          <div class="row">pass · <b>abundance-or-lean-26</b></div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/joseph-yusuf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+          <a class="live" href="https://josephyusuf.com" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
+            Démo live
+          </a>
+        </div>
+      </article>
+
+      <!-- Le Petit Mag — client réel -->
+      <article class="card-proj large reveal">
+        <div class="head">
+          <span class="cat">CMS éditorial sur mesure</span>
+          <div class="badges">
+            <span class="badge">● CLIENT LIVRÉ</span>
+            <span class="badge">● EN PRODUCTION</span>
+          </div>
+        </div>
+        <img
+          src="assets/img/lepetitmag-home.png"
+          alt="Aperçu de la page d'accueil du magazine en ligne Le Petit Mag"
+          loading="lazy"
+          class="visual"
+        />
+        <div>
+          <h3>Le Petit Mag</h3>
+          <p class="pitch">
+            Plateforme de publication custom conçue comme première instance d'un moteur
+            <em>cms-core</em> réutilisable. Gestion d'articles, catégories, médias, et rendu SSR
+            optimisé pour le SEO et la performance.
+          </p>
+        </div>
+        <p class="status">Client : Sabrina Petit — média indépendant · en production</p>
+        <ul class="hi">
+          <li>Architecture réutilisable (cms-core) pensée pour d'autres clients média</li>
+          <li>Rendu côté serveur (Angular SSR) pour SEO et temps de chargement optimisés</li>
+          <li>Migrations versionnées (Flyway) et conteneurisation Docker complète</li>
+          <li>Déploiement autonome sur VPS Hetzner — infrastructure sous contrôle</li>
+        </ul>
+        <div class="stack">
+          <span class="tech-tag">Spring Boot 3</span>
+          <span class="tech-tag">Angular SSR</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Flyway</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Hetzner VPS</span>
+        </div>
+        <div class="links">
+          <a class="live" href="https://lepetitmag.org" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
+            Voir le magazine
+          </a>
+        </div>
+      </article>
+
+      <!-- Lets-Travel -->
+      <article class="card-proj reveal">
+        <div class="head">
+          <span class="cat">Plateforme SaaS</span>
+        </div>
+        <div>
+          <h3>Lets-Travel</h3>
+          <p class="pitch">
+            Plateforme SaaS de gestion de voyages pensée pour la production —
+            8 microservices, multi-base, infra-as-code complète.
+          </p>
+        </div>
+        <div class="stack">
+          <span class="tech-tag">8 microservices</span>
+          <span class="tech-tag">Spring Boot 3</span>
+          <span class="tech-tag">PostgreSQL 16</span>
+          <span class="tech-tag">Neo4j</span>
+          <span class="tech-tag">Elasticsearch 9</span>
+          <span class="tech-tag">Redis 7</span>
+          <span class="tech-tag">Kafka</span>
+          <span class="tech-tag">Vault</span>
+          <span class="tech-tag">Stripe</span>
+          <span class="tech-tag">PayPal</span>
+          <span class="tech-tag">Ansible</span>
+          <span class="tech-tag">Prometheus</span>
+          <span class="tech-tag">Grafana</span>
+          <span class="tech-tag">Loki</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/lets-travel" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- Neo4flix -->
+      <article class="card-proj reveal">
+        <div class="head">
+          <span class="cat">Moteur de recommandation</span>
+        </div>
+        <div>
+          <h3>Neo4flix</h3>
+          <p class="pitch">
+            Moteur de recommandation de films par traversée de graphe Neo4j — architecture
+            microservices Spring Boot, authentification JWT + 2FA email.
+          </p>
+        </div>
+        <div class="stack">
+          <span class="tech-tag">6 microservices</span>
+          <span class="tech-tag">Spring Boot 3</span>
+          <span class="tech-tag">Neo4j 5</span>
+          <span class="tech-tag">MongoDB 6</span>
+          <span class="tech-tag">Angular 20</span>
+          <span class="tech-tag">JWT + 2FA</span>
+          <span class="tech-tag">Cloudinary</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/neo4flix" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- Lets-Play -->
+      <article class="card-proj reveal">
+        <div class="head">
+          <span class="cat">API REST sécurisée</span>
+        </div>
+        <div>
+          <h3>Lets-Play</h3>
+          <p class="pitch">
+            API REST Spring Boot — petit format, exécution exemplaire. Le projet qui démontre
+            la maîtrise des fondamentaux backend.
+          </p>
+        </div>
+        <div class="stack">
+          <span class="tech-tag">Spring Boot 3.4</span>
+          <span class="tech-tag">Spring Security</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">JWT</span>
+          <span class="tech-tag">Bucket4j</span>
+          <span class="tech-tag">HTTPS</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/lets-play" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- Buy-01 -->
+      <article class="card-proj reveal">
+        <div class="head">
+          <span class="cat">E-commerce microservices</span>
+        </div>
+        <div>
+          <h3>Buy-01</h3>
+          <p class="pitch">
+            Plateforme e-commerce événementielle avec communication asynchrone Kafka et
+            frontend Angular. Projet en duo.
+          </p>
+        </div>
+        <div class="stack">
+          <span class="tech-tag">Spring Boot</span>
+          <span class="tech-tag">Kafka</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Eureka</span>
+          <span class="tech-tag">Angular</span>
+          <span class="tech-tag">JWT</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/buy-01" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- OncoShift -->
+      <article class="card-proj reveal">
+        <div class="head">
+          <span class="cat">Healthcare-tech</span>
+        </div>
+        <div>
+          <h3>OncoShift</h3>
+          <p class="pitch">
+            Plateforme de téléconsultation médicale — 5 microservices avec intégration
+            Jitsi Meet auto-hébergé et service IA d'aide à la décision.
+          </p>
+        </div>
+        <div class="stack">
+          <span class="tech-tag">5 microservices</span>
+          <span class="tech-tag">Spring Boot</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Kafka</span>
+          <span class="tech-tag">Jitsi Meet</span>
+          <span class="tech-tag">IA (règles)</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/oncoshift" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- Angul-It -->
+      <article class="card-proj reveal">
+        <div class="head">
+          <span class="cat">Frontend Angular pur</span>
+        </div>
+        <div>
+          <h3>Angul-It</h3>
+          <p class="pitch">
+            Captcha multi-étapes (images, math, texte) en Angular 20 — animations soignées,
+            SSR, déployable Vercel.
+          </p>
+        </div>
+        <div class="stack">
+          <span class="tech-tag">Angular 20</span>
+          <span class="tech-tag">TypeScript 5.8</span>
+          <span class="tech-tag">TailwindCSS</span>
+          <span class="tech-tag">Angular Material</span>
+          <span class="tech-tag">RxJS</span>
+          <span class="tech-tag">SSR</span>
+          <span class="tech-tag">Crypto-js</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/DedSlash/angul-it" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.06c-3.34.73-4.04-1.4-4.04-1.4-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/></svg>
+            Code source
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section style="text-align:center; padding: 80px 0; border-top: 1px solid var(--line-soft);">
+  <div class="wrap-wide">
+    <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 4vw, 40px); margin-bottom: 14px;">
+      Envie d'un système qui tient la production ?
+    </h2>
+    <p style="color: var(--text-muted); max-width: 48ch; margin: 0 auto 24px;">
+      Devis gratuit sous 24h. On cadre votre besoin ensemble avant la moindre ligne de code.
+    </p>
+    <a href="devis.html" class="btn btn-primary">Décrivez votre projet <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap-wide cols">
+    <p>© <span data-year>2026</span> Rey Dedy Pangou — Développeur fullstack · Dakar</p>
+    <div class="links">
+      <a href="https://github.com/DedSlash" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/rey-dedy-pangou/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/221781602037" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:dedypangou@gmail.com">Email</a>
+    </div>
+    <p class="credit">Entreprise individuelle · <span class="accent">Sénégal</span></p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

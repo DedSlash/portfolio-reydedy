@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devis — Décrivez votre projet · Rey Dedy Pangou</title>
+  <meta name="description" content="Formulaire de qualification de projet. Remplissez en 3 minutes — réponse personnelle sous 24h avec estimation et idées concrètes. Envoi par email (Web3Forms) ou WhatsApp." />
+  <meta name="theme-color" content="#07070b" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Devis — Décrivez votre projet" />
+  <meta property="og:description" content="Formulaire en 3 minutes. Réponse personnelle sous 24h." />
+  <meta property="og:image" content="assets/img/photo-rey.jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = saved || (prefersLight ? 'light' : 'dark');
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(theme);
+      } catch (e) { document.documentElement.classList.add('dark'); }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <style>
+    /* ============================================================
+       Styles spécifiques du formulaire — palette or/#07070b
+       Fonts alignées sur Fraunces + Inter (design system global)
+       HTML + JS conservés intacts
+       ============================================================ */
+    :root {
+      --border-focus: rgba(201, 168, 76, 0.6);
+    }
+
+    /* Orbs d'ambiance — ton or discret */
+    .orb {
+      position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+      filter: blur(80px);
+    }
+    .orb1 { width: 500px; height: 500px; background: #c9a84c; opacity: 0.06; top: -100px; right: -100px; }
+    .orb2 { width: 400px; height: 400px; background: #c9a84c; opacity: 0.04; bottom: -80px; left: -80px; }
+    .orb3 { width: 300px; height: 300px; background: #f5e49a; opacity: 0.03; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    .light .orb1, .light .orb2, .light .orb3 { display: none; }
+
+    /* Wrapper local pour le formulaire */
+    .form-wrap {
+      position: relative; z-index: 1;
+      max-width: 720px; margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    .form-head { text-align: center; margin-bottom: 44px; }
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+      color: var(--gold); border: 0.8px solid var(--gold);
+      padding: 5px 16px; border-radius: 20px;
+      margin-bottom: 20px; opacity: 0.9;
+    }
+    .form-head h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(28px, 5vw, 42px);
+      background: linear-gradient(135deg, #c9a84c, #f5e49a, #c9a84c);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2; margin-bottom: 14px;
+    }
+    .form-head p {
+      font-size: 15px; color: var(--text-muted);
+      line-height: 1.7; max-width: 480px; margin: 0 auto;
+    }
+
+    .lang-toggle {
+      display: flex; justify-content: center; gap: 8px; margin-bottom: 32px;
+    }
+    .lang-btn {
+      background: transparent; border: 0.8px solid var(--border);
+      color: var(--text-muted); font-family: var(--sans);
+      font-size: 13px; font-weight: 500;
+      padding: 7px 20px; border-radius: 20px; cursor: pointer;
+      transition: var(--transition);
+    }
+    .lang-btn.active {
+      background: rgba(201, 168, 76, 0.12);
+      border-color: var(--gold); color: var(--gold-light);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 0.8px solid var(--border);
+      border-radius: 20px;
+      padding: 34px 32px;
+      margin-bottom: 16px;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.5;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 2px; color: var(--gold);
+      font-weight: 500; margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      font-size: 13px; color: var(--text-muted);
+      margin-bottom: 24px; line-height: 1.6;
+    }
+
+    .field { margin-bottom: 20px; }
+    label {
+      display: block; font-family: var(--sans);
+      font-size: 13px; font-weight: 500;
+      color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.3px;
+    }
+    label span { color: var(--gold); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea, select {
+      width: 100%;
+      background: var(--surface-2);
+      border: 0.8px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      appearance: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.10);
+    }
+    textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239b9bab' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    ::placeholder { color: var(--text-dim); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: var(--surface-2);
+      border: 0.8px solid var(--border);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 13px; color: var(--text-muted);
+      cursor: pointer; transition: var(--transition);
+      user-select: none;
+    }
+    .chip:hover { border-color: var(--gold-dim); color: var(--text); }
+    .chip.selected {
+      background: rgba(201, 168, 76, 0.12);
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .budget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .budget-opt {
+      background: var(--surface-2);
+      border: 0.8px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 12px; text-align: center;
+      cursor: pointer; transition: var(--transition);
+    }
+    .budget-opt:hover { border-color: var(--gold-dim); }
+    .budget-opt.selected {
+      background: rgba(201, 168, 76, 0.08);
+      border-color: var(--gold);
+    }
+    .budget-opt .amount {
+      font-family: var(--serif);
+      font-size: 15px; color: var(--gold-light);
+      display: block; margin-bottom: 2px;
+    }
+    .budget-opt .label { font-size: 11px; color: var(--text-muted); }
+
+    .urgency-row { display: flex; gap: 10px; }
+    .urgency-opt {
+      flex: 1; background: var(--surface-2);
+      border: 0.8px solid var(--border);
+      border-radius: var(--radius); padding: 12px 10px; text-align: center;
+      cursor: pointer; transition: var(--transition);
+      font-size: 13px; color: var(--text-muted);
+    }
+    .urgency-opt:hover { border-color: var(--gold-dim); }
+    .urgency-opt.selected {
+      background: rgba(201, 168, 76, 0.12);
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .submit-btn {
+      width: 100%; padding: 18px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      background-size: 200% auto;
+      border: none; border-radius: var(--radius);
+      color: #07070b; font-family: var(--sans);
+      font-size: 16px; font-weight: 500;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: opacity var(--transition), transform var(--transition), background-position 0.6s ease;
+    }
+    .submit-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+    .submit-btn:hover::after { transform: translateX(100%); }
+    .submit-btn:hover { transform: translateY(-1px); background-position: right center; }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn[disabled] { cursor: not-allowed; opacity: 0.7; }
+
+    /* Bouton WhatsApp — variante verte (conservée à l'identique) */
+    .submit-btn-wa {
+      background: linear-gradient(135deg, #25d366, #128c7e, #075e54);
+      color: #fff;
+    }
+
+    .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .btn-hint {
+      text-align: center; font-size: 12px; color: var(--text-dim);
+      margin-top: 14px; line-height: 1.6;
+    }
+
+    .progress-bar {
+      display: flex; gap: 6px; justify-content: center;
+      margin-bottom: 32px;
+    }
+    .prog-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text-dim); transition: var(--transition);
+    }
+    .prog-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+
+    .success-state {
+      text-align: center; padding: 60px 24px;
+      display: none;
+    }
+    .success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(201, 168, 76, 0.12);
+      border: 0.8px solid var(--gold);
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 28px;
+    }
+    .success-state h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 28px; color: var(--gold-light); margin-bottom: 12px;
+    }
+    .success-state p { color: var(--text-muted); line-height: 1.7; }
+
+    .contact-footer-inline {
+      text-align: center; margin-top: 40px;
+      font-size: 13px; color: var(--text-dim);
+    }
+    .contact-footer-inline a { color: var(--text-muted); text-decoration: none; }
+    .contact-footer-inline a:hover { color: var(--gold-light); }
+
+    .char-count { font-size: 11px; color: var(--text-dim); text-align: right; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap-wide bar">
+    <a href="index.html" class="logo" data-nav="/">
+      <span class="dot"></span>
+      <span>Rey <span class="sep">·</span> Dedy Pangou</span>
+    </a>
+    <nav class="desktop">
+      <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+      <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+      <a href="services.html" data-nav="/services.html">Services</a>
+    </nav>
+    <div class="actions">
+      <a href="devis.html" class="btn btn-primary">Démarrer un projet <span class="arrow">→</span></a>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Basculer le thème">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button type="button" class="hamburger" data-hamburger aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer">
+    <div class="wrap-wide">
+      <nav>
+        <a href="index.html" data-nav="/">Accueil</a>
+        <a href="realisations.html" data-nav="/realisations.html">Réalisations</a>
+        <a href="exemples.html" data-nav="/exemples.html">Exemples</a>
+        <a href="services.html" data-nav="/services.html">Services</a>
+        <a href="devis.html" data-nav="/devis.html">Devis</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ORBS d'ambiance ============ -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- ============ FORMULAIRE ============ -->
+<div class="form-wrap">
+
+  <div class="form-head">
+    <div class="badge" id="badge">PARLONS DE VOTRE PROJET</div>
+    <h1 id="h1">Décrivez votre projet web</h1>
+    <p id="sub">Remplissez ce formulaire en 3 minutes. Je vous réponds personnellement sous 24h avec une estimation et des idées concrètes.</p>
+  </div>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')">Français</button>
+    <button class="lang-btn" onclick="setLang('en')">English</button>
+  </div>
+
+  <div class="progress-bar">
+    <div class="prog-dot active" id="p1"></div>
+    <div class="prog-dot" id="p2"></div>
+    <div class="prog-dot" id="p3"></div>
+  </div>
+
+  <form id="projectForm" onsubmit="event.preventDefault(); sendEmail();">
+
+    <!-- SECTION 1 — Identité -->
+    <div class="card" id="sec1">
+      <div class="section-num" id="sn1">01 / VOUS</div>
+      <div class="section-title" id="st1">Qui êtes-vous ?</div>
+      <div class="section-sub" id="ss1">Pour mieux comprendre votre contexte et adapter ma réponse.</div>
+      <div class="grid-2">
+        <div class="field">
+          <label id="l-name">Prénom &amp; Nom <span>*</span></label>
+          <input type="text" id="name" placeholder="Jean Dupont" required/>
+        </div>
+        <div class="field">
+          <label id="l-email">Email <span>*</span></label>
+          <input type="email" id="email" placeholder="vous@email.com" required/>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label id="l-phone">WhatsApp / Téléphone</label>
+          <input type="tel" id="phone" placeholder="+221 7X XXX XX XX"/>
+        </div>
+        <div class="field">
+          <label id="l-company">Entreprise / Structure</label>
+          <input type="text" id="company" placeholder="Ma Boutique Dakar"/>
+        </div>
+      </div>
+      <div class="field">
+        <label id="l-country">Pays <span>*</span></label>
+        <select id="country" required>
+          <option value="" id="co0">-- Sélectionnez --</option>
+          <option value="sn">Sénégal</option>
+          <option value="fr">France</option>
+          <option value="us">États-Unis / USA</option>
+          <option value="be">Belgique</option>
+          <option value="ch">Suisse</option>
+          <option value="ci">Côte d'Ivoire</option>
+          <option value="ml">Mali</option>
+          <option value="other">Autre</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- SECTION 2 — Le projet -->
+    <div class="card" id="sec2">
+      <div class="section-num" id="sn2">02 / VOTRE PROJET</div>
+      <div class="section-title" id="st2">Quel est votre besoin ?</div>
+      <div class="section-sub" id="ss2">Pas besoin d'être technique — décrivez simplement ce que vous voulez accomplir.</div>
+
+      <div class="field">
+        <label id="l-type">Type de projet <span>*</span></label>
+        <div class="chips" id="chips-type">
+          <div class="chip" data-group="type" data-val="creation" onclick="toggleChip(this)">🆕 Création from scratch</div>
+          <div class="chip" data-group="type" data-val="redesign" onclick="toggleChip(this)">🎨 Refonte design</div>
+          <div class="chip" data-group="type" data-val="tech" onclick="toggleChip(this)">⚙️ Refonte technique</div>
+          <div class="chip" data-group="type" data-val="ecom" onclick="toggleChip(this)">🛒 E-commerce</div>
+          <div class="chip" data-group="type" data-val="webapp" onclick="toggleChip(this)">💻 Application web</div>
+          <div class="chip" data-group="type" data-val="other" onclick="toggleChip(this)">✨ Autre</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="l-sector">Secteur d'activité</label>
+        <select id="sector">
+          <option value="" id="se0">-- Sélectionnez --</option>
+          <option value="retail">Commerce / Boutique</option>
+          <option value="food">Restauration / Food</option>
+          <option value="health">Santé / Médical</option>
+          <option value="edu">Éducation / Formation</option>
+          <option value="tech">Tech / Startup</option>
+          <option value="ngo">ONG / Association</option>
+          <option value="services">Services / Conseil</option>
+          <option value="real">Immobilier</option>
+          <option value="media">Média / Créatif</option>
+          <option value="other">Autre</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label id="l-desc">Décrivez votre projet <span>*</span></label>
+        <textarea id="desc" placeholder="Expliquez ce que vous voulez faire, quel problème vous voulez résoudre, ou quelle opportunité vous souhaitez saisir..." maxlength="1000" oninput="countChars(this,'cnt-desc',1000)" required></textarea>
+        <div class="char-count"><span id="cnt-desc">0</span> / 1000</div>
+      </div>
+
+      <div class="field">
+        <label id="l-existing">Avez-vous déjà un site ?</label>
+        <input type="text" id="existing" placeholder="https://monsite.com (ou laissez vide si non)"/>
+      </div>
+
+      <div class="field">
+        <label id="l-features">Fonctionnalités souhaitées</label>
+        <div class="chips" id="chips-feat">
+          <div class="chip" data-group="feat" data-val="auth" onclick="toggleChip(this)">Connexion / Compte</div>
+          <div class="chip" data-group="feat" data-val="payment" onclick="toggleChip(this)">Paiement en ligne</div>
+          <div class="chip" data-group="feat" data-val="admin" onclick="toggleChip(this)">Tableau de bord admin</div>
+          <div class="chip" data-group="feat" data-val="blog" onclick="toggleChip(this)">Blog / Actualités</div>
+          <div class="chip" data-group="feat" data-val="map" onclick="toggleChip(this)">Carte / Géolocalisation</div>
+          <div class="chip" data-group="feat" data-val="chat" onclick="toggleChip(this)">Chat / Messagerie</div>
+          <div class="chip" data-group="feat" data-val="notif" onclick="toggleChip(this)">Notifications</div>
+          <div class="chip" data-group="feat" data-val="api" onclick="toggleChip(this)">Intégration API</div>
+          <div class="chip" data-group="feat" data-val="multi" onclick="toggleChip(this)">Multi-langue</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="l-inspi">Sites que vous aimez <small style="font-weight:300; font-size:12px">(inspiration)</small></label>
+        <input type="text" id="inspi" placeholder="airbnb.com, notion.so, ..."/>
+      </div>
+    </div>
+
+    <!-- SECTION 3 — Budget & timing -->
+    <div class="card" id="sec3">
+      <div class="section-num" id="sn3">03 / BUDGET &amp; DÉLAI</div>
+      <div class="section-title" id="st3">Cadrage pratique</div>
+      <div class="section-sub" id="ss3">Ces informations m'aident à vous proposer la meilleure solution dans votre contexte.</div>
+
+      <div class="field">
+        <label id="l-budget">Budget approximatif <span>*</span></label>
+        <div class="budget-grid" id="budget-opts">
+          <div class="budget-opt" data-val="small" onclick="selectBudget(this)">
+            <span class="amount">80k – 150k F</span>
+            <span class="label">$130 – $250</span>
+          </div>
+          <div class="budget-opt" data-val="med" onclick="selectBudget(this)">
+            <span class="amount">150k – 300k F</span>
+            <span class="label">$250 – $500</span>
+          </div>
+          <div class="budget-opt" data-val="large" onclick="selectBudget(this)">
+            <span class="amount">300k – 600k F</span>
+            <span class="label">$500 – $1000</span>
+          </div>
+          <div class="budget-opt" data-val="xl" onclick="selectBudget(this)">
+            <span class="amount">+ 600k F</span>
+            <span class="label">$1000+</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="l-urgent">Délai souhaité</label>
+        <div class="urgency-row">
+          <div class="urgency-opt" data-val="asap" onclick="selectUrgency(this)" id="urg1">🔥 ASAP</div>
+          <div class="urgency-opt" data-val="1m" onclick="selectUrgency(this)" id="urg2">1 mois</div>
+          <div class="urgency-opt" data-val="3m" onclick="selectUrgency(this)" id="urg3">2-3 mois</div>
+          <div class="urgency-opt" data-val="flex" onclick="selectUrgency(this)" id="urg4">Flexible</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="l-more">Quelque chose à ajouter ?</label>
+        <textarea id="more" placeholder="Contraintes particulières, questions, contexte supplémentaire..." maxlength="500" oninput="countChars(this,'cnt-more',500)"></textarea>
+        <div class="char-count"><span id="cnt-more">0</span> / 500</div>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="submit-btn submit-btn-wa" id="btnWa" onclick="sendWhatsApp()">
+          <span id="btn-wa-txt">💬 Envoyer via WhatsApp</span>
+        </button>
+        <button type="submit" class="submit-btn" id="btnEmail">
+          <span id="btn-email-txt">✉️ Envoyer par email</span>
+        </button>
+      </div>
+      <p class="btn-hint" id="btn-hint">Les deux méthodes m'arrivent directement — choisissez la plus pratique pour vous.</p>
+    </div>
+
+  </form>
+
+  <div class="success-state" id="successState">
+    <div class="success-icon">✦</div>
+    <h2 id="succ-title">Projet reçu !</h2>
+    <p id="succ-body">Merci pour votre confiance. Je lis personnellement chaque demande et vous réponds sous 24h avec une analyse de votre projet et une estimation concrète.<br><br>À très bientôt !</p>
+  </div>
+
+  <div class="contact-footer-inline">
+    <p id="footer-txt">Questions urgentes ? <a href="https://wa.me/221781602037">WhatsApp +221 78 160 20 37</a> · <a href="mailto:dedypangou@gmail.com">dedypangou@gmail.com</a></p>
+  </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap-wide cols">
+    <p>© <span data-year>2026</span> Rey Dedy Pangou — Développeur fullstack · Dakar</p>
+    <div class="links">
+      <a href="https://github.com/DedSlash" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/rey-dedy-pangou/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/221781602037" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:dedypangou@gmail.com">Email</a>
+    </div>
+    <p class="credit">Entreprise individuelle · <span class="accent">Sénégal</span></p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Logique du formulaire — CONSERVÉE INTÉGRALEMENT
+   Source : formulaire_projet_rey_dedy.html (identique)
+   Web3Forms + WhatsApp + i18n FR/EN + chips + budget + urgence
+   ============================================================ */
+const t = {
+  fr: {
+    badge: 'PARLONS DE VOTRE PROJET',
+    h1: 'Décrivez votre projet web',
+    sub: 'Remplissez ce formulaire en 3 minutes. Je vous réponds personnellement sous 24h avec une estimation et des idées concrètes.',
+    sn1:'01 / VOUS', st1:'Qui êtes-vous ?', ss1:'Pour mieux comprendre votre contexte et adapter ma réponse.',
+    ln:'Prénom & Nom', le:'Email', lp:'WhatsApp / Téléphone', lc:'Entreprise / Structure', lco:'Pays',
+    sn2:'02 / VOTRE PROJET', st2:'Quel est votre besoin ?', ss2:"Pas besoin d'être technique — décrivez simplement ce que vous voulez accomplir.",
+    ltype:'Type de projet', lsector:"Secteur d'activité", ldesc:'Décrivez votre projet', lexist:'Avez-vous déjà un site ?',
+    lfeat:'Fonctionnalités souhaitées', linspi:'Sites que vous aimez',
+    sn3:'03 / BUDGET & DÉLAI', st3:'Cadrage pratique', ss3:'Ces informations m\'aident à vous proposer la meilleure solution dans votre contexte.',
+    lbudget:'Budget approximatif', lurgent:'Délai souhaité', lmore:'Quelque chose à ajouter ?',
+    btnWa:'💬 Envoyer via WhatsApp',
+    btnEmail:'✉️ Envoyer par email',
+    btnHint:"Les deux méthodes m'arrivent directement — choisissez la plus pratique pour vous.",
+    sending:'⏳ Envoi en cours...',
+    co0:'-- Sélectionnez --', se0:'-- Sélectionnez --',
+    urg1:'🔥 ASAP', urg2:'1 mois', urg3:'2-3 mois', urg4:'Flexible',
+    succ_title:'Projet reçu !', succ_body:'Merci pour votre confiance. Je lis personnellement chaque demande et vous réponds sous 24h avec une analyse de votre projet et une estimation concrète.<br><br>À très bientôt !',
+    footer:"Questions urgentes ? <a href='https://wa.me/221781602037'>WhatsApp +221 78 160 20 37</a> · <a href='mailto:dedypangou@gmail.com'>dedypangou@gmail.com</a>",
+    errType:'Veuillez sélectionner au moins un type de projet.',
+    errBudget:'Veuillez sélectionner un budget approximatif.',
+    errSend:"Erreur lors de l'envoi par email. Réessayez ou utilisez WhatsApp.",
+    errNet:'Erreur réseau. Vérifiez votre connexion ou utilisez WhatsApp.',
+  },
+  en: {
+    badge: "LET'S TALK ABOUT YOUR PROJECT",
+    h1: 'Describe your web project',
+    sub: 'Fill in this form in 3 minutes. I reply personally within 24h with a concrete estimate and ideas.',
+    sn1:'01 / YOU', st1:'Who are you?', ss1:'To better understand your context and tailor my response.',
+    ln:'First & Last Name', le:'Email', lp:'WhatsApp / Phone', lc:'Company / Organisation', lco:'Country',
+    sn2:'02 / YOUR PROJECT', st2:'What do you need?', ss2:'No need to be technical — just describe what you want to achieve.',
+    ltype:'Type of project', lsector:'Industry', ldesc:'Describe your project', lexist:'Do you already have a website?',
+    lfeat:'Desired features', linspi:'Websites you like',
+    sn3:'03 / BUDGET & TIMELINE', st3:'Practical scope', ss3:'This helps me suggest the best solution for your situation.',
+    lbudget:'Approximate budget', lurgent:'Desired timeline', lmore:'Anything else to add?',
+    btnWa:'💬 Send via WhatsApp',
+    btnEmail:'✉️ Send by email',
+    btnHint:'Both options reach me directly — pick whichever is easiest for you.',
+    sending:'⏳ Sending...',
+    co0:'-- Select --', se0:'-- Select --',
+    urg1:'🔥 ASAP', urg2:'1 month', urg3:'2-3 months', urg4:'Flexible',
+    succ_title:'Project received!', succ_body:"Thank you for your trust. I personally read every request and reply within 24h with a project analysis and a concrete estimate.<br><br>Talk soon!",
+    footer:"Urgent question? <a href='https://wa.me/221781602037'>WhatsApp +221 78 160 20 37</a> · <a href='mailto:dedypangou@gmail.com'>dedypangou@gmail.com</a>",
+    errType:'Please select at least one project type.',
+    errBudget:'Please select an approximate budget.',
+    errSend:'Email sending failed. Please retry or use WhatsApp.',
+    errNet:'Network error. Check your connection or use WhatsApp.',
+  }
+};
+
+let lang = 'fr';
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(l === 'fr' ? 'fr' : 'en')));
+  const d = t[l];
+  document.getElementById('badge').textContent = d.badge;
+  document.getElementById('h1').textContent = d.h1;
+  document.getElementById('sub').textContent = d.sub;
+  document.getElementById('sn1').textContent = d.sn1;
+  document.getElementById('st1').textContent = d.st1;
+  document.getElementById('ss1').textContent = d.ss1;
+  document.getElementById('l-name').innerHTML = d.ln + ' <span>*</span>';
+  document.getElementById('l-email').innerHTML = d.le + ' <span>*</span>';
+  document.getElementById('l-phone').textContent = d.lp;
+  document.getElementById('l-company').textContent = d.lc;
+  document.getElementById('l-country').innerHTML = d.lco + ' <span>*</span>';
+  document.getElementById('co0').textContent = d.co0;
+  document.getElementById('sn2').textContent = d.sn2;
+  document.getElementById('st2').textContent = d.st2;
+  document.getElementById('ss2').textContent = d.ss2;
+  document.getElementById('l-type').innerHTML = d.ltype + ' <span>*</span>';
+  document.getElementById('l-sector').textContent = d.lsector;
+  document.getElementById('l-desc').innerHTML = d.ldesc + ' <span>*</span>';
+  document.getElementById('l-existing').textContent = d.lexist;
+  document.getElementById('l-features').textContent = d.lfeat;
+  document.getElementById('l-inspi').innerHTML = d.linspi + ' <small style="font-weight:300;font-size:12px">(inspiration)</small>';
+  document.getElementById('sn3').textContent = d.sn3;
+  document.getElementById('st3').textContent = d.st3;
+  document.getElementById('ss3').textContent = d.ss3;
+  document.getElementById('l-budget').innerHTML = d.lbudget + ' <span>*</span>';
+  document.getElementById('l-urgent').textContent = d.lurgent;
+  document.getElementById('l-more').textContent = d.lmore;
+  document.getElementById('btn-wa-txt').textContent = d.btnWa;
+  document.getElementById('btn-email-txt').textContent = d.btnEmail;
+  document.getElementById('btn-hint').textContent = d.btnHint;
+  document.getElementById('urg1').textContent = d.urg1;
+  document.getElementById('urg2').textContent = d.urg2;
+  document.getElementById('urg3').textContent = d.urg3;
+  document.getElementById('urg4').textContent = d.urg4;
+  document.getElementById('footer-txt').innerHTML = d.footer;
+}
+
+function toggleChip(el) {
+  el.classList.toggle('selected');
+  updateProgress();
+}
+
+function selectBudget(el) {
+  document.querySelectorAll('.budget-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  updateProgress();
+}
+
+function selectUrgency(el) {
+  document.querySelectorAll('.urgency-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function countChars(el, counterId, max) {
+  document.getElementById(counterId).textContent = el.value.length;
+}
+
+function updateProgress() {
+  const s1 = document.getElementById('name').value && document.getElementById('email').value;
+  const s2 = document.querySelectorAll('.chip[data-group="type"].selected').length > 0 && document.getElementById('desc').value;
+  const s3 = document.querySelectorAll('.budget-opt.selected').length > 0;
+  document.getElementById('p1').className = 'prog-dot active';
+  document.getElementById('p2').className = 'prog-dot' + (s1 ? ' active' : '');
+  document.getElementById('p3').className = 'prog-dot' + (s2 ? ' active' : '');
+}
+
+document.getElementById('name').addEventListener('input', updateProgress);
+document.getElementById('email').addEventListener('input', updateProgress);
+document.getElementById('desc').addEventListener('input', updateProgress);
+
+// === Tables de correspondance — libellés lisibles pour les valeurs des champs ===
+const LABELS = {
+  country: {
+    sn:'Sénégal', fr:'France', us:'États-Unis / USA', be:'Belgique',
+    ch:'Suisse', ci:"Côte d'Ivoire", ml:'Mali', other:'Autre'
+  },
+  sector: {
+    retail:'Commerce / Boutique', food:'Restauration / Food', health:'Santé / Médical',
+    edu:'Éducation / Formation', tech:'Tech / Startup', ngo:'ONG / Association',
+    services:'Services / Conseil', real:'Immobilier', media:'Média / Créatif', other:'Autre'
+  },
+  type: {
+    creation:'Création from scratch', redesign:'Refonte design', tech:'Refonte technique',
+    ecom:'E-commerce', webapp:'Application web', other:'Autre'
+  },
+  feat: {
+    auth:'Connexion / Compte', payment:'Paiement en ligne', admin:'Tableau de bord admin',
+    blog:'Blog / Actualités', map:'Carte / Géolocalisation', chat:'Chat / Messagerie',
+    notif:'Notifications', api:'Intégration API', multi:'Multi-langue'
+  },
+  budget: {
+    small:'80k – 150k F CFA ($130 – $250)',
+    med:'150k – 300k F CFA ($250 – $500)',
+    large:'300k – 600k F CFA ($500 – $1000)',
+    xl:'+ 600k F CFA ($1000+)'
+  },
+  urgency: {
+    asap:'ASAP', '1m':'1 mois', '3m':'2-3 mois', flex:'Flexible'
+  }
+};
+
+// Récupère toutes les données du formulaire sous une forme lisible
+function gatherData() {
+  const types = [...document.querySelectorAll('.chip[data-group="type"].selected')]
+    .map(e => LABELS.type[e.dataset.val] || e.dataset.val);
+  const features = [...document.querySelectorAll('.chip[data-group="feat"].selected')]
+    .map(e => LABELS.feat[e.dataset.val] || e.dataset.val);
+  const budgetEl = document.querySelector('.budget-opt.selected');
+  const urgencyEl = document.querySelector('.urgency-opt.selected');
+  const countryVal = document.getElementById('country').value;
+  const sectorVal = document.getElementById('sector').value;
+  return {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    company: document.getElementById('company').value.trim(),
+    country: LABELS.country[countryVal] || '',
+    types,
+    sector: LABELS.sector[sectorVal] || '',
+    desc: document.getElementById('desc').value.trim(),
+    existing: document.getElementById('existing').value.trim(),
+    features,
+    inspi: document.getElementById('inspi').value.trim(),
+    budget: budgetEl ? LABELS.budget[budgetEl.dataset.val] : '',
+    urgency: urgencyEl ? LABELS.urgency[urgencyEl.dataset.val] : '',
+    more: document.getElementById('more').value.trim()
+  };
+}
+
+// Valide les champs requis (HTML natif + type de projet + budget)
+function validateForm() {
+  const form = document.getElementById('projectForm');
+  if (!form.checkValidity()) { form.reportValidity(); return false; }
+  const d = t[lang];
+  if (document.querySelectorAll('.chip[data-group="type"].selected').length === 0) {
+    alert(d.errType); return false;
+  }
+  if (!document.querySelector('.budget-opt.selected')) {
+    alert(d.errBudget); return false;
+  }
+  return true;
+}
+
+// Construit le message WhatsApp ligne par ligne avec des labels clairs
+function buildWhatsAppMessage(d) {
+  const L = [];
+  L.push('*✦ Nouveau projet — formulaire web*');
+  L.push('');
+  L.push('*— Vous —*');
+  L.push(`• Nom : ${d.name}`);
+  L.push(`• Email : ${d.email}`);
+  if (d.phone)   L.push(`• Téléphone : ${d.phone}`);
+  if (d.company) L.push(`• Entreprise : ${d.company}`);
+  if (d.country) L.push(`• Pays : ${d.country}`);
+  L.push('');
+  L.push('*— Votre projet —*');
+  if (d.types.length) L.push(`• Type : ${d.types.join(', ')}`);
+  if (d.sector)       L.push(`• Secteur : ${d.sector}`);
+  L.push(`• Description : ${d.desc}`);
+  if (d.existing)        L.push(`• Site actuel : ${d.existing}`);
+  if (d.features.length) L.push(`• Fonctionnalités : ${d.features.join(', ')}`);
+  if (d.inspi)           L.push(`• Inspiration : ${d.inspi}`);
+  L.push('');
+  L.push('*— Budget & délai —*');
+  if (d.budget)  L.push(`• Budget : ${d.budget}`);
+  if (d.urgency) L.push(`• Délai : ${d.urgency}`);
+  if (d.more) {
+    L.push('');
+    L.push('*— Précisions —*');
+    L.push(d.more);
+  }
+  return L.join('\n');
+}
+
+// Affiche l'écran de succès partagé par les deux modes d'envoi
+function showSuccess() {
+  document.getElementById('projectForm').style.display = 'none';
+  const s = document.getElementById('successState');
+  s.style.display = 'block';
+  const d = t[lang];
+  document.getElementById('succ-title').textContent = d.succ_title;
+  document.getElementById('succ-body').innerHTML = d.succ_body;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Envoi via WhatsApp — ouvre wa.me dans un nouvel onglet avec le message pré-rempli
+function sendWhatsApp() {
+  if (!validateForm()) return;
+  const data = gatherData();
+  const msg = buildWhatsAppMessage(data);
+  const url = 'https://wa.me/221781602037?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+  showSuccess();
+}
+
+// Envoi par email via l'API Web3Forms
+async function sendEmail() {
+  if (!validateForm()) return;
+  const data = gatherData();
+  const d = t[lang];
+  const btn = document.getElementById('btnEmail');
+  const txt = document.getElementById('btn-email-txt');
+  const original = txt.textContent;
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+  txt.textContent = d.sending;
+
+  // Payload Web3Forms — la clé d'accès identifie la boîte de réception
+  const payload = {
+    access_key: 'db99c8e3-cc88-4597-b15c-29845ba3a83b',
+    subject: `Nouveau projet — ${data.name}`,
+    from_name: data.name,
+    email: data.email,
+    'Nom': data.name,
+    'Email': data.email,
+    'Téléphone': data.phone || '—',
+    'Entreprise': data.company || '—',
+    'Pays': data.country || '—',
+    'Type de projet': data.types.join(', ') || '—',
+    'Secteur': data.sector || '—',
+    'Description': data.desc,
+    'Site actuel': data.existing || '—',
+    'Fonctionnalités': data.features.join(', ') || '—',
+    'Inspiration': data.inspi || '—',
+    'Budget': data.budget || '—',
+    'Délai': data.urgency || '—',
+    'Précisions': data.more || '—'
+  };
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if (json.success) {
+      showSuccess();
+    } else {
+      alert(d.errSend + (json.message ? ' (' + json.message + ')' : ''));
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      txt.textContent = original;
+    }
+  } catch (err) {
+    alert(d.errNet);
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    txt.textContent = original;
+  }
+}
+</script>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

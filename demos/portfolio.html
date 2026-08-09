@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koné Creative Studio — Design & Photographie · Dakar</title>
+<meta name="description" content="Studio de design graphique et de photographie à Dakar. Branding, identités visuelles, séries photo." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-2: #131313;
+    --white: #fafafa;
+    --grey: #888;
+    --grey-dim: #555;
+    --line: rgba(250,250,250,0.08);
+    --accent: #ff3d6e;
+    --accent-soft: rgba(255,61,110,0.15);
+    --display: 'Space Grotesk', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--accent); color: var(--white); }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  .back-badge {
+    position: fixed; top: 18px; left: 18px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: rgba(10,10,10,0.78); color: var(--white);
+    padding: 8px 14px; border-radius: 999px;
+    backdrop-filter: blur(8px); border: 1px solid var(--line);
+  }
+  .back-badge:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* nav */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .inner {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0;
+  }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .brand .dot { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; font-family: var(--display); font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--accent); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* hero */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 0 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 30%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,61,110,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero .meta {
+    font-family: var(--display);
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--grey); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero .meta::before {
+    content: ''; width: 36px; height: 1px; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(56px, 11vw, 168px);
+    font-weight: 700; line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+  }
+  .hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+  .hero p.lead {
+    font-size: clamp(15px, 1.7vw, 18px);
+    color: var(--grey); max-width: 56ch;
+    margin-bottom: 32px;
+  }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 28px; border-radius: 999px;
+    font-family: var(--display); font-weight: 500; font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer; border: 1px solid transparent; transition: all .25s ease;
+  }
+  .btn-primary { background: var(--accent); color: var(--white); }
+  .btn-primary:hover { background: var(--white); color: var(--bg); }
+  .btn-ghost { border-color: var(--line); color: var(--white); }
+  .btn-ghost:hover { border-color: var(--white); }
+
+  /* sections */
+  section { padding: 100px 0; }
+  .sec-head { margin-bottom: 50px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .sec-head .eyebrow {
+    font-family: var(--display); font-size: 12px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block;
+  }
+  .sec-head h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.05; letter-spacing: -0.03em;
+  }
+
+  /* filtres */
+  .filters {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .filter {
+    padding: 8px 18px; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent; color: var(--white);
+    font-family: var(--display); font-size: 13px;
+    cursor: pointer; transition: all .2s ease;
+  }
+  .filter:hover { border-color: var(--accent); color: var(--accent); }
+  .filter.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
+
+  /* gallery */
+  .gallery {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    grid-auto-rows: minmax(280px, auto);
+  }
+  @media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .gallery { grid-template-columns: 1fr; } }
+  .work {
+    position: relative; overflow: hidden;
+    border-radius: 4px; cursor: pointer;
+    background-size: cover; background-position: center;
+    background-color: var(--bg-2);
+    transition: opacity .25s ease;
+  }
+  .work.hidden { display: none; }
+  .work::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.85) 100%);
+    opacity: 0; transition: opacity .3s ease;
+  }
+  .work:hover::after { opacity: 1; }
+  .work.big { grid-column: span 2; grid-row: span 2; }
+  @media (max-width: 540px) { .work.big { grid-column: span 1; grid-row: span 1; } }
+  .work .info {
+    position: absolute; bottom: 18px; left: 22px; right: 22px; z-index: 1;
+    opacity: 0; transform: translateY(10px);
+    transition: all .3s ease;
+  }
+  .work:hover .info { opacity: 1; transform: translateY(0); }
+  .work .info .cat {
+    font-family: var(--display); font-size: 10.5px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 4px;
+  }
+  .work .info h3 {
+    font-family: var(--display); font-weight: 600;
+    font-size: 20px; letter-spacing: -0.01em;
+  }
+
+  /* about */
+  #about { background: var(--bg-2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 30px; } }
+  .about-text h2 {
+    font-family: var(--display); font-size: clamp(28px, 4vw, 38px);
+    font-weight: 700; line-height: 1.12; letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
+  .about-text p { color: var(--grey); font-size: 15.5px; line-height: 1.75; margin-bottom: 14px; }
+  .about-text .stats {
+    display: flex; gap: 36px; margin-top: 26px; flex-wrap: wrap;
+  }
+  .about-text .stat b { display: block; font-family: var(--display); font-size: 28px; color: var(--accent); font-weight: 700; }
+  .about-text .stat span { color: var(--grey); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .about-visual {
+    aspect-ratio: 1;
+    background:
+      linear-gradient(160deg, rgba(255,61,110,0.4), transparent 70%),
+      url('https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=900&q=60') center/cover;
+    border-radius: 6px;
+  }
+
+  /* services */
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 760px) { .svc-grid { grid-template-columns: 1fr; } }
+  .svc {
+    padding: 36px 28px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: all .25s ease;
+  }
+  .svc:hover { border-color: var(--accent); }
+  .svc .num { font-family: var(--display); font-size: 13px; color: var(--accent); letter-spacing: 1.5px; margin-bottom: 18px; }
+  .svc h3 { font-family: var(--display); font-size: 20px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .svc p { color: var(--grey); font-size: 14.5px; line-height: 1.65; }
+
+  /* contact */
+  #contact {
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  }
+  #contact h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(40px, 7vw, 84px);
+    letter-spacing: -0.03em; line-height: 1; margin-bottom: 22px;
+  }
+  #contact h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+  #contact p { color: var(--grey); max-width: 50ch; margin: 0 auto 36px; font-size: 16px; }
+  #contact .cta { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 36px 0;
+    font-family: var(--display); font-size: 13px;
+    color: var(--grey-dim);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  }
+  footer a:hover { color: var(--accent); }
+
+  /* lightbox */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.96);
+    display: none; align-items: center; justify-content: center;
+    z-index: 200; padding: 30px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    max-width: 1100px; width: 100%;
+    display: grid; grid-template-columns: 1fr;
+    gap: 20px; position: relative;
+  }
+  .lightbox-img {
+    max-height: 70vh; aspect-ratio: 16/10;
+    background-size: cover; background-position: center;
+    border-radius: 6px;
+  }
+  .lightbox-info {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    color: var(--white);
+  }
+  .lightbox-info .cat {
+    font-family: var(--display); font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .lightbox-info h3 {
+    font-family: var(--display); font-size: 26px; font-weight: 600;
+    margin-top: 4px; letter-spacing: -0.01em;
+  }
+  .lightbox-info .nav-arrows { display: flex; gap: 10px; }
+  .lb-btn {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: rgba(250,250,250,0.08); color: var(--white);
+    border: 1px solid var(--line); cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s ease;
+  }
+  .lb-btn:hover { background: var(--accent); border-color: var(--accent); }
+  .lightbox .close-x {
+    position: absolute; top: -50px; right: 0;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(250,250,250,0.1); color: var(--white);
+    border: 1px solid var(--line); font-size: 22px; cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<nav class="top">
+  <div class="wrap inner">
+    <div class="brand">Koné<span class="dot">.</span>studio</div>
+    <div class="nav-links">
+      <a href="#works">Travaux</a>
+      <a href="#about">Studio</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="meta">Studio de design · Dakar · Depuis 2019</div>
+    <h1>Faire <span class="accent">voir</span> ce qu'on n'avait pas vu.</h1>
+    <p class="lead">Studio de design graphique et de direction artistique. On dessine des identités, on photographie des marques, on construit des sites — pour les gens qui veulent un travail visuel qui se remarque, vraiment.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#works">Voir nos travaux</a>
+      <a class="btn btn-ghost" href="#contact">Démarrer un projet</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Sélection 2024 — 2026</span>
+        <h2>Travaux récents.</h2>
+      </div>
+      <div class="filters">
+        <button class="filter active" data-cat="all">Tout</button>
+        <button class="filter" data-cat="branding">Branding</button>
+        <button class="filter" data-cat="photo">Photo</button>
+        <button class="filter" data-cat="web">Web</button>
+      </div>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-visual"></div>
+    <div class="about-text">
+      <span class="eyebrow" style="font-family:var(--display);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block;">À propos</span>
+      <h2>Un studio à taille humaine, fondé par <span style="color:var(--accent);">Mariam Koné</span>.</h2>
+      <p>Diplômée des Beaux-Arts de Dakar, Mariam a travaillé pour des marques de mode, des institutions culturelles et des startups avant d'ouvrir Koné Creative en 2019.</p>
+      <p>Le studio réunit aujourd'hui 4 personnes — directrices artistiques, photographes, développeur — et collabore avec des marques au Sénégal, en Côte d'Ivoire et en France.</p>
+      <div class="stats">
+        <div class="stat"><b>+60</b><span>Projets livrés</span></div>
+        <div class="stat"><b>6 ans</b><span>D'existence</span></div>
+        <div class="stat"><b>3 pays</b><span>Clients actifs</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2>Ce qu'on fait.</h2>
+      </div>
+    </div>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="num">01</div>
+        <h3>Identité de marque</h3>
+        <p>Logo, charte, déclinaisons. On crée ou on rafraîchit l'identité de votre marque pour qu'elle parle juste.</p>
+      </div>
+      <div class="svc">
+        <div class="num">02</div>
+        <h3>Direction artistique photo</h3>
+        <p>Shootings produit, campagnes, séries éditoriales. Du moodboard au tirage final, tout est pensé.</p>
+      </div>
+      <div class="svc">
+        <div class="num">03</div>
+        <h3>Site internet sur mesure</h3>
+        <p>Sites vitrines et e-commerce conçus comme des objets de design — pas comme des templates assemblés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Un projet ?<br><span class="accent">Parlons-en.</span></h2>
+    <p>Briefs en cours acceptés pour septembre 2026. Réponse sous 48h, en français ou en wolof.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://wa.me/221770000000">📱 WhatsApp</a>
+      <a class="btn btn-ghost" href="mailto:hello@konestudio.sn">hello@konestudio.sn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+    <span>© Koné Creative Studio — Dakar</span>
+    <span>Instagram · Behance · LinkedIn</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner">
+    <button class="close-x" onclick="closeLb()" aria-label="Fermer">×</button>
+    <div class="lightbox-img" id="lbImg"></div>
+    <div class="lightbox-info">
+      <div>
+        <div class="cat" id="lbCat"></div>
+        <h3 id="lbTitle"></h3>
+      </div>
+      <div class="nav-arrows">
+        <button class="lb-btn" onclick="prevLb()" aria-label="Précédent">←</button>
+        <button class="lb-btn" onclick="nextLb()" aria-label="Suivant">→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const works = [
+    { id:1, cat:'branding', title:"Identité — Maison Téranga", img:"https://images.unsplash.com/photo-1561070791-2526d30994b8?auto=format&fit=crop&w=1100&q=60", big:true },
+    { id:2, cat:'photo', title:"Série Saly · Bord de mer", img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=60" },
+    { id:3, cat:'web', title:"Site — Galerie Le Manège", img:"https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=900&q=60" },
+    { id:4, cat:'branding', title:"Logo — Café Diéry", img:"https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=900&q=60" },
+    { id:5, cat:'photo', title:"Portraits artistes Dakar", img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=900&q=60", big:true },
+    { id:6, cat:'web', title:"Boutique en ligne — Téra.K", img:"https://images.unsplash.com/photo-1517292987719-0369a794ec0f?auto=format&fit=crop&w=900&q=60" },
+    { id:7, cat:'branding', title:"Direction artistique — Bakhi", img:"https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=60" },
+    { id:8, cat:'photo', title:"Cuisine éditoriale — Le Lamantin", img:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=60" },
+    { id:9, cat:'web', title:"Landing — Festival Ngor", img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=60" },
+  ];
+
+  function catLbl(c) { return c==='branding'?'Branding':c==='photo'?'Photographie':'Web'; }
+
+  const gallery = document.getElementById('gallery');
+  function render(cat='all') {
+    gallery.innerHTML = '';
+    works.filter(w => cat==='all' || w.cat===cat).forEach((w, i) => {
+      const el = document.createElement('div');
+      el.className = 'work' + (w.big ? ' big' : '');
+      el.style.backgroundImage = `url('${w.img}')`;
+      el.innerHTML = `
+        <div class="info">
+          <div class="cat">${catLbl(w.cat)}</div>
+          <h3>${w.title}</h3>
+        </div>`;
+      el.addEventListener('click', () => openLb(w.id));
+      gallery.appendChild(el);
+    });
+  }
+  render();
+
+  document.querySelectorAll('.filter').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      render(b.dataset.cat);
+    });
+  });
+
+  // Lightbox
+  let lbIndex = 0;
+  let visibleList = works;
+  function openLb(id) {
+    const cat = document.querySelector('.filter.active').dataset.cat;
+    visibleList = works.filter(w => cat==='all' || w.cat===cat);
+    lbIndex = visibleList.findIndex(w => w.id===id);
+    updateLb();
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function updateLb() {
+    const w = visibleList[lbIndex];
+    document.getElementById('lbImg').style.backgroundImage = `url('${w.img}')`;
+    document.getElementById('lbCat').textContent = catLbl(w.cat);
+    document.getElementById('lbTitle').textContent = w.title;
+  }
+  function closeLb() { document.getElementById('lightbox').classList.remove('open'); }
+  function nextLb() { lbIndex = (lbIndex + 1) % visibleList.length; updateLb(); }
+  function prevLb() { lbIndex = (lbIndex - 1 + visibleList.length) % visibleList.length; updateLb(); }
+  document.getElementById('lightbox').addEventListener('click', e => { if (e.target.id==='lightbox') closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key==='Escape') closeLb();
+    if (e.key==='ArrowRight') nextLb();
+    if (e.key==='ArrowLeft') prevLb();
+  });
+</script>
+</body>
+</html>
