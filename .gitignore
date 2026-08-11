@@ -48,3 +48,6 @@ Thumbs.db
 # Archives des anciens sites fusionnés (Angular + sources HTML héritées)
 _legacy_angular/
 _legacy_sources/
+
+# Captures d'écran locales exportées depuis les DevTools (non versionnées)
+assets/img/localhost_*
