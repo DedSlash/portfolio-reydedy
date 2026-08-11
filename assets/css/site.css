@@ -183,6 +183,23 @@ h1, h2, h3, h4 {
   background: var(--surface-2);
 }
 
+/* ---------- Visuels d'architecture (études de cas) ---------- */
+.archi-visuals {
+  display: flex; flex-direction: column; gap: 16px;
+  margin: 20px 0;
+}
+.archi-diagram,
+.archi-preview {
+  width: 100%; height: auto;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+@media (min-width: 900px) {
+  .archi-visuals { flex-direction: row; }
+  .archi-visuals img { width: 50%; }
+}
+
 /* ---------- Liens discrets ---------- */
 .link-discreet {
   color: var(--text-muted);
