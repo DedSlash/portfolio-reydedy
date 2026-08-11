@@ -398,6 +398,10 @@
           <option value="other">Autre</option>
         </select>
       </div>
+      <div class="field other-field" id="country-other-field" hidden>
+        <label for="country-other-input" id="l-country-other">Précisez le pays</label>
+        <input type="text" id="country-other-input" placeholder="Ex : Canada" />
+      </div>
     </div>
 
     <!-- SECTION 2 — Le projet -->
@@ -418,6 +422,11 @@
         </div>
       </div>
 
+      <div class="field other-field" id="type-other-field" hidden>
+        <label for="type-other-input" id="l-type-other">Précisez le type de projet</label>
+        <input type="text" id="type-other-input" placeholder="Décrivez brièvement…" />
+      </div>
+
       <div class="field">
         <label id="l-sector">Secteur d'activité</label>
         <select id="sector">
@@ -433,6 +442,10 @@
           <option value="media">Média / Créatif</option>
           <option value="other">Autre</option>
         </select>
+      </div>
+      <div class="field other-field" id="sector-other-field" hidden>
+        <label for="sector-other-input" id="l-sector-other">Précisez le secteur</label>
+        <input type="text" id="sector-other-input" placeholder="Ex : Événementiel" />
       </div>
 
       <div class="field">
@@ -580,6 +593,12 @@ const t = {
     errBudget:'Veuillez sélectionner un budget approximatif.',
     errSend:"Erreur lors de l'envoi par email. Réessayez ou utilisez WhatsApp.",
     errNet:'Erreur réseau. Vérifiez votre connexion ou utilisez WhatsApp.',
+    lcountry_other:'Précisez le pays',
+    lsector_other:'Précisez le secteur',
+    ltype_other:'Précisez le type de projet',
+    phcountry_other:'Ex : Canada',
+    phsector_other:'Ex : Événementiel',
+    phtype_other:'Décrivez brièvement…',
   },
   en: {
     badge: "LET'S TALK ABOUT YOUR PROJECT",
@@ -604,6 +623,12 @@ const t = {
     errBudget:'Please select an approximate budget.',
     errSend:'Email sending failed. Please retry or use WhatsApp.',
     errNet:'Network error. Check your connection or use WhatsApp.',
+    lcountry_other:'Please specify the country',
+    lsector_other:'Please specify the industry',
+    ltype_other:'Please specify the project type',
+    phcountry_other:'e.g. Canada',
+    phsector_other:'e.g. Events',
+    phtype_other:'Briefly describe…',
   }
 };
 
@@ -647,11 +672,18 @@ function setLang(l) {
   document.getElementById('urg3').textContent = d.urg3;
   document.getElementById('urg4').textContent = d.urg4;
   document.getElementById('footer-txt').innerHTML = d.footer;
+  document.getElementById('l-country-other').textContent = d.lcountry_other;
+  document.getElementById('country-other-input').placeholder = d.phcountry_other;
+  document.getElementById('l-sector-other').textContent = d.lsector_other;
+  document.getElementById('sector-other-input').placeholder = d.phsector_other;
+  document.getElementById('l-type-other').textContent = d.ltype_other;
+  document.getElementById('type-other-input').placeholder = d.phtype_other;
 }
 
 function toggleChip(el) {
   el.classList.toggle('selected');
   updateProgress();
+  refreshOtherFields();
 }
 
 function selectBudget(el) {
@@ -681,6 +713,37 @@ function updateProgress() {
 document.getElementById('name').addEventListener('input', updateProgress);
 document.getElementById('email').addEventListener('input', updateProgress);
 document.getElementById('desc').addEventListener('input', updateProgress);
+
+// Champs "Autre" — affichage conditionnel + required dynamique
+function setOtherFieldVisible(fieldEl, inputEl, visible) {
+  if (visible) {
+    fieldEl.hidden = false;
+    inputEl.setAttribute('required', '');
+  } else {
+    fieldEl.hidden = true;
+    inputEl.removeAttribute('required');
+    inputEl.value = '';
+  }
+}
+function refreshOtherFields() {
+  setOtherFieldVisible(
+    document.getElementById('country-other-field'),
+    document.getElementById('country-other-input'),
+    document.getElementById('country').value === 'other'
+  );
+  setOtherFieldVisible(
+    document.getElementById('sector-other-field'),
+    document.getElementById('sector-other-input'),
+    document.getElementById('sector').value === 'other'
+  );
+  setOtherFieldVisible(
+    document.getElementById('type-other-field'),
+    document.getElementById('type-other-input'),
+    !!document.querySelector('.chip[data-group="type"][data-val="other"].selected')
+  );
+}
+document.getElementById('country').addEventListener('change', refreshOtherFields);
+document.getElementById('sector').addEventListener('change', refreshOtherFields);
 
 // === Tables de correspondance — libellés lisibles pour les valeurs des champs ===
 const LABELS = {
@@ -715,22 +778,34 @@ const LABELS = {
 
 // Récupère toutes les données du formulaire sous une forme lisible
 function gatherData() {
+  const typeOtherPrecision = document.getElementById('type-other-input').value.trim();
   const types = [...document.querySelectorAll('.chip[data-group="type"].selected')]
-    .map(e => LABELS.type[e.dataset.val] || e.dataset.val);
+    .map(e => {
+      if (e.dataset.val === 'other' && typeOtherPrecision) return `Autre : ${typeOtherPrecision}`;
+      return LABELS.type[e.dataset.val] || e.dataset.val;
+    });
   const features = [...document.querySelectorAll('.chip[data-group="feat"].selected')]
     .map(e => LABELS.feat[e.dataset.val] || e.dataset.val);
   const budgetEl = document.querySelector('.budget-opt.selected');
   const urgencyEl = document.querySelector('.urgency-opt.selected');
   const countryVal = document.getElementById('country').value;
   const sectorVal = document.getElementById('sector').value;
+  const countryOtherPrecision = document.getElementById('country-other-input').value.trim();
+  const sectorOtherPrecision = document.getElementById('sector-other-input').value.trim();
+  const country = (countryVal === 'other' && countryOtherPrecision)
+    ? `Autre : ${countryOtherPrecision}`
+    : (LABELS.country[countryVal] || '');
+  const sector = (sectorVal === 'other' && sectorOtherPrecision)
+    ? `Autre : ${sectorOtherPrecision}`
+    : (LABELS.sector[sectorVal] || '');
   return {
     name: document.getElementById('name').value.trim(),
     email: document.getElementById('email').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     company: document.getElementById('company').value.trim(),
-    country: LABELS.country[countryVal] || '',
+    country,
     types,
-    sector: LABELS.sector[sectorVal] || '',
+    sector,
     desc: document.getElementById('desc').value.trim(),
     existing: document.getElementById('existing').value.trim(),
     features,
