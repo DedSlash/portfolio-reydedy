@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Réalisations — Rey Dedy Pangou</title>
-  <meta name="description" content="Mes réalisations : Joseph Yusuf (plateforme SaaS multi-microservices), Le Petit Mag (CMS éditorial en production), Lets-Travel, Neo4flix, et quatre autres systèmes livrés." />
+  <meta name="description" content="Mes réalisations : Joseph Yusuf (plateforme SaaS multi-microservices), Le Petit Mag (CMS éditorial en production), Xpertiz Groupe (refonte complète), Lets-Travel, Neo4flix, et d'autres systèmes livrés." />
   <meta name="theme-color" content="#07070b" />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
@@ -12,7 +12,7 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Réalisations — Rey Dedy Pangou" />
-  <meta property="og:description" content="Huit systèmes livrés : du SaaS multi-microservices au CMS éditorial sur mesure, en passant par des APIs petit-format soignées." />
+  <meta property="og:description" content="Neuf systèmes livrés : du SaaS multi-microservices au CMS éditorial sur mesure, en passant par une refonte complète de plateforme et des APIs petit-format soignées." />
   <meta property="og:image" content="assets/img/photo-rey.jpeg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -168,6 +168,54 @@
       border: 1px solid var(--line-soft);
       background: var(--surface-2);
     }
+
+    /* Bloc avant/après (utilisé par la carte Xpertiz) */
+    .card-proj .ba {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+    }
+    .card-proj .ba figure {
+      margin: 0;
+      position: relative;
+      background: var(--surface-2);
+    }
+    .card-proj .ba figcaption {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 14px 18px;
+      display: flex; align-items: center; gap: 8px;
+      background: linear-gradient(to bottom, rgba(7,7,11,0.72), rgba(7,7,11,0));
+      z-index: 2;
+      pointer-events: none;
+    }
+    .card-proj .ba .avant figcaption { color: var(--text); }
+    .card-proj .ba .apres figcaption { color: var(--gold-light); }
+    .card-proj .ba .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      display: inline-block;
+    }
+    .card-proj .ba .avant .dot { background: var(--text-muted); }
+    .card-proj .ba .apres .dot { background: var(--gold); }
+    .card-proj .ba img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 8 / 5;
+    }
+    @media (max-width: 640px) {
+      .card-proj .ba { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -212,7 +260,7 @@
 <section class="page-hero">
   <div class="wrap-wide">
     <span class="eyebrow reveal">Mes projets</span>
-    <h1 class="reveal">Huit systèmes, huit terrains de jeu.</h1>
+    <h1 class="reveal">Neuf systèmes, neuf terrains de jeu.</h1>
     <p class="lead reveal">
       Du SaaS multi-microservices en production aux APIs petit-format soignées, voici les projets qui
       composent ma pratique. Chacun a son repo public, sa stack assumée, et — pour certains — sa démo live.
@@ -320,6 +368,67 @@
           <a class="live" href="https://lepetitmag.org" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
             Voir le magazine
+          </a>
+        </div>
+      </article>
+
+      <!-- Xpertiz Groupe — refonte -->
+      <article class="card-proj large reveal">
+        <div class="head">
+          <span class="cat">Refonte &amp; reprise de site — Mars → Avril 2026</span>
+          <div class="badges">
+            <span class="badge">● REFONTE LIVRÉE</span>
+          </div>
+        </div>
+        <div class="ba">
+          <figure class="avant">
+            <figcaption><span class="dot"></span>Avant</figcaption>
+            <img src="assets/img/xpertiz-avant.png"
+                 alt="Xpertiz Groupe — interface d'origine, thème générique daté"
+                 loading="lazy" width="1600" height="1000" />
+          </figure>
+          <figure class="apres">
+            <figcaption><span class="dot"></span>Après</figcaption>
+            <img src="assets/img/xpertiz-apres.png"
+                 alt="Xpertiz Groupe — interface refondue, responsive et hiérarchisée"
+                 loading="lazy" width="1600" height="1000" />
+          </figure>
+        </div>
+        <div>
+          <h3>Xpertiz Groupe — refonte complète d'une plateforme de formation</h3>
+          <p class="pitch">
+            Reprise complète d'un site existant pour un organisme de formation professionnelle
+            présent à travers l'Afrique francophone. Le site partait d'un thème générique daté ;
+            j'ai mené une refonte visuelle et structurelle — nouvelle charte, réorganisation des
+            sections, navigation enrichie et repositionnée, passage responsive — puis ajouté
+            plusieurs modules à valeur ajoutée, mis le site en conformité réglementaire et
+            sécurisé l'environnement technique.
+          </p>
+        </div>
+        <p class="status">Refonte livrée — Avril 2026</p>
+        <ul class="hi">
+          <li>Refonte design &amp; hiérarchie visuelle des sections</li>
+          <li>Navigation enrichie et repositionnée</li>
+          <li>Passage responsive (mobile / tablette)</li>
+          <li>Section témoignages apprenants</li>
+          <li>Section Archives de formation (carrousel photos)</li>
+          <li>Flux vidéo YouTube auto-actualisé (détection de nouvelles publications sur créneau)</li>
+          <li>Mise en conformité réglementaire (CGU, mentions légales)</li>
+          <li>Audit &amp; mise à jour des extensions et dépendances</li>
+        </ul>
+        <div class="stack">
+          <span class="tech-tag">Refonte</span>
+          <span class="tech-tag">UX/UI</span>
+          <span class="tech-tag">Responsive</span>
+          <span class="tech-tag">Intégration API YouTube</span>
+          <span class="tech-tag">Conformité RGPD</span>
+          <span class="tech-tag">Maintenance &amp; sécurité</span>
+          <span class="tech-tag ctx">WordPress</span>
+        </div>
+        <div class="links">
+          <a class="live" href="https://xpertizgroupe.com/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
+            Voir le site
           </a>
         </div>
       </article>
