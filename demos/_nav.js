@@ -51,14 +51,20 @@
     'dashboard.html': 'Dashboard',
   };
 
-  const currentFile = (location.pathname.split('/').pop() || '').toLowerCase();
+  // Netlify sert les URLs sans .html (pretty URLs), donc on normalise
+  let currentFile = (location.pathname.split('/').pop() || '').toLowerCase();
+  if (currentFile && !currentFile.endsWith('.html')) currentFile += '.html';
   const idx = ORDER.indexOf(currentFile);
   if (idx === -1) return;
 
-  const prevFile = idx > 0 ? ORDER[idx - 1] : null;
-  const nextFile = idx < ORDER.length - 1 ? ORDER[idx + 1] : null;
-  const prevLabel = prevFile ? (LABELS[prevFile] || prevFile) : '';
-  const nextLabel = nextFile ? (LABELS[nextFile] || nextFile) : '';
+  const prevKey = idx > 0 ? ORDER[idx - 1] : null;
+  const nextKey = idx < ORDER.length - 1 ? ORDER[idx + 1] : null;
+  // Href : on garde le .html — Netlify sert les deux formes et le HTML statique
+  // local (Live Server) exige l'extension.
+  const prevFile = prevKey;
+  const nextFile = nextKey;
+  const prevLabel = prevKey ? (LABELS[prevKey] || prevKey) : '';
+  const nextLabel = nextKey ? (LABELS[nextKey] || nextKey) : '';
 
   const style = document.createElement('style');
   style.textContent = `
