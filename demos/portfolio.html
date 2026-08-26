@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Koné Creative Studio — Design & Photographie · Dakar</title>
-<meta name="description" content="Studio de design graphique et de photographie à Dakar. Branding, identités visuelles, séries photo." />
+<title>Koné Creative Studio — Design &amp; Photographie · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — studio fictif de design graphique et de photographie. Branding, identités visuelles, séries photo." />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
@@ -288,11 +288,39 @@
     html { scroll-behavior: auto; }
   }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
 </style>
 </head>
 <body>
 
 <a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>700 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
 
 <nav class="top">
   <div class="wrap inner">
@@ -309,7 +337,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap hero-inner">
-    <div class="meta">Studio de design · Dakar · Depuis 2019</div>
+    <div class="meta">Studio de design · Depuis 2019</div>
     <h1>Faire <span class="accent">voir</span> ce qu'on n'avait pas vu.</h1>
     <p class="lead">Studio de design graphique et de direction artistique. On dessine des identités, on photographie des marques, on construit des sites — pour les gens qui veulent un travail visuel qui se remarque, vraiment.</p>
     <div class="hero-cta">
@@ -345,8 +373,8 @@
     <div class="about-text">
       <span class="eyebrow" style="font-family:var(--display);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block;">À propos</span>
       <h2>Un studio à taille humaine, fondé par <span style="color:var(--accent);">Mariam Koné</span>.</h2>
-      <p>Diplômée des Beaux-Arts de Dakar, Mariam a travaillé pour des marques de mode, des institutions culturelles et des startups avant d'ouvrir Koné Creative en 2019.</p>
-      <p>Le studio réunit aujourd'hui 4 personnes — directrices artistiques, photographes, développeur — et collabore avec des marques au Sénégal, en Côte d'Ivoire et en France.</p>
+      <p>Diplômée des Beaux-Arts, Mariam a travaillé pour des marques de mode, des institutions culturelles et des startups avant d'ouvrir Koné Creative en 2019.</p>
+      <p>Le studio réunit aujourd'hui 4 personnes — directrices artistiques, photographes, développeur — et collabore avec des marques sur plusieurs marchés internationaux.</p>
       <div class="stats">
         <div class="stat"><b>+60</b><span>Projets livrés</span></div>
         <div class="stat"><b>6 ans</b><span>D'existence</span></div>
@@ -389,17 +417,17 @@
 <section id="contact">
   <div class="wrap">
     <h2>Un projet ?<br><span class="accent">Parlons-en.</span></h2>
-    <p>Briefs en cours acceptés pour septembre 2026. Réponse sous 48h, en français ou en wolof.</p>
+    <p>Briefs en cours acceptés pour septembre 2026. Réponse sous 48h.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://wa.me/221770000000">📱 WhatsApp</a>
-      <a class="btn btn-ghost" href="mailto:hello@konestudio.sn">hello@konestudio.sn</a>
+      <a class="btn btn-primary" href="mailto:hello@konestudio.example">hello@konestudio.example</a>
+      <a class="btn btn-ghost" href="#">01 23 45 67 89</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;">
-    <span>© Koné Creative Studio — Dakar</span>
+    <span>© Koné Creative Studio — Maquette de démonstration</span>
     <span>Instagram · Behance · LinkedIn</span>
   </div>
 </footer>
@@ -424,15 +452,15 @@
 
 <script>
   const works = [
-    { id:1, cat:'branding', title:"Identité — Maison Téranga", img:"https://images.unsplash.com/photo-1561070791-2526d30994b8?auto=format&fit=crop&w=1100&q=60", big:true },
-    { id:2, cat:'photo', title:"Série Saly · Bord de mer", img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=60" },
+    { id:1, cat:'branding', title:"Identité — Maison Auriga", img:"https://images.unsplash.com/photo-1561070791-2526d30994b8?auto=format&fit=crop&w=1100&q=60", big:true },
+    { id:2, cat:'photo', title:"Série éditoriale · Bord de mer", img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=60" },
     { id:3, cat:'web', title:"Site — Galerie Le Manège", img:"https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=900&q=60" },
-    { id:4, cat:'branding', title:"Logo — Café Diéry", img:"https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=900&q=60" },
-    { id:5, cat:'photo', title:"Portraits artistes Dakar", img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=900&q=60", big:true },
-    { id:6, cat:'web', title:"Boutique en ligne — Téra.K", img:"https://images.unsplash.com/photo-1517292987719-0369a794ec0f?auto=format&fit=crop&w=900&q=60" },
-    { id:7, cat:'branding', title:"Direction artistique — Bakhi", img:"https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=60" },
+    { id:4, cat:'branding', title:"Logo — Café Nord", img:"https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=900&q=60" },
+    { id:5, cat:'photo', title:"Portraits d'artistes en studio", img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=900&q=60", big:true },
+    { id:6, cat:'web', title:"Boutique en ligne — Studio K", img:"https://images.unsplash.com/photo-1517292987719-0369a794ec0f?auto=format&fit=crop&w=900&q=60" },
+    { id:7, cat:'branding', title:"Direction artistique — Arka", img:"https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=60" },
     { id:8, cat:'photo', title:"Cuisine éditoriale — Le Lamantin", img:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=60" },
-    { id:9, cat:'web', title:"Landing — Festival Ngor", img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=60" },
+    { id:9, cat:'web', title:"Landing — Festival Boréal", img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=60" },
   ];
 
   function catLbl(c) { return c==='branding'?'Branding':c==='photo'?'Photographie':'Web'; }

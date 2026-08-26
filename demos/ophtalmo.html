@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Centre Ophtalmologique Lumen — Consultations & chirurgie · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — centre ophtalmologique fictif. Consultation, chirurgie réfractive, dépistage glaucome et DMLA. Plateau technique moderne, prise de rendez-vous en ligne." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
+<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0e2338;
+    --navy-2: #17324c;
+    --navy-3: #1f4568;
+    --cyan: #2ea9c8;
+    --cyan-dark: #1f8ba5;
+    --cyan-light: #e4f4f8;
+    --slate: #4a5b6e;
+    --slate-2: #7a8899;
+    --white: #ffffff;
+    --off: #f4f7fa;
+    --off-2: #e6ecf2;
+    --text: #10202f;
+    --font: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--cyan); color: var(--white); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .back-badge {
+    position: fixed; top: 18px; left: 18px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: var(--white); color: var(--text);
+    padding: 8px 14px; border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(14,35,56,0.18);
+    border: 1px solid var(--off-2);
+  }
+  .back-badge:hover { background: var(--cyan-light); color: var(--navy); }
+
+  .demo-ribbon {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 9px 16px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.4px;
+    border-bottom: 2px solid var(--cyan);
+  }
+  .demo-ribbon strong { font-weight: 800; color: var(--cyan); }
+
+  /* Nav */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--off-2);
+    padding: 18px 0;
+  }
+  nav.top .inner { display: flex; justify-content: space-between; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 17px; color: var(--text); }
+  .brand small { display: block; font-size: 11px; font-weight: 500; color: var(--slate-2); letter-spacing: 0.5px; text-transform: uppercase; }
+  .logo-mark {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--navy);
+    color: var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px;
+    position: relative;
+  }
+  .logo-mark::after {
+    content: ''; position: absolute; inset: 4px;
+    border: 1.5px solid var(--cyan); border-radius: 8px;
+    opacity: 0.5;
+  }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; color: var(--slate); }
+  .nav-links a:hover { color: var(--cyan-dark); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+  .nav-cta {
+    background: var(--navy); color: var(--white);
+    padding: 11px 20px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 600;
+    border: 1px solid var(--navy);
+  }
+  .nav-cta:hover { background: var(--navy-2); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: var(--white);
+    padding: 90px 0 100px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -120px; right: -120px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,169,200,0.22) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -200px; left: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,169,200,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; position: relative; z-index: 2; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 44px; } }
+  .badge-avail {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(46,169,200,0.15); color: var(--cyan);
+    padding: 7px 14px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600;
+    border: 1px solid rgba(46,169,200,0.35);
+    margin-bottom: 22px;
+  }
+  .badge-avail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 4px rgba(46,169,200,0.25); }
+  .hero h1 {
+    font-size: clamp(38px, 5.5vw, 56px);
+    font-weight: 800; line-height: 1.06;
+    letter-spacing: -0.025em;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: normal; color: var(--cyan); }
+  .hero p.lead {
+    font-size: 17px; color: rgba(255,255,255,0.78);
+    max-width: 54ch; margin-bottom: 30px;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 8px;
+    font-weight: 600; font-size: 14.5px; cursor: pointer;
+    border: 1px solid transparent; transition: all .2s ease;
+    font-family: var(--font);
+  }
+  .btn-primary { background: var(--cyan); color: var(--white); }
+  .btn-primary:hover { background: var(--cyan-dark); transform: translateY(-1px); }
+  .btn-ghost { border-color: rgba(255,255,255,0.25); color: var(--white); background: transparent; }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+  .btn-white { background: var(--white); color: var(--navy); }
+  .btn-white:hover { background: var(--cyan-light); }
+
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .hero-card .kpi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 22px; }
+  .hero-card .kpi > div {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px 14px;
+  }
+  .hero-card .kpi b { display: block; font-size: 24px; color: var(--cyan); font-weight: 800; margin-bottom: 4px; }
+  .hero-card .kpi span { font-size: 12.5px; color: rgba(255,255,255,0.7); line-height: 1.4; }
+  .hero-card .accred {
+    padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 12.5px; color: rgba(255,255,255,0.7); line-height: 1.6;
+  }
+  .hero-card .accred strong { color: var(--white); display: block; margin-bottom: 6px; font-weight: 700; font-size: 13px; }
+
+  /* Sections */
+  section { padding: 92px 0; }
+  .sec-head { text-align: left; margin-bottom: 44px; max-width: 720px; }
+  .sec-head.center { text-align: center; margin-left: auto; margin-right: auto; }
+  .sec-head .eyebrow {
+    display: inline-block;
+    color: var(--cyan-dark); font-weight: 700;
+    padding: 4px 0;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--cyan);
+  }
+  .sec-head h2 {
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
+    color: var(--navy);
+  }
+  .sec-head p { color: var(--slate); margin-top: 14px; font-size: 16px; }
+
+  /* Spécialités */
+  .spec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 980px) { .spec-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .spec-grid { grid-template-columns: 1fr; } }
+  .spec-card {
+    background: var(--white);
+    padding: 30px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--off-2);
+    border-top: 3px solid var(--cyan);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .spec-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(14,35,56,0.12); }
+  .spec-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--navy); color: var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; font-size: 22px;
+  }
+  .spec-card h3 { font-size: 16.5px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+  .spec-card p { font-size: 13.5px; color: var(--slate); line-height: 1.6; }
+
+  /* Plateau technique */
+  #tech { background: var(--off); }
+  .tech-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+  @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .tech-visual {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 40px;
+    color: var(--white);
+    aspect-ratio: 4/5;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .tech-visual::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at top right, rgba(46,169,200,0.35) 0%, transparent 70%);
+  }
+  .tech-visual .top {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cyan); font-weight: 700; position: relative;
+  }
+  .tech-visual .mid {
+    display: flex; align-items: center; justify-content: center;
+    flex: 1; margin: 24px 0;
+    position: relative;
+  }
+  .tech-visual .eye {
+    width: 180px; height: 180px;
+    border: 2px solid var(--cyan);
+    border-radius: 50%;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 60px rgba(46,169,200,0.4), inset 0 0 40px rgba(46,169,200,0.2);
+  }
+  .tech-visual .eye::before {
+    content: ''; position: absolute; inset: 30px;
+    border: 1.5px solid rgba(46,169,200,0.5);
+    border-radius: 50%;
+  }
+  .tech-visual .eye::after {
+    content: ''; width: 40px; height: 40px;
+    background: var(--cyan); border-radius: 50%;
+    box-shadow: 0 0 20px rgba(46,169,200,0.8);
+  }
+  .tech-visual .bottom {
+    background: rgba(255,255,255,0.06);
+    padding: 14px 18px; border-radius: 10px;
+    font-size: 13px; line-height: 1.5;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .tech-visual .bottom b { color: var(--cyan); font-weight: 700; }
+
+  .tech-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .tech-list li {
+    background: var(--white);
+    border: 1px solid var(--off-2);
+    border-left: 3px solid var(--cyan);
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .tech-list .num {
+    font-weight: 800; color: var(--cyan-dark);
+    font-size: 20px; line-height: 1; flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .tech-list h4 { font-size: 15.5px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .tech-list p { font-size: 13.5px; color: var(--slate); line-height: 1.55; }
+
+  /* Équipe */
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .team-grid { grid-template-columns: 1fr; } }
+  .team-card {
+    background: var(--white);
+    padding: 30px 26px;
+    border-radius: 12px;
+    border: 1px solid var(--off-2);
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .team-card .av {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--navy); color: var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px;
+    flex-shrink: 0;
+    border: 2px solid var(--cyan);
+  }
+  .team-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .team-card .role { color: var(--cyan-dark); font-size: 12.5px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .team-card p { font-size: 13.5px; color: var(--slate); line-height: 1.55; }
+
+  /* RDV */
+  #rdv { background: var(--off); }
+  .rdv-box {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--off-2);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(14,35,56,0.08);
+  }
+  .rdv-head {
+    background: var(--navy);
+    color: var(--white);
+    padding: 24px 32px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .rdv-head h3 { font-size: 18px; font-weight: 700; }
+  .rdv-head p { color: rgba(255,255,255,0.75); font-size: 13px; margin-top: 4px; }
+  .rdv-head .type-pill {
+    background: rgba(46,169,200,0.15); color: var(--cyan);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
+    border: 1px solid rgba(46,169,200,0.3);
+  }
+  .rdv-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+  @media (max-width: 760px) { .rdv-grid { grid-template-columns: 1fr; } }
+  .day-col {
+    padding: 22px 14px;
+    border-right: 1px solid var(--off-2);
+  }
+  .day-col:last-child { border-right: none; }
+  @media (max-width: 760px) {
+    .day-col { border-right: none; border-bottom: 1px solid var(--off-2); }
+  }
+  .day-head { text-align: center; margin-bottom: 14px; }
+  .day-head .dow { font-size: 11.5px; color: var(--slate-2); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .day-head .num { font-size: 22px; font-weight: 800; color: var(--navy); margin-top: 2px; }
+  .slot-list { display: flex; flex-direction: column; gap: 8px; }
+  .slot {
+    padding: 10px; border-radius: 6px;
+    background: var(--cyan-light); color: var(--cyan-dark);
+    border: 1px solid transparent; font-weight: 700; font-size: 13px;
+    cursor: pointer; transition: all .15s ease;
+    font-family: var(--font);
+  }
+  .slot:hover { background: var(--navy); color: var(--white); }
+  .slot.taken { background: var(--off); color: var(--slate-2); cursor: not-allowed; text-decoration: line-through; }
+  .slot.taken:hover { background: var(--off); color: var(--slate-2); }
+
+  /* Infos pratiques */
+  .infos-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: stretch; }
+  @media (max-width: 900px) { .infos-grid { grid-template-columns: 1fr; } }
+  .price-table {
+    background: var(--white);
+    border: 1px solid var(--off-2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .price-table .head {
+    background: var(--navy); color: var(--white);
+    padding: 18px 24px; font-size: 15px; font-weight: 700;
+  }
+  .price-table .row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 24px; border-bottom: 1px solid var(--off-2);
+    font-size: 14px;
+  }
+  .price-table .row:last-child { border-bottom: none; }
+  .price-table .row .lbl { color: var(--text); font-weight: 500; }
+  .price-table .row .val { color: var(--cyan-dark); font-weight: 800; }
+  .price-table .note {
+    padding: 14px 24px; background: var(--off);
+    font-size: 12.5px; color: var(--slate); line-height: 1.55;
+  }
+
+  .info-side { display: flex; flex-direction: column; gap: 16px; }
+  .info-card {
+    background: var(--white); padding: 22px 24px;
+    border-radius: 12px; border: 1px solid var(--off-2);
+  }
+  .info-card .ic {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--cyan-light); color: var(--cyan-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 12px;
+  }
+  .info-card b { display: block; font-size: 14.5px; color: var(--navy); margin-bottom: 4px; font-weight: 700; }
+  .info-card p { font-size: 13.5px; color: var(--slate); line-height: 1.55; }
+
+  /* Footer */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.65);
+    padding: 40px 0 24px; text-align: center; font-size: 13px;
+    border-top: 3px solid var(--cyan);
+  }
+  footer .row1 { margin-bottom: 10px; font-weight: 500; color: rgba(255,255,255,0.85); }
+  footer .row2 { font-size: 12px; color: rgba(255,255,255,0.5); }
+  footer a { color: var(--cyan); border-bottom: 1px dotted rgba(46,169,200,0.4); }
+  footer a:hover { color: var(--white); border-bottom-color: var(--white); }
+
+  /* Modale */
+  .modal-bg { position: fixed; inset: 0; background: rgba(14,35,56,0.7); display: none; align-items: center; justify-content: center; z-index: 100; padding: 24px; }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 14px; padding: 40px 32px;
+    max-width: 460px; width: 100%; text-align: center;
+    border-top: 3px solid var(--cyan);
+  }
+  .modal .check {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--cyan); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px; font-size: 30px; font-weight: 700;
+  }
+  .modal h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
+  .modal p { color: var(--slate); font-size: 14.5px; margin-bottom: 18px; }
+  .modal .summary {
+    background: var(--off); color: var(--navy);
+    padding: 14px; border-radius: 8px; margin-bottom: 20px;
+    font-weight: 700; font-size: 14.5px;
+    border-left: 3px solid var(--cyan);
+  }
+  .modal .btn-primary { width: 100%; justify-content: center; background: var(--navy); color: var(--white); }
+  .modal .btn-primary:hover { background: var(--navy-2); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>1 200 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
+
+<div class="demo-ribbon">
+  <strong>Maquette de démonstration</strong> · Centre fictif, coordonnées fictives. Illustre un site pour cabinet d'ophtalmologie.
+</div>
+
+<nav class="top">
+  <div class="wrap inner">
+    <div class="brand">
+      <div class="logo-mark">L</div>
+      <div>Centre Ophtalmologique Lumen<small>Consultations · Chirurgie</small></div>
+    </div>
+    <div class="nav-links">
+      <a href="#specialites">Spécialités</a>
+      <a href="#tech">Plateau technique</a>
+      <a href="#equipe">Équipe</a>
+      <a href="#rdv">Rendez-vous</a>
+      <a href="#infos">Tarifs &amp; infos</a>
+    </div>
+    <a class="nav-cta" href="#rdv">Prendre RDV</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge-avail"><span class="dot"></span>Consultations disponibles cette semaine</span>
+      <h1>La santé de vos yeux, <em>au niveau du meilleur plateau technique.</em></h1>
+      <p class="lead">Un centre ophtalmologique de nouvelle génération : consultations, dépistages, chirurgie réfractive et de la cataracte. Six praticiens, dix équipements de dernière génération, un parcours de soins fluide de A à Z.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#rdv">Prendre rendez-vous</a>
+        <a class="btn btn-ghost" href="#tech">Découvrir le plateau technique</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="kpi">
+        <div><b>6</b><span>ophtalmologues associés</span></div>
+        <div><b>10</b><span>équipements de dernière génération</span></div>
+        <div><b>&lt; 5 j</b><span>délai moyen pour un RDV</span></div>
+        <div><b>2 500+</b><span>interventions par an</span></div>
+      </div>
+      <div class="accred">
+        <strong>Accréditations</strong>
+        Centre partenaire des principales caisses d'assurance et mutuelles santé. Continuité de prise en charge post-opératoire.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPÉCIALITÉS -->
+<section id="specialites">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Spécialités</span>
+      <h2>Un parcours complet, de la consultation à la chirurgie.</h2>
+      <p>Nous couvrons l'ensemble des besoins ophtalmologiques adultes et pédiatriques, avec une orientation forte sur la chirurgie réfractive et le dépistage précoce.</p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-icon">👁</div>
+        <h3>Consultation générale</h3>
+        <p>Examen de la vue, prescription optique, suivi annuel. Adultes et enfants dès 3 ans.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">⚡</div>
+        <h3>Chirurgie réfractive</h3>
+        <p>Techniques LASIK, PRK, SMILE pour corriger myopie, hypermétropie, astigmatisme et presbytie.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🔬</div>
+        <h3>Cataracte</h3>
+        <p>Chirurgie par ultrasons avec implants monofocaux ou multifocaux, en ambulatoire.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">📊</div>
+        <h3>Dépistage glaucome</h3>
+        <p>Mesure de la pression intra-oculaire, champ visuel, tomographie du nerf optique.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🎯</div>
+        <h3>Dépistage DMLA</h3>
+        <p>Rétinographie couleur, OCT maculaire, angiographie sans injection. Suivi personnalisé.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">👶</div>
+        <h3>Ophtalmo pédiatrique</h3>
+        <p>Dépistage précoce, strabisme, amblyopie, lunettes enfant. Consultation adaptée aux plus jeunes.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">💧</div>
+        <h3>Sécheresse oculaire</h3>
+        <p>Bilan complet du film lacrymal, protocoles LipiFlow, IPL, traitements sur mesure.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🚨</div>
+        <h3>Urgences ophtalmo</h3>
+        <p>Œil rouge, baisse de vue brutale, corps étranger. Créneaux d'urgence chaque jour ouvré.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATEAU TECHNIQUE -->
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Plateau technique</span>
+      <h2>Ce qui fait la différence : l'équipement.</h2>
+      <p>Un diagnostic précis commence par des outils de mesure de dernière génération. Nous investissons chaque année pour vous offrir l'examen le plus fiable possible.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-visual">
+        <div class="top">→ OCT de dernière génération</div>
+        <div class="mid"><div class="eye"></div></div>
+        <div class="bottom">
+          <b>Résolution &lt; 5 µm</b> — visualisation en coupe des différentes couches de la rétine et du nerf optique, sans injection.
+        </div>
+      </div>
+      <ul class="tech-list">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h4>OCT-Angiographie</h4>
+            <p>Cartographie vasculaire de la rétine sans injection de produit de contraste. Suivi DMLA et diabète.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h4>Topographe cornéen</h4>
+            <p>Analyse tridimensionnelle de la cornée avant chirurgie réfractive ou pose de lentilles rigides.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h4>Laser Excimer &amp; Femtoseconde</h4>
+            <p>Chirurgie réfractive tout laser, technique LASIK / SMILE selon indication.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <div>
+            <h4>Champ visuel automatisé</h4>
+            <p>Périmétrie de référence pour le dépistage et le suivi du glaucome.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">05</span>
+          <div>
+            <h4>Rétinographe grand-champ</h4>
+            <p>Photographie de la rétine sur 200° en une image, dépistage rapide et non invasif.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ÉQUIPE -->
+<section id="equipe">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">L'équipe</span>
+      <h2>Six ophtalmologues, une orthoptiste, une infirmière coordinatrice.</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="av">HV</div>
+        <div>
+          <h3>Dr. Hélène Vasseur</h3>
+          <div class="role">Chirurgie réfractive</div>
+          <p>Chef du service chirurgie. Spécialiste LASIK, SMILE, chirurgie de la cataracte.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="av">JM</div>
+        <div>
+          <h3>Dr. Julien Moreau</h3>
+          <div class="role">Rétine · DMLA</div>
+          <p>Suivi des pathologies rétiniennes : DMLA, rétinopathie diabétique, occlusions vasculaires.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="av">AK</div>
+        <div>
+          <h3>Dr. Anaïs Kader</h3>
+          <div class="role">Glaucome</div>
+          <p>Dépistage précoce et suivi du glaucome, chirurgie mini-invasive du glaucome (MIGS).</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="av">RC</div>
+        <div>
+          <h3>Dr. Rémi Chastel</h3>
+          <div class="role">Pédiatrie · Strabisme</div>
+          <p>Consultation enfant, dépistage précoce, strabisme, amblyopie. Approche pédagogique.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="av">MO</div>
+        <div>
+          <h3>Dr. Mila Okonkwo</h3>
+          <div class="role">Cornée · Sécheresse</div>
+          <p>Pathologies de la cornée, sécheresse oculaire, adaptations en lentilles complexes.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="av">SB</div>
+        <div>
+          <h3>Dr. Sami Bruneau</h3>
+          <div class="role">Consultation générale</div>
+          <p>Bilans visuels, prescriptions optiques, suivi annuel adultes et adolescents.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RDV -->
+<section id="rdv">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Prendre rendez-vous</span>
+      <h2>Un créneau, un clic.</h2>
+      <p>Sélectionnez le motif, choisissez l'horaire, recevez votre confirmation immédiate.</p>
+    </div>
+    <div class="rdv-box">
+      <div class="rdv-head">
+        <div>
+          <h3>Créneaux à venir</h3>
+          <p>Rappel automatique la veille du rendez-vous</p>
+        </div>
+        <span class="type-pill">Consultation générale · 20 min</span>
+      </div>
+      <div class="rdv-grid" id="rdvGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS PRATIQUES -->
+<section id="infos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Infos pratiques</span>
+      <h2>Tarifs indicatifs &amp; informations utiles</h2>
+      <p>Les tarifs affichés sont donnés à titre d'exemple. Un devis personnalisé est établi pour toute intervention chirurgicale.</p>
+    </div>
+    <div class="infos-grid">
+      <div class="price-table">
+        <div class="head">Grille indicative — consultations</div>
+        <div class="row"><span class="lbl">Consultation générale</span><span class="val">XX</span></div>
+        <div class="row"><span class="lbl">Consultation spécialisée (glaucome, DMLA)</span><span class="val">XX</span></div>
+        <div class="row"><span class="lbl">Bilan avant chirurgie réfractive</span><span class="val">XX</span></div>
+        <div class="row"><span class="lbl">Consultation enfant &lt; 12 ans</span><span class="val">XX</span></div>
+        <div class="row"><span class="lbl">Urgence ophtalmologique</span><span class="val">XX</span></div>
+        <div class="row"><span class="lbl">Chirurgie réfractive (par œil)</span><span class="val">sur devis</span></div>
+        <div class="row"><span class="lbl">Chirurgie cataracte (par œil)</span><span class="val">sur devis</span></div>
+        <div class="note">Paiement mobile &amp; carte bancaire acceptés. Prise en charge par assurance et mutuelle santé selon vos garanties. Facilités de paiement en 3 fois possibles sur intervention chirurgicale.</div>
+      </div>
+      <div class="info-side">
+        <div class="info-card">
+          <div class="ic">📍</div>
+          <b>Adresse du centre</b>
+          <p>18 boulevard des Cèdres · Bâtiment Lumen · Rez-de-chaussée &amp; 1er étage</p>
+        </div>
+        <div class="info-card">
+          <div class="ic">🕐</div>
+          <b>Horaires d'ouverture</b>
+          <p>Lundi – Vendredi : 8h00 – 19h30<br>Samedi : 9h00 – 14h00<br>Fermé dimanche &amp; jours fériés</p>
+        </div>
+        <div class="info-card">
+          <div class="ic">📞</div>
+          <b>Contact</b>
+          <p>Standard : 01 23 45 67 89<br>Email : contact@lumen-ophtalmo.example</p>
+        </div>
+        <div class="info-card">
+          <div class="ic">🚗</div>
+          <b>Accès</b>
+          <p>Parking visiteur (60 places) · accès PMR à tous les étages · station de transport en commun à 3 minutes à pied.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="row1">
+      Maquette de démonstration réalisée par <a href="../index.html">Rey Dedy Pangou</a> — voir plus de démos sur <a href="../exemples.html">/exemples</a>.
+    </div>
+    <div class="row2">
+      Centre Ophtalmologique Lumen est un établissement fictif. Aucune coordonnée n'est réelle.
+    </div>
+  </div>
+</footer>
+
+<!-- Modale -->
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="check">✓</div>
+    <h3>Rendez-vous confirmé</h3>
+    <p>Vous recevrez un rappel automatique la veille de votre consultation.</p>
+    <div class="summary" id="rdvSummary"></div>
+    <button class="btn btn-primary" onclick="closeModal()">Parfait, merci</button>
+  </div>
+</div>
+
+<script>
+  const days = [
+    { dow:'LUN', num:'—', slots:[ {t:'08:30',taken:false}, {t:'10:00',taken:true},  {t:'14:00',taken:false}, {t:'16:30',taken:false} ] },
+    { dow:'MAR', num:'—', slots:[ {t:'09:00',taken:false}, {t:'11:30',taken:false}, {t:'14:30',taken:true},  {t:'17:00',taken:false} ] },
+    { dow:'MER', num:'—', slots:[ {t:'08:30',taken:true},  {t:'10:30',taken:false}, {t:'15:00',taken:false}, {t:'18:00',taken:false} ] },
+    { dow:'JEU', num:'—', slots:[ {t:'09:00',taken:false}, {t:'11:30',taken:false}, {t:'14:00',taken:false}, {t:'16:00',taken:true } ] },
+    { dow:'VEN', num:'—', slots:[ {t:'08:30',taken:false}, {t:'10:30',taken:false}, {t:'14:30',taken:false}, {t:'17:30',taken:false} ] },
+  ];
+  const dowFull = { LUN:'lundi', MAR:'mardi', MER:'mercredi', JEU:'jeudi', VEN:'vendredi' };
+
+  const grid = document.getElementById('rdvGrid');
+  days.forEach(day => {
+    const col = document.createElement('div');
+    col.className = 'day-col';
+    col.innerHTML = `
+      <div class="day-head">
+        <div class="dow">${day.dow}</div>
+        <div class="num">${day.num}</div>
+      </div>
+      <div class="slot-list">
+        ${day.slots.map(s => `<button class="slot ${s.taken?'taken':''}" ${s.taken?'disabled':''} data-day="${day.dow}" data-t="${s.t}">${s.t}</button>`).join('')}
+      </div>`;
+    grid.appendChild(col);
+  });
+
+  document.querySelectorAll('.slot:not(.taken)').forEach(s => {
+    s.addEventListener('click', () => {
+      const day = dowFull[s.dataset.day];
+      const t = s.dataset.t;
+      document.getElementById('rdvSummary').textContent =
+        `${day.charAt(0).toUpperCase()+day.slice(1)} · ${t} · Consultation générale`;
+      document.getElementById('modal').classList.add('open');
+    });
+  });
+
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  document.getElementById('modal').addEventListener('click', e => { if (e.target.id==='modal') closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DelivPay — Le paiement mobile, simplifié.</title>
-<meta name="description" content="Payer, recevoir, transférer. Tout depuis votre téléphone, sans frais cachés. DelivPay arrive bientôt au Sénégal." />
+<title>DelivPay — Le paiement mobile, simplifié · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — produit fictif. Payer, recevoir, transférer depuis votre téléphone, sans frais cachés." />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
@@ -356,11 +356,39 @@
     html { scroll-behavior: auto; }
   }
   :focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
 </style>
 </head>
 <body>
 
 <a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>900 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
 
 <nav class="top">
   <div class="wrap inner">
@@ -383,21 +411,21 @@
     <div>
       <span class="pill-launch">Lancement officiel · septembre 2026</span>
       <h1>Le paiement mobile, <span class="grad">enfin sans friction.</span></h1>
-      <p class="lead">Payer, recevoir, transférer. Tout depuis votre téléphone. Compatible Wave et Orange Money, frais 5× moins chers, instantané partout au Sénégal.</p>
+      <p class="lead">Payer, recevoir, transférer. Tout depuis votre téléphone. Interopérable avec les principaux services de paiement mobile, frais 5× moins chers, instantané.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#signup">Réserver ma place gratuite</a>
         <a class="btn btn-ghost" href="#how">Comment ça marche →</a>
       </div>
-      <div class="micro-trust">🔒 Agrément BCEAO en cours · Aucune carte bancaire requise · <b>14 jours d'avance</b> pour les premiers inscrits</div>
+      <div class="micro-trust">🔒 Conformité financière en cours · Aucune carte bancaire requise · <b>14 jours d'avance</b> pour les premiers inscrits</div>
     </div>
     <div class="phone-wrap">
       <div class="phone">
         <div class="phone-screen">
           <div class="phone-hello">Bonjour 👋</div>
-          <div class="phone-name">Awa Sow</div>
+          <div class="phone-name">Alex Dupont</div>
           <div class="phone-balance">
             <div class="lab">Solde disponible</div>
-            <div class="amt">142 350 <small>FCFA</small></div>
+            <div class="amt">142 350 <small>XX</small></div>
           </div>
           <div class="phone-actions">
             <div class="pa"><span class="ic">↗</span>Envoyer</div>
@@ -408,12 +436,12 @@
           <div class="phone-txn-title">RÉCENT</div>
           <div class="phone-tx">
             <div class="tx-ic">🛒</div>
-            <div class="tx-info"><b>Marché Sandaga</b><span>Aujourd'hui · 14:22</span></div>
+            <div class="tx-info"><b>Épicerie du Marché</b><span>Aujourd'hui · 14:22</span></div>
             <div class="amt-tx">−4 500</div>
           </div>
           <div class="phone-tx">
             <div class="tx-ic">👤</div>
-            <div class="tx-info"><b>De Mamadou D.</b><span>Hier · 19:08</span></div>
+            <div class="tx-info"><b>De Thomas R.</b><span>Hier · 19:08</span></div>
             <div class="amt-tx in">+15 000</div>
           </div>
         </div>
@@ -439,12 +467,12 @@
       <div class="step">
         <div class="n">2</div>
         <h3>Rechargez votre compte</h3>
-        <p>Depuis Wave, Orange Money, ou en cash chez l'un de nos 800+ points partenaires partout au Sénégal.</p>
+        <p>Depuis les principaux services de paiement mobile ou en cash chez l'un de nos 800+ points partenaires.</p>
       </div>
       <div class="step">
         <div class="n">3</div>
         <h3>Payez, transférez, vivez.</h3>
-        <p>Chez le commerçant via QR code, en ligne, ou à un proche. Toujours instantané, jamais plus de 150 FCFA de frais.</p>
+        <p>Chez le commerçant via QR code, en ligne, ou à un proche. Toujours instantané, jamais plus de 150 XX de frais.</p>
       </div>
     </div>
   </div>
@@ -455,8 +483,8 @@
   <div class="wrap">
     <div class="live">EN DIRECT</div>
     <div class="num-big" id="counterNum">2 847</div>
-    <h3>Sénégalais ont déjà réservé leur place</h3>
-    <p style="color:var(--grey-dim);max-width:50ch;margin:14px auto 0;font-size:13.5px;">Plus que <b style="color:var(--white);">7 153 places</b> avant le lancement public. Les premiers inscrits bénéficient des frais à <b style="color:var(--mint);">0 FCFA</b> pendant 3 mois.</p>
+    <h3>utilisateurs ont déjà réservé leur place</h3>
+    <p style="color:var(--grey-dim);max-width:50ch;margin:14px auto 0;font-size:13.5px;">Plus que <b style="color:var(--white);">7 153 places</b> avant le lancement public. Les premiers inscrits bénéficient de <b style="color:var(--mint);">0 XX de frais</b> pendant 3 mois.</p>
   </div>
 </section>
 
@@ -490,8 +518,8 @@
 
 <footer>
   <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;">
-    <span>© 2026 DelivPay — En phase de lancement</span>
-    <span>contact@delivpay.sn · +221 78 000 00 00</span>
+    <span>© 2026 DelivPay — Maquette de démonstration · produit fictif</span>
+    <span>contact@delivpay.example · 01 23 45 67 89</span>
   </div>
 </footer>
 
@@ -532,10 +560,10 @@
   // FAQ
   const faqs = [
     { q:"DelivPay, c'est gratuit ?", a:"L'application est entièrement gratuite. Les frais de transaction sont parmi les plus bas du marché — 5× moins que les opérateurs classiques — et offerts pendant 3 mois pour les premiers inscrits." },
-    { q:"Est-ce que je peux envoyer de l'argent à un compte Wave ou Orange Money ?", a:"Oui. DelivPay est interopérable dès le lancement avec Wave et Orange Money. Vous pouvez envoyer et recevoir entre les trois services sans aucun frais supplémentaire." },
-    { q:"Mes données sont-elles en sécurité ?", a:"Toutes vos données sont chiffrées de bout en bout. DelivPay est en cours d'obtention de l'agrément BCEAO et applique les standards de la finance internationale (PCI-DSS niveau 1)." },
+    { q:"Est-ce que je peux envoyer de l'argent à un compte de paiement mobile classique ?", a:"Oui. DelivPay est interopérable dès le lancement avec les principaux services de paiement mobile. Vous pouvez envoyer et recevoir sans aucun frais supplémentaire." },
+    { q:"Mes données sont-elles en sécurité ?", a:"Toutes vos données sont chiffrées de bout en bout. DelivPay est en cours d'obtention de son agrément financier et applique les standards de la finance internationale (PCI-DSS niveau 1)." },
     { q:"Quand l'application sera-t-elle disponible ?", a:"Lancement officiel prévu en septembre 2026. Les inscrits sur cette liste auront accès en avant-première 14 jours avant tout le monde." },
-    { q:"Y a-t-il un plafond de transaction ?", a:"100 000 FCFA par jour pour un compte standard, 1 500 000 FCFA pour un compte vérifié (KYC complet). Aucun plafond mensuel." },
+    { q:"Y a-t-il un plafond de transaction ?", a:"100 000 XX par jour pour un compte standard, 1 500 000 XX pour un compte vérifié (KYC complet). Aucun plafond mensuel." },
   ];
   const faqList = document.getElementById('faqList');
   faqs.forEach((f, i) => {

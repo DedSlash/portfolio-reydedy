@@ -384,11 +384,39 @@
     html { scroll-behavior: auto; }
   }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
 </style>
 </head>
 <body>
 
 <a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>900 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
 
 <nav class="top">
   <div class="wrap inner">
@@ -402,7 +430,7 @@
   <div class="wrap">
     <span class="pill">Démonstration en temps réel</span>
     <h1><span class="strike">Votre vieux site</span><br><span class="grad">repensé pour 2026.</span></h1>
-    <p class="lead">Beaucoup d'entreprises au Sénégal traînent un site fait il y a 5 ou 10 ans : lent, illisible sur téléphone, invisible sur Google. Voici exactement à quoi ressemble une refonte sérieuse.</p>
+    <p class="lead">Beaucoup d'entreprises traînent un site fait il y a 5 ou 10 ans : lent, illisible sur téléphone, invisible sur Google. Voici exactement à quoi ressemble une refonte sérieuse.</p>
     <p class="hint">👉 <b>Glissez le curseur</b> pour voir le avant / après ci-dessous</p>
   </div>
 </section>
@@ -419,12 +447,12 @@
         <div class="pane-inner">
           <div class="new-site">
             <div class="new-nav">
-              <div class="new-brand">Restaurant<span>Téranga</span></div>
+              <div class="new-brand">Restaurant<span>Marchand</span></div>
               <div class="links"><span>Carte</span><span>Réserver</span><span>Contact</span></div>
             </div>
             <div class="new-hero">
               <div>
-                <h2>Une cuisine sénégalaise, <span>servie comme un art.</span></h2>
+                <h2>Une cuisine du marché, <span>servie comme un art.</span></h2>
                 <p>Plats du marché, réservation en ligne, ouvert tous les jours.</p>
                 <span class="ctab">Réserver une table →</span>
               </div>
@@ -444,7 +472,7 @@
         <div class="pane-inner">
           <div class="old-site">
             <div class="old-banner">★ ★ ★ BIENVENUE SUR NOTRE SITE WEB !!! ★ ★ ★</div>
-            <div class="old-title">Restaurant Teranga !!!</div>
+            <div class="old-title">Restaurant Marchand !!!</div>
             <table class="old-table">
               <tr class="old-menu">
                 <td><a href="#">ACCUEIL</a></td>
@@ -456,7 +484,7 @@
               <tr>
                 <td colspan="5" class="old-content">
                   <h3>♨ Notre Restaurant ♨</h3>
-                  <p>Bienvenue sur le site officiel du Restaurant Teranga ! Situe a Dakar, nous vous proposons les meilleurs plats senegalais depuis 2008.</p>
+                  <p>Bienvenue sur le site officiel du Restaurant Marchand ! Depuis 2008, nous vous proposons une cuisine du marché, faite maison.</p>
                   <p style="margin-top:4px;">Pour reserver une table, telephonez au <span class="old-blink">33 825 47 12</span></p>
                   <p style="margin-top:4px;font-size:11px;">Heures d'ouverture : Lundi-Dimanche, 12h-22h</p>
                   <div class="old-counter">Visiteurs : 00012847 </div>
@@ -473,7 +501,7 @@
         <div class="handle-grab">⇄</div>
       </div>
     </div>
-    <p class="slider-cap">Le site de gauche est <b>réel</b> : c'est le genre de page qui pénalise une entreprise sénégalaise sur Google et sur mobile en 2026.</p>
+    <p class="slider-cap">Le site de gauche est <b>représentatif</b> : c'est le genre de page qui pénalise une entreprise sur Google et sur mobile en 2026.</p>
   </div>
 </section>
 
@@ -483,7 +511,7 @@
     <div class="sec-head">
       <span class="eyebrow">Résultats mesurés</span>
       <h2>Ce qu'on gagne, concrètement.</h2>
-      <p>Exemple chiffré sur un client réel : restaurant à Dakar, refonte livrée en 3 semaines.</p>
+      <p>Exemple chiffré représentatif : restaurant indépendant, refonte livrée en 3 semaines.</p>
     </div>
     <div class="stats-grid">
       <div class="stat-card">

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>La Table Dorée — Restaurant raffiné · Dakar</title>
-<meta name="description" content="Cuisine africaine raffinée à Dakar. Menu, galerie et réservation en ligne." />
+<title>La Table Dorée — Restaurant raffiné · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — restaurant fictif. Menu, galerie et réservation en ligne." />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
@@ -289,11 +289,39 @@
     html { scroll-behavior: auto; }
   }
   :focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
 </style>
 </head>
 <body>
 
 <a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>1 200 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -308,9 +336,9 @@
       </ul>
     </nav>
     <div class="hero-inner">
-      <span class="eyebrow">Cuisine africaine raffinée · Dakar</span>
-      <h1>Le goût du Sénégal, dressé avec soin.</h1>
-      <p class="lead">Une carte courte, des produits frais du jour, et la générosité de la cuisine d'Afrique de l'Ouest revisitée par un chef passionné. Ouverte tous les soirs aux Almadies.</p>
+      <span class="eyebrow">Cuisine raffinée · saisonnière</span>
+      <h1>Le goût du produit, dressé avec soin.</h1>
+      <p class="lead">Une carte courte, des produits frais du jour, une cuisine généreuse revisitée par un chef passionné. Ouverte tous les soirs en centre-ville.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#reservation">Réserver une table</a>
         <a class="btn btn-ghost" href="#menu">Voir le menu</a>
@@ -325,7 +353,7 @@
     <div class="sec-head">
       <span class="eyebrow">Notre carte</span>
       <h2>Menu de saison</h2>
-      <p>Tous nos plats sont préparés à la commande avec des produits frais des marchés de Dakar.</p>
+      <p>Tous nos plats sont préparés à la commande avec des produits frais des marchés locaux.</p>
     </div>
     <div class="filters">
       <button class="filter active" data-cat="all">Tout</button>
@@ -368,11 +396,11 @@
       <div class="row">
         <div class="field">
           <label for="rName">Nom complet</label>
-          <input id="rName" type="text" placeholder="Aïcha Diop" required>
+          <input id="rName" type="text" placeholder="Alex Dupont" required>
         </div>
         <div class="field">
           <label for="rPhone">Téléphone</label>
-          <input id="rPhone" type="tel" placeholder="+221 77 000 00 00" required>
+          <input id="rPhone" type="tel" placeholder="01 23 45 67 89" required>
         </div>
       </div>
       <div class="row">
@@ -416,22 +444,22 @@
     <div class="contact-grid">
       <div class="contact-card">
         <h3>Adresse</h3>
-        <p>Route des Almadies, en face de la résidence Téranga</p>
-        <p>Dakar, Sénégal</p>
+        <p>7 avenue des Tilleuls, en face du square Marchand</p>
+        <p>Centre-ville · 2ᵉ étage</p>
         <h3 style="margin-top:30px;">Réservations</h3>
-        <p><a href="https://wa.me/221770000000">+221 77 000 00 00 (WhatsApp)</a></p>
-        <p><a href="mailto:bonjour@latabledoree.sn">bonjour@latabledoree.sn</a></p>
+        <p>01 23 45 67 89</p>
+        <p><a href="mailto:bonjour@latabledoree.example">bonjour@latabledoree.example</a></p>
         <h3 style="margin-top:30px;">Horaires</h3>
         <p class="horaires">Mardi — Dimanche · 19h00 — 23h30</p>
         <p style="font-size:14px;">Fermé le lundi</p>
       </div>
-      <div class="map" aria-label="Carte — Almadies, Dakar"><div class="pin"></div></div>
+      <div class="map" aria-label="Carte factice — La Table Dorée"><div class="pin"></div></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">© La Table Dorée · Dakar — Tous droits réservés</div>
+  <div class="wrap">© La Table Dorée — Maquette de démonstration · établissement fictif</div>
 </footer>
 
 <!-- Modale confirmation -->

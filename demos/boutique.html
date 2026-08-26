@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Afrik'Style — Mode féminine wax · Dakar</title>
-<meta name="description" content="Marque de mode féminine africaine. Wax, boubous, accessoires. Livraison Dakar et Sénégal." />
+<title>Afrik'Style — Mode féminine · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — boutique fictive de mode féminine. Catalogue, panier, paiement mobile &amp; carte bancaire." />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
@@ -320,11 +320,39 @@
     html { scroll-behavior: auto; }
   }
   :focus-visible { outline: 2px solid var(--ocre); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
 </style>
 </head>
 <body>
 
 <a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>1 200 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
 
 <nav class="top">
   <div class="wrap inner">
@@ -343,9 +371,9 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Collection Téranga · 2026</div>
+      <div class="eyebrow">Collection Saison · 2026</div>
       <h1>Le wax, <em>raconté</em> autrement.</h1>
-      <p class="lead">Des coupes contemporaines, des tissus choisis dans les meilleurs ateliers de la sous-région. Livraison Dakar en 24h, Sénégal en 72h, paiement Wave ou Orange Money.</p>
+      <p class="lead">Des coupes contemporaines, des tissus choisis dans des ateliers partenaires sélectionnés. Livraison rapide en zone urbaine, sous 72h ailleurs, paiement mobile &amp; carte bancaire.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#shop">Découvrir la collection</a>
         <a class="btn btn-ghost" href="#shop">Voir le lookbook</a>
@@ -360,7 +388,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>La sélection</h2>
-      <p>8 pièces signature, fabriquées en petite série dans nos ateliers de Dakar.</p>
+      <p>8 pièces signature, fabriquées en petite série dans nos ateliers partenaires.</p>
     </div>
     <div class="filters-row">
       <div class="pills">
@@ -380,7 +408,7 @@
     <div class="cols">
       <div>
         <div class="brand">Afrik'<span>Style</span></div>
-        <p style="margin-top:12px;max-width:36ch;">Mode féminine africaine, fabriquée à Dakar. Livraison à travers tout le Sénégal.</p>
+        <p style="margin-top:12px;max-width:36ch;">Mode féminine contemporaine, fabriquée en petite série dans nos ateliers partenaires.</p>
       </div>
       <div>
         <h4>Boutique</h4>
@@ -393,9 +421,9 @@
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="https://wa.me/221770000000">+221 77 000 00 00</a></li>
-          <li>bonjour@afrikstyle.sn</li>
-          <li>Sacré-Cœur, Dakar</li>
+          <li>01 23 45 67 89</li>
+          <li>bonjour@afrikstyle.example</li>
+          <li>12 rue des Peupliers</li>
         </ul>
       </div>
     </div>
@@ -430,7 +458,7 @@
   </div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
-    <div class="total"><span>Total</span><b id="cartTotal">0 FCFA</b></div>
+    <div class="total"><span>Total</span><b id="cartTotal">0 XX</b></div>
     <button class="btn btn-primary checkout" id="checkoutBtn">Passer commande</button>
   </div>
 </aside>
@@ -439,11 +467,11 @@
 <div class="modal-bg" id="checkoutModal" role="dialog" aria-modal="true">
   <div class="checkout-modal" id="checkoutInner">
     <h3 id="ckTitle">Mode de paiement</h3>
-    <p id="ckSub">Choisissez votre opérateur préféré.</p>
+    <p id="ckSub">Choisissez votre moyen de paiement.</p>
     <div class="pay-opts">
-      <button class="pay-opt sel" data-pay="Wave">Wave</button>
-      <button class="pay-opt" data-pay="Orange Money">Orange Money</button>
-      <button class="pay-opt" data-pay="Cash">Cash à la livraison</button>
+      <button class="pay-opt sel" data-pay="Paiement mobile">Paiement mobile</button>
+      <button class="pay-opt" data-pay="Carte bancaire">Carte bancaire</button>
+      <button class="pay-opt" data-pay="À la livraison">À la livraison</button>
     </div>
     <div class="summary" id="ckSummary"></div>
     <button class="btn btn-primary" id="ckConfirm">Confirmer la commande</button>
@@ -452,17 +480,17 @@
 
 <script>
   const products = [
-    { id:1, cat:'robes', name:"Robe wax Téranga", price:38000, img:"https://images.unsplash.com/photo-1581338834647-b0fb40704e21?auto=format&fit=crop&w=700&q=60", desc:"Robe longue en wax authentique, coupe ajustée à la taille, manches bouffantes. Pièce unique." },
-    { id:2, cat:'ensembles', name:"Boubou brodé royal", price:65000, img:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=60", desc:"Ensemble boubou + pantalon, broderies main, lin léger. Idéal cérémonies." },
-    { id:3, cat:'robes', name:"Robe ankara Aïcha", price:32000, img:"https://images.unsplash.com/photo-1535185384036-28bbc8035f28?auto=format&fit=crop&w=700&q=60", desc:"Robe mi-longue en ankara, ceinture amovible, dos nu travaillé." },
+    { id:1, cat:'robes', name:"Robe imprimée Édition n°1", price:38000, img:"https://images.unsplash.com/photo-1581338834647-b0fb40704e21?auto=format&fit=crop&w=700&q=60", desc:"Robe longue en tissu imprimé, coupe ajustée à la taille, manches bouffantes. Pièce unique." },
+    { id:2, cat:'ensembles', name:"Ensemble brodé cérémonie", price:65000, img:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=60", desc:"Ensemble tunique + pantalon, broderies main, lin léger. Idéal cérémonies." },
+    { id:3, cat:'robes', name:"Robe imprimée mi-longue", price:32000, img:"https://images.unsplash.com/photo-1535185384036-28bbc8035f28?auto=format&fit=crop&w=700&q=60", desc:"Robe mi-longue en coton imprimé, ceinture amovible, dos nu travaillé." },
     { id:4, cat:'acc', name:"Sac raphia tressé", price:18500, img:"https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=700&q=60", desc:"Sac tressé main en raphia naturel, anses cuir, doublure coton." },
-    { id:5, cat:'ensembles', name:"Combinaison Soleil", price:42000, img:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=60", desc:"Combinaison wax fluide, ceinture nouée, parfaite pour les sorties." },
-    { id:6, cat:'robes', name:"Robe Saly légère", price:28000, img:"https://images.unsplash.com/photo-1572804013427-4d7ca7268217?auto=format&fit=crop&w=700&q=60", desc:"Robe courte en coton imprimé, idéale plage et balades en bord de mer." },
-    { id:7, cat:'acc', name:"Boucles Gorée laiton", price:12000, img:"https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&w=700&q=60", desc:"Boucles d'oreilles laiton martelé fait main par un artisan de Gorée." },
-    { id:8, cat:'ensembles', name:"Tailleur Bissap", price:55000, img:"https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&w=700&q=60", desc:"Veste + jupe taille haute, motif inspiré du bissap, doublure soie." },
+    { id:5, cat:'ensembles', name:"Combinaison Soleil", price:42000, img:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=60", desc:"Combinaison en tissu imprimé fluide, ceinture nouée, parfaite pour les sorties." },
+    { id:6, cat:'robes', name:"Robe légère bord de mer", price:28000, img:"https://images.unsplash.com/photo-1572804013427-4d7ca7268217?auto=format&fit=crop&w=700&q=60", desc:"Robe courte en coton imprimé, idéale plage et balades en bord de mer." },
+    { id:7, cat:'acc', name:"Boucles laiton martelé", price:12000, img:"https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&w=700&q=60", desc:"Boucles d'oreilles laiton martelé fait main par un artisan indépendant." },
+    { id:8, cat:'ensembles', name:"Tailleur imprimé", price:55000, img:"https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&w=700&q=60", desc:"Veste + jupe taille haute, motif floral, doublure soie." },
   ];
 
-  function fmt(n) { return n.toLocaleString('fr-FR').replace(/,/g,' ') + ' FCFA'; }
+  function fmt(n) { return n.toLocaleString('fr-FR').replace(/,/g,' ') + ' XX'; }
   function catLabel(c) {
     return c==='robes'?'Robes':c==='ensembles'?'Ensembles':c==='acc'?'Accessoire':'';
   }
@@ -566,7 +594,7 @@
   renderCart();
 
   // Checkout
-  let payMethod = 'Wave';
+  let payMethod = 'Paiement mobile';
   document.querySelectorAll('.pay-opt').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.pay-opt').forEach(x => x.classList.remove('sel'));
@@ -580,9 +608,9 @@
     const total = cart.reduce((s,it) => s + it.price * it.qty, 0);
     const items = cart.reduce((s,it) => s + it.qty, 0);
     document.getElementById('ckTitle').textContent = 'Mode de paiement';
-    document.getElementById('ckSub').textContent = 'Choisissez votre opérateur préféré.';
+    document.getElementById('ckSub').textContent = 'Choisissez votre moyen de paiement.';
     document.getElementById('ckSummary').innerHTML =
-      `<b>${items} article${items>1?'s':''}</b> · Total <b>${fmt(total)}</b><br>Livraison Dakar : <b>gratuite dès 30 000 F</b>`;
+      `<b>${items} article${items>1?'s':''}</b> · Total <b>${fmt(total)}</b><br>Livraison en zone urbaine : <b>gratuite dès 30 000 XX</b>`;
     document.getElementById('ckConfirm').textContent = 'Confirmer la commande';
     document.getElementById('checkoutModal').classList.add('open');
   });
@@ -592,7 +620,7 @@
     document.getElementById('ckTitle').innerHTML = '<div class="check-circle">✓</div>Commande confirmée';
     document.getElementById('ckSub').textContent = 'Merci ! Vous recevrez un SMS avec le numéro de suivi.';
     document.getElementById('ckSummary').innerHTML =
-      `Paiement : <b>${payMethod}</b><br>Total : <b>${fmt(total)}</b><br>Livraison : Dakar sous 24h`;
+      `Paiement : <b>${payMethod}</b><br>Total : <b>${fmt(total)}</b><br>Livraison : zone urbaine sous 24h`;
     document.getElementById('ckConfirm').textContent = 'Fermer';
     document.getElementById('ckConfirm').onclick = () => {
       document.getElementById('checkoutModal').classList.remove('open');

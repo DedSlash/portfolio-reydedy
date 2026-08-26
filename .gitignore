@@ -51,3 +51,8 @@ _legacy_sources/
 
 # Captures d'écran locales exportées depuis les DevTools (non versionnées)
 assets/img/localhost_*
+
+# Fichiers de travail (briefs Claude Code, cartes de référence) — non versionnés
+brief-*.md
+prompt-*.md
+carte-xpertiz.html

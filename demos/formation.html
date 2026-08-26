@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumen Academy — Formations pro &amp; e-learning · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — organisme de formation fictif. Catalogue de cours, formats (présentiel, distanciel, hybride), inscription adulte, certifications." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
+<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --violet: #3a2a5e;
+    --violet-2: #241946;
+    --violet-3: #4d3a75;
+    --lilac: #a48fd4;
+    --gold: #d4a94a;
+    --gold-2: #b58c34;
+    --cream: #f6f1e6;
+    --paper: #ffffff;
+    --line: #e6dcc9;
+    --text: #1a1428;
+    --muted: #6b6480;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Manrope', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--text); background: var(--cream); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.015em; line-height: 1.15; }
+  ::selection { background: var(--violet); color: var(--cream); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .back-badge {
+    position: fixed; top: 18px; left: 18px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: var(--paper); color: var(--violet);
+    padding: 8px 14px; border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(58,42,94,0.2);
+    border: 1px solid var(--line);
+    font-weight: 600;
+  }
+  .back-badge:hover { background: var(--gold); color: var(--violet-2); }
+
+  .demo-ribbon {
+    background: var(--violet-2);
+    color: var(--cream);
+    text-align: center;
+    padding: 9px 16px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.4px;
+  }
+  .demo-ribbon strong { font-weight: 800; color: var(--gold); }
+
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246,241,230,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  nav.top .inner { display: flex; justify-content: space-between; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 14px; font-family: var(--serif); font-weight: 600; font-size: 22px; color: var(--violet); }
+  .brand small { display: block; font-family: var(--sans); font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .logo-mark {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--violet);
+    color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 600; font-size: 24px;
+    box-shadow: 0 6px 16px rgba(58,42,94,0.35);
+  }
+  .nav-links { display: flex; gap: 26px; font-size: 14px; font-weight: 600; color: var(--violet-2); }
+  .nav-links a:hover { color: var(--gold-2); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+  .nav-cta {
+    background: var(--violet); color: var(--cream);
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 700;
+  }
+  .nav-cta:hover { background: var(--violet-2); }
+
+  .hero {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(212,169,74,0.16) 0%, transparent 50%),
+      linear-gradient(160deg, var(--violet-2) 0%, var(--violet) 60%, var(--violet-3) 100%);
+    color: var(--cream);
+    padding: 100px 0 120px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,169,74,0.18) 0%, transparent 70%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(212,169,74,0.16); color: var(--gold);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 62px);
+    color: var(--cream);
+    margin-bottom: 22px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero p.lead {
+    font-size: 17px; color: rgba(246,241,230,0.82);
+    max-width: 52ch; margin-bottom: 30px;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 28px; border-radius: 999px;
+    font-weight: 700; font-size: 14px; cursor: pointer;
+    border: 1px solid transparent; transition: all .2s ease;
+    font-family: var(--sans);
+  }
+  .btn-primary { background: var(--gold); color: var(--violet-2); }
+  .btn-primary:hover { background: #eabd57; transform: translateY(-1px); }
+  .btn-ghost { border-color: rgba(246,241,230,0.4); color: var(--cream); background: transparent; }
+  .btn-ghost:hover { background: rgba(246,241,230,0.1); border-color: var(--cream); }
+  .btn-violet { background: var(--violet); color: var(--cream); }
+  .btn-violet:hover { background: var(--violet-2); }
+
+  .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(246,241,230,0.15); }
+  .hero-stats b { font-family: var(--serif); font-size: 28px; color: var(--gold); display: block; }
+  .hero-stats span { font-size: 12.5px; color: rgba(246,241,230,0.7); letter-spacing: 0.5px; }
+
+  .hero-visual {
+    aspect-ratio: 3/4;
+    background: rgba(246,241,230,0.06);
+    border: 1px solid rgba(246,241,230,0.15);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+  .hero-visual .badge-cert {
+    position: absolute; top: -14px; right: 24px;
+    background: var(--gold); color: var(--violet-2);
+    padding: 6px 14px; border-radius: 999px;
+    font-family: var(--sans); font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(212,169,74,0.4);
+  }
+  .hero-visual h3 { color: var(--cream); font-size: 22px; margin-bottom: 6px; }
+  .hero-visual .kicker { display: block; font-family: var(--sans); font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+  .hero-visual p { color: rgba(246,241,230,0.72); font-size: 14px; margin-bottom: 24px; }
+  .lesson-list li {
+    list-style: none;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0; border-top: 1px solid rgba(246,241,230,0.12);
+    font-size: 13.5px; color: var(--cream);
+  }
+  .lesson-list li:first-child { border-top: none; }
+  .lesson-list .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--gold); color: var(--violet-2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .lesson-list .check.pending {
+    background: rgba(246,241,230,0.1); color: rgba(246,241,230,0.6);
+    border: 1px dashed rgba(246,241,230,0.25);
+  }
+  .lesson-list .dur { margin-left: auto; font-size: 11.5px; color: rgba(246,241,230,0.55); }
+
+  section { padding: 90px 0; }
+  .sec-head { text-align: center; margin-bottom: 54px; }
+  .sec-head .eyebrow {
+    background: rgba(58,42,94,0.1); color: var(--violet);
+    display: inline-block;
+    padding: 6px 14px; border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 11.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .sec-head h2 {
+    font-size: clamp(30px, 4.5vw, 44px);
+    color: var(--violet);
+  }
+  .sec-head h2 em { color: var(--gold-2); font-style: italic; }
+  .sec-head p { color: var(--muted); margin-top: 12px; max-width: 58ch; margin-left: auto; margin-right: auto; }
+
+  /* Formats */
+  #formats { background: var(--paper); }
+  .fmt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .fmt-grid { grid-template-columns: 1fr; } }
+  .fmt-card {
+    background: var(--cream);
+    padding: 36px 30px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .fmt-card.featured {
+    background: var(--violet); color: var(--cream);
+    border-color: var(--violet);
+    transform: scale(1.03);
+  }
+  @media (max-width: 900px) { .fmt-card.featured { transform: none; } }
+  .fmt-card.featured h3, .fmt-card.featured .fmt-price { color: var(--gold); }
+  .fmt-card.featured p, .fmt-card.featured li { color: rgba(246,241,230,0.8); }
+  .fmt-card.featured .badge-pop {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: var(--violet-2);
+    padding: 5px 14px; border-radius: 999px;
+    font-family: var(--sans); font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .fmt-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--violet); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 18px;
+  }
+  .fmt-card.featured .fmt-icon { background: var(--gold); color: var(--violet); }
+  .fmt-card h3 { font-size: 24px; margin-bottom: 6px; color: var(--violet); }
+  .fmt-card p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  .fmt-price { font-family: var(--serif); font-size: 22px; color: var(--violet); margin-bottom: 8px; }
+  .fmt-list { list-style: none; margin-bottom: 24px; }
+  .fmt-list li { padding: 8px 0; font-size: 13.5px; color: var(--muted); display: flex; gap: 10px; }
+  .fmt-list li::before { content: '✓'; color: var(--gold-2); font-weight: 700; }
+  .fmt-card.featured .fmt-list li::before { color: var(--gold); }
+  .fmt-card .btn { width: 100%; justify-content: center; }
+
+  /* Catalogue */
+  #catalogue { background: var(--cream); }
+  .cat-filter { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+  .cat-filter button {
+    background: transparent; border: 1px solid var(--line);
+    padding: 9px 18px; border-radius: 999px;
+    font-family: var(--sans); font-size: 12.5px; font-weight: 700; color: var(--muted);
+    cursor: pointer; transition: all .2s ease; letter-spacing: 0.4px;
+  }
+  .cat-filter button.active { background: var(--violet); color: var(--gold); border-color: var(--violet); }
+  .cat-filter button:not(.active):hover { color: var(--violet); border-color: var(--violet); }
+
+  .courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 900px) { .courses { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .courses { grid-template-columns: 1fr; } }
+  .course {
+    background: var(--paper);
+    border-radius: 16px; border: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .course:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(58,42,94,0.12); }
+  .course .thumb {
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-3) 100%);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-family: var(--serif); font-size: 46px;
+  }
+  .course .thumb.g1 { background: linear-gradient(135deg, #3a2a5e, #6b4b9a); }
+  .course .thumb.g2 { background: linear-gradient(135deg, #5b3560, #a3546a); }
+  .course .thumb.g3 { background: linear-gradient(135deg, #2a4a5c, #3e7889); }
+  .course .thumb.g4 { background: linear-gradient(135deg, #4a3b28, #7a5a3a); }
+  .course .thumb.g5 { background: linear-gradient(135deg, #1e3b2c, #3d6b4d); }
+  .course .thumb.g6 { background: linear-gradient(135deg, #5a2a2a, #8f4a4a); }
+  .course .tag {
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(0,0,0,0.35); color: var(--cream);
+    padding: 4px 10px; border-radius: 999px;
+    font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    backdrop-filter: blur(4px);
+  }
+  .course .body { padding: 22px; }
+  .course .body .meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--sans); font-size: 11.5px; color: var(--muted); font-weight: 600;
+    margin-bottom: 8px; letter-spacing: 0.4px; text-transform: uppercase;
+  }
+  .course .body .meta .lvl { color: var(--gold-2); }
+  .course h3 { font-size: 19px; color: var(--violet); margin-bottom: 10px; }
+  .course .desc { font-size: 13.5px; color: var(--muted); margin-bottom: 14px; }
+  .course .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 14px; border-top: 1px solid var(--line);
+  }
+  .course .price { font-family: var(--serif); font-size: 20px; color: var(--violet); }
+  .course .foot a { color: var(--gold-2); font-family: var(--sans); font-size: 12.5px; font-weight: 700; letter-spacing: 0.6px; }
+
+  /* Certification */
+  #certif {
+    background: linear-gradient(180deg, var(--violet-2) 0%, var(--violet) 100%);
+    color: var(--cream);
+  }
+  #certif .sec-head h2 { color: var(--cream); }
+  #certif .sec-head p { color: rgba(246,241,230,0.75); }
+  #certif .sec-head .eyebrow { background: rgba(212,169,74,0.16); color: var(--gold); }
+  .certif-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 900px) { .certif-grid { grid-template-columns: 1fr; } }
+  .certif-copy p { color: rgba(246,241,230,0.8); font-size: 15.5px; margin-bottom: 16px; }
+  .certif-copy .list { list-style: none; margin-top: 20px; }
+  .certif-copy .list li {
+    display: flex; gap: 14px; padding: 14px 0; border-top: 1px solid rgba(246,241,230,0.12);
+  }
+  .certif-copy .list li:first-child { border-top: none; }
+  .certif-copy .list .ic {
+    background: var(--gold); color: var(--violet-2);
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .certif-copy .list b { display: block; font-weight: 700; margin-bottom: 3px; color: var(--cream); }
+  .certif-copy .list span { color: rgba(246,241,230,0.72); font-size: 13.5px; }
+
+  .diploma {
+    background: var(--cream); color: var(--violet-2);
+    padding: 40px 36px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    position: relative;
+    border: 8px solid transparent;
+    background-clip: padding-box;
+  }
+  .diploma::before {
+    content: ''; position: absolute; inset: -8px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+    z-index: -1;
+  }
+  .diploma .seal {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: var(--violet); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 30px; font-weight: 600;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 20px rgba(58,42,94,0.3);
+  }
+  .diploma .kicker { display: block; font-family: var(--sans); font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-2); font-weight: 800; margin-bottom: 10px; }
+  .diploma h3 { font-size: 26px; color: var(--violet); margin-bottom: 6px; }
+  .diploma .name { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--violet-2); margin: 20px 0 4px; }
+  .diploma .sub { font-size: 13px; color: var(--muted); }
+  .diploma .sig { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px dashed var(--gold-2); font-size: 11.5px; color: var(--muted); letter-spacing: 0.4px; }
+
+  /* Contact */
+  #contact { background: var(--paper); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-box {
+    background: var(--cream);
+    padding: 36px; border-radius: 16px; border: 1px solid var(--line);
+  }
+  .contact-box h3 { font-size: 24px; color: var(--violet); margin-bottom: 20px; }
+  .contact-row { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+  .contact-row .ic {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--violet); color: var(--gold);
+    display: flex; align-items: center; justify-content: center; font-size: 15px;
+    flex-shrink: 0;
+  }
+  .contact-row b { display: block; font-size: 14px; color: var(--text); font-weight: 700; }
+  .contact-row span { font-size: 13.5px; color: var(--muted); }
+  .contact-info {
+    background: linear-gradient(160deg, var(--violet) 0%, var(--violet-2) 100%);
+    color: var(--cream);
+    padding: 36px; border-radius: 16px;
+  }
+  .contact-info h3 { color: var(--gold); font-size: 24px; margin-bottom: 12px; }
+  .contact-info p { color: rgba(246,241,230,0.8); margin-bottom: 18px; font-size: 14.5px; }
+  .contact-info ul { list-style: none; }
+  .contact-info li { padding: 10px 0; border-top: 1px solid rgba(246,241,230,0.12); font-size: 13.5px; display: flex; justify-content: space-between; }
+  .contact-info li:first-child { border-top: none; }
+  .contact-info li b { color: var(--cream); font-weight: 600; }
+  .contact-info li span { color: var(--gold); font-weight: 700; }
+
+  footer {
+    background: var(--violet-2); color: rgba(246,241,230,0.7);
+    padding: 40px 0 26px; text-align: center; font-size: 13px;
+  }
+  footer .row1 { margin-bottom: 10px; font-weight: 500; }
+  footer .row2 { font-size: 12px; color: rgba(246,241,230,0.5); }
+  footer a { color: var(--gold); border-bottom: 1px dotted rgba(212,169,74,0.4); }
+  footer a:hover { color: var(--cream); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>1 500 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
+
+<div class="demo-ribbon">
+  <strong>Maquette de démonstration</strong> — Organisme fictif, coordonnées fictives. Illustre un site pour organisme de formation.
+</div>
+
+<nav class="top">
+  <div class="wrap inner">
+    <div class="brand">
+      <div class="logo-mark">L</div>
+      <div>Lumen Academy<small>Formations professionnelles</small></div>
+    </div>
+    <div class="nav-links">
+      <a href="#formats">Formats</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#certif">Certification</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#catalogue">S'inscrire</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Formation professionnelle</span>
+      <h1>Apprendre pour <em>changer de trajectoire</em>, pas pour cocher une case.</h1>
+      <p class="lead">Un catalogue de 48 formations pensées pour les professionnels en activité : formats courts, formats longs, distanciel, présentiel. Chaque cursus est encadré par un formateur qui exerce vraiment le métier — pas un intervenant lu dans les livres.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#catalogue">Voir le catalogue</a>
+        <a class="btn btn-ghost" href="#certif">Demander un devis</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>48</b><span>formations au catalogue</span></div>
+        <div><b>3 200+</b><span>apprenants formés</span></div>
+        <div><b>94 %</b><span>de satisfaction</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <span class="badge-cert">Certifiant</span>
+      <span class="kicker">Formation en cours</span>
+      <h3>Product Management fondamentaux</h3>
+      <p>Session de mars — 12 apprenants inscrits</p>
+      <ul class="lesson-list">
+        <li><span class="check">✓</span>Comprendre son marché<span class="dur">2h15</span></li>
+        <li><span class="check">✓</span>Découverte utilisateur<span class="dur">3h00</span></li>
+        <li><span class="check">✓</span>Prioriser la roadmap<span class="dur">2h45</span></li>
+        <li><span class="check pending">4</span>Rédiger une spec claire<span class="dur">2h30</span></li>
+        <li><span class="check pending">5</span>Mesurer le succès<span class="dur">2h00</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="formats">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Trois formats</span>
+      <h2>Choisissez votre <em>rythme</em></h2>
+      <p>Chaque formation existe dans un ou plusieurs formats. Vous choisissez celui qui colle à votre agenda et à votre budget.</p>
+    </div>
+    <div class="fmt-grid">
+      <div class="fmt-card">
+        <div class="fmt-icon">💻</div>
+        <h3>E-learning</h3>
+        <p>À votre rythme, 100 % en ligne, accès pendant 12 mois.</p>
+        <div class="fmt-price">dès XX <span style="font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:500;">/ formation</span></div>
+        <ul class="fmt-list">
+          <li>Vidéos HD téléchargeables</li>
+          <li>Exercices auto-corrigés</li>
+          <li>Forum communautaire</li>
+          <li>Attestation de fin</li>
+        </ul>
+        <a class="btn btn-violet" href="#catalogue">Voir les cours</a>
+      </div>
+
+      <div class="fmt-card featured">
+        <span class="badge-pop">Le plus choisi</span>
+        <div class="fmt-icon">🎓</div>
+        <h3>Blended</h3>
+        <p>E-learning + 3 sessions live avec formateur. Le meilleur des deux mondes.</p>
+        <div class="fmt-price">dès XX</div>
+        <ul class="fmt-list">
+          <li>Tout l'e-learning inclus</li>
+          <li>3 lives en visio (2h chacun)</li>
+          <li>Correction personnalisée</li>
+          <li>Certification incluse</li>
+          <li>Éligible financement pro</li>
+        </ul>
+        <a class="btn btn-primary" href="#catalogue">Réserver ma session</a>
+      </div>
+
+      <div class="fmt-card">
+        <div class="fmt-icon">🏛️</div>
+        <h3>Présentiel intensif</h3>
+        <p>Deux ou trois jours consécutifs. Groupes de 8 à 12 participants.</p>
+        <div class="fmt-price">dès XX</div>
+        <ul class="fmt-list">
+          <li>Cas pratiques encadrés</li>
+          <li>Petit-déjeuner &amp; déjeuner</li>
+          <li>Support de cours imprimé</li>
+          <li>Certification incluse</li>
+        </ul>
+        <a class="btn btn-violet" href="#catalogue">Voir les sessions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalogue">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Le catalogue</span>
+      <h2>Six familles, quarante-huit formations</h2>
+      <p>Filtrez par thématique pour trouver rapidement.</p>
+    </div>
+
+    <div class="cat-filter">
+      <button class="active" data-f="all">Toutes</button>
+      <button data-f="produit">Produit</button>
+      <button data-f="data">Data</button>
+      <button data-f="design">Design</button>
+      <button data-f="dev">Développement</button>
+      <button data-f="gestion">Gestion</button>
+    </div>
+
+    <div class="courses" id="courses"></div>
+  </div>
+</section>
+
+<section id="certif">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Certification</span>
+      <h2>Un diplôme reconnu, pas un simple PDF</h2>
+      <p>Nos certifications sont enregistrées et vérifiables par tiers. Chaque diplôme porte un identifiant unique consultable en ligne.</p>
+    </div>
+    <div class="certif-grid">
+      <div class="certif-copy">
+        <p>Un employeur qui reçoit votre CV peut vérifier votre certification en 20 secondes via l'identifiant. Nous ne cachons rien : programme, taux de réussite, méthode d'évaluation, tout est public.</p>
+        <ul class="list">
+          <li>
+            <div class="ic">1</div>
+            <div><b>Formation encadrée</b><span>Formateurs praticiens, sessions live obligatoires en Blended et Présentiel.</span></div>
+          </li>
+          <li>
+            <div class="ic">2</div>
+            <div><b>Évaluation finale</b><span>Cas pratique + soutenance orale. Note ≥ 12/20 pour valider.</span></div>
+          </li>
+          <li>
+            <div class="ic">3</div>
+            <div><b>Diplôme vérifiable</b><span>Identifiant unique consultable par un employeur ou un client.</span></div>
+          </li>
+          <li>
+            <div class="ic">4</div>
+            <div><b>Suivi post-certification</b><span>Accès à vie à la communauté et aux mises à jour de la formation.</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="diploma">
+        <div class="seal">L</div>
+        <span class="kicker">Certificat Lumen Academy</span>
+        <h3>Product Management</h3>
+        <p style="color:var(--muted);font-size:13.5px;">Niveau Fondamentaux — Session mars 2026</p>
+        <div class="name">Alexandre M.</div>
+        <div class="sub">Note obtenue : 16 / 20 · Mention Bien</div>
+        <div class="sig">
+          <div><b>Identifiant</b><br>LMN-PM-2026-0847</div>
+          <div><b>Signé par</b><br>Direction pédagogique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Contact</span>
+      <h2>Nous joindre</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>Écrivez-nous</h3>
+        <div class="contact-row"><div class="ic">📍</div><div><b>Adresse</b><span>18 boulevard des Arts, Immeuble Lumen · 3ᵉ étage</span></div></div>
+        <div class="contact-row"><div class="ic">📞</div><div><b>Téléphone</b><span>01 23 45 67 89 · Lun–Ven 9h–18h</span></div></div>
+        <div class="contact-row"><div class="ic">✉️</div><div><b>Email</b><span>bonjour@lumen-academy.example</span></div></div>
+        <div class="contact-row"><div class="ic">💳</div><div><b>Financement</b><span>Paiement mobile &amp; carte bancaire · échelonnement possible · dispositifs de financement pro éligibles</span></div></div>
+        <div class="contact-row"><div class="ic">🎯</div><div><b>Entreprise</b><span>Formations sur-mesure &amp; devis intra à partir de 6 collaborateurs</span></div></div>
+      </div>
+
+      <div class="contact-info">
+        <h3>Prochaines sessions</h3>
+        <p>Les sessions Blended démarrent tous les mois. Places limitées à 12 apprenants pour garantir la qualité du suivi.</p>
+        <ul>
+          <li><b>Product Management · Fond.</b><span>15 mars</span></li>
+          <li><b>Data Analyst · Débutant</b><span>22 mars</span></li>
+          <li><b>UX Research · Avancé</b><span>05 avril</span></li>
+          <li><b>Product Ops · Intermédiaire</b><span>12 avril</span></li>
+          <li><b>Full-stack Web · Fond.</b><span>19 avril</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="row1">
+      Maquette de démonstration réalisée par <a href="../index.html">Rey Dedy Pangou</a> — voir plus de démos sur <a href="../exemples.html">/exemples</a>.
+    </div>
+    <div class="row2">
+      Lumen Academy est un organisme fictif. Aucune coordonnée n'est réelle.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const catalog = [
+    { f:'produit', t:'PM Fondamentaux', l:'Débutant', d:'Comprendre son marché, prioriser, mesurer. Le socle du product management.', p:'dès XX', dur:'21h', ini:'PM', g:1 },
+    { f:'produit', t:'Product Ops', l:'Intermédiaire', d:'Standardiser les rituels produit, industrialiser la découverte utilisateur.', p:'dès XX', dur:'14h', ini:'PO', g:2 },
+    { f:'data', t:'Data Analyst', l:'Débutant', d:'SQL, tableaux de bord, analyse exploratoire. Devenir opérationnel en 5 semaines.', p:'dès XX', dur:'35h', ini:'DA', g:3 },
+    { f:'data', t:'Data Storytelling', l:'Avancé', d:'Raconter une histoire avec vos données. Passer du dashboard au récit.', p:'dès XX', dur:'12h', ini:'DS', g:4 },
+    { f:'design', t:'UX Research', l:'Avancé', d:'Méthodes qualitatives, protocoles d\'entretien, analyse thématique.', p:'dès XX', dur:'18h', ini:'UX', g:5 },
+    { f:'design', t:'Design System', l:'Intermédiaire', d:'Construire, maintenir, faire adopter un design system dans son entreprise.', p:'dès XX', dur:'16h', ini:'DS', g:6 },
+    { f:'dev', t:'Full-stack Web', l:'Débutant', d:'HTML, CSS, JavaScript, Node.js. Du projet vitrine à l\'app connectée.', p:'dès XX', dur:'60h', ini:'FS', g:1 },
+    { f:'dev', t:'API modernes', l:'Intermédiaire', d:'REST, GraphQL, sécurité, versioning. Bâtir des API qui tiennent la route.', p:'dès XX', dur:'22h', ini:'API', g:2 },
+    { f:'gestion', t:'Chef de projet', l:'Débutant', d:'Cadrage, planning, comité de pilotage. Les fondamentaux qui évitent le chaos.', p:'dès XX', dur:'21h', ini:'CP', g:3 },
+  ];
+
+  const el = document.getElementById('courses');
+  function paint(f) {
+    el.innerHTML = catalog.filter(c => f==='all'||c.f===f).map(c => `
+      <article class="course">
+        <div class="thumb g${c.g}">
+          <span class="tag">${c.f}</span>
+          ${c.ini}
+        </div>
+        <div class="body">
+          <div class="meta"><span class="lvl">${c.l}</span><span>${c.dur}</span></div>
+          <h3>${c.t}</h3>
+          <p class="desc">${c.d}</p>
+          <div class="foot">
+            <span class="price">${c.p}</span>
+            <a href="#">S'inscrire →</a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  }
+  paint('all');
+  document.querySelectorAll('.cat-filter button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.cat-filter button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      paint(b.dataset.f);
+    });
+  });
+</script>
+</body>
+</html>

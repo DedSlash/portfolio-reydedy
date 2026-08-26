@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atelier Nova — Studio créatif indépendant · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — studio créatif fictif. Équipe, études de cas, services, prise de contact projet." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
+<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0a0a12;
+    --ink-2: #14141f;
+    --ink-3: #1c1c2b;
+    --line: #26263a;
+    --paper: #fafaf5;
+    --paper-2: #f0f0e8;
+    --lime: #c7ff3d;
+    --lime-dark: #a8de1c;
+    --coral: #ff6b5b;
+    --violet: #8a5cff;
+    --sky: #5cc9ff;
+    --muted: #8a8ba3;
+    --display: 'Space Grotesk', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--paper); background: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; }
+  ::selection { background: var(--lime); color: var(--ink); }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+  .back-badge {
+    position: fixed; top: 18px; left: 18px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: var(--paper); color: var(--ink);
+    padding: 8px 14px; border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    border: 1px solid var(--line);
+    font-family: var(--display); font-weight: 600;
+  }
+  .back-badge:hover { background: var(--lime); }
+
+  .demo-ribbon {
+    background: var(--lime);
+    color: var(--ink);
+    text-align: center;
+    padding: 9px 16px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.4px;
+    font-family: var(--display);
+  }
+  .demo-ribbon strong { font-weight: 700; }
+
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  nav.top .inner { display: flex; justify-content: space-between; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--paper); }
+  .brand .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); }
+  .nav-links { display: flex; gap: 30px; font-family: var(--display); font-size: 14px; font-weight: 500; color: var(--paper); }
+  .nav-links a:hover { color: var(--lime); }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+  .nav-cta {
+    background: var(--lime); color: var(--ink);
+    padding: 11px 22px; border-radius: 999px;
+    font-family: var(--display); font-size: 13px; font-weight: 700;
+  }
+  .nav-cta:hover { background: var(--paper); }
+
+  .hero {
+    padding: 110px 0 140px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 20%; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(199,255,61,0.14) 0%, transparent 70%);
+    filter: blur(20px);
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(138,92,255,0.12) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(199,255,61,0.1);
+    border: 1px solid rgba(199,255,61,0.3);
+    padding: 8px 16px; border-radius: 999px;
+    font-family: var(--display); font-size: 12px; font-weight: 500; color: var(--lime);
+    margin-bottom: 36px;
+  }
+  .status .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--lime);
+    box-shadow: 0 0 0 4px rgba(199,255,61,0.25);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(199,255,61,0.25); }
+    50% { box-shadow: 0 0 0 8px rgba(199,255,61,0.05); }
+  }
+  .hero h1 {
+    font-size: clamp(52px, 9vw, 128px);
+    color: var(--paper);
+    max-width: 15ch;
+    margin-bottom: 36px;
+  }
+  .hero h1 em { color: var(--lime); font-style: normal; }
+  .hero h1 .strike { color: var(--muted); text-decoration: line-through; }
+  .hero p.lead {
+    font-size: 20px; color: var(--muted);
+    max-width: 46ch; margin-bottom: 44px; line-height: 1.5;
+  }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 30px; border-radius: 999px;
+    font-family: var(--display);
+    font-weight: 600; font-size: 15px; cursor: pointer;
+    border: 1px solid transparent; transition: all .2s ease;
+  }
+  .btn-primary { background: var(--lime); color: var(--ink); }
+  .btn-primary:hover { background: var(--paper); }
+  .btn-ghost { border-color: var(--line); color: var(--paper); background: transparent; }
+  .btn-ghost:hover { border-color: var(--paper); background: rgba(255,255,255,0.05); }
+
+  .marquee {
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--ink-2);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+  .marquee-track {
+    display: inline-flex; gap: 40px; align-items: center;
+    animation: scroll 30s linear infinite;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .marquee-item.acc { color: var(--lime); }
+  .marquee-item.dot { color: var(--coral); font-size: 30px; }
+
+  section { padding: 110px 0; }
+  .sec-head { margin-bottom: 60px; max-width: 800px; }
+  .sec-head .eyebrow {
+    display: inline-block; font-family: var(--display); font-weight: 500;
+    color: var(--lime); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .sec-head h2 {
+    font-size: clamp(36px, 5.5vw, 60px);
+    color: var(--paper);
+    margin-bottom: 18px;
+  }
+  .sec-head h2 em { color: var(--lime); font-style: normal; }
+  .sec-head p { color: var(--muted); font-size: 17px; max-width: 62ch; }
+
+  /* Services */
+  #services { background: var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .svc-list {
+    display: flex; flex-direction: column;
+  }
+  .svc-row {
+    display: grid; grid-template-columns: 80px 1fr 2fr 100px;
+    gap: 30px; align-items: center;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    transition: padding .2s ease;
+  }
+  .svc-row:hover { padding: 32px 20px; }
+  .svc-row:hover .svc-title { color: var(--lime); }
+  .svc-row:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 820px) {
+    .svc-row { grid-template-columns: 60px 1fr; gap: 16px; padding: 24px 0; }
+    .svc-row .svc-desc, .svc-row .svc-arrow { display: none; }
+  }
+  .svc-num {
+    font-family: var(--display); font-weight: 500; font-size: 15px;
+    color: var(--muted); letter-spacing: 1px;
+  }
+  .svc-title { font-family: var(--display); font-weight: 600; font-size: 30px; color: var(--paper); transition: color .2s ease; letter-spacing: -0.02em; }
+  .svc-desc { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+  .svc-arrow { text-align: right; font-family: var(--display); font-size: 24px; color: var(--muted); }
+  .svc-row:hover .svc-arrow { color: var(--lime); }
+
+  /* Cases */
+  #cases { background: var(--ink); }
+  .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  @media (max-width: 900px) { .case-grid { grid-template-columns: 1fr; } }
+  .case {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform .3s ease, border-color .3s ease;
+  }
+  .case:hover { transform: translateY(-6px); border-color: var(--lime); }
+  .case .thumb {
+    aspect-ratio: 16/10;
+    padding: 40px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .case-1 .thumb { background: linear-gradient(135deg, #ff6b5b 0%, #d43a2a 100%); }
+  .case-2 .thumb { background: linear-gradient(135deg, #8a5cff 0%, #4d2fb3 100%); }
+  .case-3 .thumb { background: linear-gradient(135deg, #5cc9ff 0%, #2a8bc7 100%); }
+  .case-4 .thumb { background: linear-gradient(135deg, #c7ff3d 0%, #7fb31c 100%); color: var(--ink); }
+  .case .thumb .cat {
+    font-family: var(--display); font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+  .case-4 .thumb .cat { color: rgba(10,10,18,0.6); }
+  .case .thumb h3 {
+    font-family: var(--display); font-size: clamp(28px, 3vw, 42px); color: var(--paper);
+    letter-spacing: -0.02em;
+  }
+  .case-4 .thumb h3 { color: var(--ink); }
+  .case .thumb .huge {
+    position: absolute; right: -20px; bottom: -60px;
+    font-family: var(--display); font-size: 220px; font-weight: 700;
+    color: rgba(255,255,255,0.08); line-height: 0.8;
+  }
+  .case-4 .thumb .huge { color: rgba(10,10,18,0.08); }
+  .case .body {
+    padding: 26px 30px 30px;
+    background: var(--ink-2);
+  }
+  .case .body p { color: var(--muted); font-size: 14.5px; margin-bottom: 18px; }
+  .case .metrics {
+    display: flex; gap: 24px; padding-top: 18px; border-top: 1px solid var(--line);
+  }
+  .case .metrics div { font-family: var(--display); }
+  .case .metrics b { display: block; font-size: 24px; color: var(--lime); font-weight: 600; letter-spacing: -0.02em; }
+  .case .metrics span { font-size: 11px; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; }
+
+  /* Team */
+  #team { background: var(--ink-2); border-top: 1px solid var(--line); }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .team-grid { grid-template-columns: 1fr; } }
+  .member {
+    background: var(--ink-3);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color .2s ease;
+  }
+  .member:hover { border-color: var(--lime); }
+  .member .av {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 700; font-size: 72px; color: var(--ink);
+  }
+  .member.a1 .av { background: linear-gradient(135deg, #c7ff3d, #a8de1c); }
+  .member.a2 .av { background: linear-gradient(135deg, #ff6b5b, #d43a2a); color: var(--paper); }
+  .member.a3 .av { background: linear-gradient(135deg, #8a5cff, #4d2fb3); color: var(--paper); }
+  .member.a4 .av { background: linear-gradient(135deg, #5cc9ff, #2a8bc7); color: var(--paper); }
+  .member .body { padding: 22px; }
+  .member h3 { font-family: var(--display); font-size: 20px; margin-bottom: 4px; color: var(--paper); }
+  .member .role { color: var(--muted); font-size: 12.5px; font-family: var(--display); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .member p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* Process */
+  #process { background: var(--ink); }
+  .proc-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .proc-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .proc-list { grid-template-columns: 1fr; } }
+  .proc {
+    padding: 30px 26px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--ink-2);
+    position: relative;
+  }
+  .proc .num {
+    font-family: var(--display); font-weight: 700; font-size: 44px;
+    color: var(--lime); letter-spacing: -0.02em; line-height: 1;
+    margin-bottom: 20px;
+  }
+  .proc h3 { font-size: 20px; margin-bottom: 8px; color: var(--paper); }
+  .proc p { color: var(--muted); font-size: 13.5px; }
+  .proc .dur { display: block; margin-top: 16px; font-family: var(--display); font-size: 11.5px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; padding-top: 14px; border-top: 1px solid var(--line); }
+
+  /* Contact */
+  #contact {
+    background: linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    border-top: 1px solid var(--line);
+  }
+  .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-copy h2 { font-size: clamp(36px, 5vw, 60px); margin-bottom: 20px; }
+  .contact-copy h2 em { color: var(--lime); font-style: normal; }
+  .contact-copy p { color: var(--muted); font-size: 16px; margin-bottom: 28px; max-width: 42ch; }
+  .contact-info { margin-top: 30px; }
+  .contact-info li {
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 16px 0; border-top: 1px solid var(--line);
+    font-family: var(--display); font-size: 14px;
+  }
+  .contact-info li b { font-weight: 500; color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+  .contact-info li span { color: var(--paper); font-weight: 500; }
+
+  .form {
+    background: var(--ink-2); border: 1px solid var(--line); border-radius: 20px;
+    padding: 36px;
+  }
+  .form label { display: block; font-family: var(--display); font-size: 12px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
+  .form input, .form textarea, .form select {
+    width: 100%;
+    background: var(--ink-3); border: 1px solid var(--line); color: var(--paper);
+    padding: 14px 16px; border-radius: 10px;
+    font-family: var(--sans); font-size: 15px;
+    margin-bottom: 20px;
+    transition: border-color .2s ease;
+  }
+  .form input:focus, .form textarea:focus, .form select:focus { outline: none; border-color: var(--lime); }
+  .form textarea { min-height: 100px; resize: vertical; }
+  .form .radio-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .form .radio-group input { display: none; }
+  .form .radio-group label {
+    display: inline-block; padding: 10px 16px; margin: 0;
+    background: var(--ink-3); border: 1px solid var(--line);
+    border-radius: 999px; cursor: pointer;
+    font-family: var(--display); font-size: 12.5px; color: var(--paper);
+    letter-spacing: 0.3px; text-transform: none; font-weight: 500;
+  }
+  .form .radio-group input:checked + label { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+  .form .btn-primary { width: 100%; justify-content: center; }
+
+  footer {
+    background: var(--ink);
+    border-top: 1px solid var(--line);
+    padding: 40px 0 30px; text-align: center; font-size: 13px;
+    color: var(--muted);
+  }
+  footer .row1 { margin-bottom: 10px; font-weight: 500; color: var(--paper); }
+  footer .row2 { font-size: 12px; color: var(--muted); }
+  footer a { color: var(--lime); border-bottom: 1px dotted rgba(199,255,61,0.4); }
+  footer a:hover { color: var(--paper); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  :focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>700 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
+
+<div class="demo-ribbon">
+  <strong>Maquette de démonstration</strong> — Studio fictif, coordonnées fictives. Illustre un site pour agence créative.
+</div>
+
+<nav class="top">
+  <div class="wrap inner">
+    <div class="brand">
+      <span class="dot"></span>
+      Atelier Nova
+    </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#cases">Cas</a>
+      <a href="#team">Équipe</a>
+      <a href="#process">Méthode</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Démarrer un projet</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-content">
+    <span class="status"><span class="pulse"></span>2 projets ouverts en Q3 · dispo dès juin</span>
+    <h1>On <span class="strike">fait des sites</span> <em>construit&nbsp;des&nbsp;marques</em>.</h1>
+    <p class="lead">Studio indépendant de six personnes. Identité, direction artistique, produits digitaux. On travaille avec ceux qui savent pourquoi ils existent — pas seulement ce qu'ils vendent.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Parlons de votre projet</a>
+      <a class="btn btn-ghost" href="#cases">Voir les cas récents ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Identité</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item acc">Direction artistique</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item">Sites &amp; produits</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item acc">Motion</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item">Édition</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item acc">Stratégie</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item">Identité</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item acc">Direction artistique</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item">Sites &amp; produits</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item acc">Motion</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item">Édition</span>
+    <span class="marquee-item dot">●</span>
+    <span class="marquee-item acc">Stratégie</span>
+    <span class="marquee-item dot">●</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Services</span>
+      <h2>Quatre disciplines, une <em>seule équipe</em>.</h2>
+      <p>On refuse le modèle en silos où les livrables changent de mains à chaque étape. Chaque projet a un couple designer + directeur artistique du début à la fin.</p>
+    </div>
+
+    <div class="svc-list">
+      <a class="svc-row" href="#contact">
+        <span class="svc-num">01/</span>
+        <span class="svc-title">Identité de marque</span>
+        <span class="svc-desc">Positionnement, nom, logo, système graphique complet, guide de marque. Le socle qui rend le reste cohérent.</span>
+        <span class="svc-arrow">→</span>
+      </a>
+      <a class="svc-row" href="#contact">
+        <span class="svc-num">02/</span>
+        <span class="svc-title">Direction artistique</span>
+        <span class="svc-desc">Campagnes, éditos, séries photo, contenu de marque. Une intention claire du brief à la publication.</span>
+        <span class="svc-arrow">→</span>
+      </a>
+      <a class="svc-row" href="#contact">
+        <span class="svc-num">03/</span>
+        <span class="svc-title">Sites &amp; produits digitaux</span>
+        <span class="svc-desc">Design UX/UI, prototypage, développement front. Livrable = code, pas juste une maquette Figma.</span>
+        <span class="svc-arrow">→</span>
+      </a>
+      <a class="svc-row" href="#contact">
+        <span class="svc-num">04/</span>
+        <span class="svc-title">Motion &amp; édition</span>
+        <span class="svc-desc">Animations d'interface, teasers vidéo, print, packaging. Ce qui manque souvent aux studios web pur jus.</span>
+        <span class="svc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Cas récents</span>
+      <h2>Ce qu'on a livré, <em>et pourquoi</em>.</h2>
+      <p>Quatre projets sélectionnés parmi les trente derniers mois. Cliquez pour la version longue avec briefs, itérations et résultats mesurés.</p>
+    </div>
+    <div class="case-grid">
+      <a class="case case-1" href="#">
+        <div class="thumb">
+          <span class="cat">Identité · Packaging</span>
+          <h3>Refonte complète d'une marque de café de spécialité</h3>
+          <span class="huge">01</span>
+        </div>
+        <div class="body">
+          <p>Repositionnement premium, nouveau système de packaging, site e-commerce refondu. Résultat : +38 % de panier moyen en 4 mois.</p>
+          <div class="metrics">
+            <div><b>+38 %</b><span>Panier moyen</span></div>
+            <div><b>×2,4</b><span>Trafic direct</span></div>
+            <div><b>6 mois</b><span>Durée projet</span></div>
+          </div>
+        </div>
+      </a>
+      <a class="case case-2" href="#">
+        <div class="thumb">
+          <span class="cat">Produit · UX/UI</span>
+          <h3>App mobile pour une plateforme de coaching</h3>
+          <span class="huge">02</span>
+        </div>
+        <div class="body">
+          <p>Design system complet, refonte du flow d'onboarding, animations d'interface. Rétention D30 en hausse de 21 % sur la nouvelle version.</p>
+          <div class="metrics">
+            <div><b>+21 %</b><span>Rétention D30</span></div>
+            <div><b>4,7 ★</b><span>Note stores</span></div>
+            <div><b>4 mois</b><span>Durée projet</span></div>
+          </div>
+        </div>
+      </a>
+      <a class="case case-3" href="#">
+        <div class="thumb">
+          <span class="cat">Direction artistique</span>
+          <h3>Campagne visuelle pour un lancement produit</h3>
+          <span class="huge">03</span>
+        </div>
+        <div class="body">
+          <p>Concept créatif, direction photo, déclinaison print et digital sur 12 formats. Campagne pilote adoptée pour trois marchés supplémentaires.</p>
+          <div class="metrics">
+            <div><b>12</b><span>Formats livrés</span></div>
+            <div><b>3 marchés</b><span>Extension</span></div>
+            <div><b>8 sem.</b><span>Durée projet</span></div>
+          </div>
+        </div>
+      </a>
+      <a class="case case-4" href="#">
+        <div class="thumb">
+          <span class="cat">Édition · Motion</span>
+          <h3>Rapport d'impact annuel d'une fondation</h3>
+          <span class="huge">04</span>
+        </div>
+        <div class="body">
+          <p>Direction éditoriale, mise en pages 84 pages, version web animée. Un objet imprimé qu'on garde plutôt qu'un PDF qu'on ferme.</p>
+          <div class="metrics">
+            <div><b>84 p.</b><span>Print</span></div>
+            <div><b>18 min</b><span>Temps de lecture web</span></div>
+            <div><b>3 mois</b><span>Durée projet</span></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">L'équipe</span>
+      <h2>Six personnes, <em>zéro freelance</em>.</h2>
+      <p>Tout est fait en interne. Vous parlez aux gens qui produisent. C'est plus lent à recruter, plus rapide à livrer.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member a1">
+        <div class="av">M</div>
+        <div class="body">
+          <h3>Mila R.</h3>
+          <div class="role">Direction créative</div>
+          <p>Fondatrice. 12 ans de studio. Cadrage stratégique et direction artistique des projets long-cours.</p>
+        </div>
+      </div>
+      <div class="member a2">
+        <div class="av">A</div>
+        <div class="body">
+          <h3>Axel D.</h3>
+          <div class="role">Design produit</div>
+          <p>Ancien lead design d'un scale-up. UX rigoureuse, prototypage rapide, design systems.</p>
+        </div>
+      </div>
+      <div class="member a3">
+        <div class="av">S</div>
+        <div class="body">
+          <h3>Sonia K.</h3>
+          <div class="role">Motion &amp; édition</div>
+          <p>Passe indifféremment de l'After Effects à l'InDesign. Rare et précieux.</p>
+        </div>
+      </div>
+      <div class="member a4">
+        <div class="av">T</div>
+        <div class="body">
+          <h3>Tomás H.</h3>
+          <div class="role">Dev front &amp; motion web</div>
+          <p>Écrit le code qui rend les animations vivantes. Sans qu'elles cassent en prod.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Méthode</span>
+      <h2>Quatre étapes, <em>zéro surprise</em>.</h2>
+      <p>Chaque phase se termine par une livraison intermédiaire chiffrée et validée. Vous savez toujours où on en est.</p>
+    </div>
+    <div class="proc-list">
+      <div class="proc">
+        <div class="num">01</div>
+        <h3>Cadrage</h3>
+        <p>Atelier immersif d'une demi-journée, restitution écrite en 5 jours. Brief consolidé.</p>
+        <span class="dur">1 à 2 semaines</span>
+      </div>
+      <div class="proc">
+        <div class="num">02</div>
+        <h3>Exploration</h3>
+        <p>Trois pistes créatives, présentées en vidéo commentée. Vous choisissez celle qu'on approfondit.</p>
+        <span class="dur">2 à 3 semaines</span>
+      </div>
+      <div class="proc">
+        <div class="num">03</div>
+        <h3>Production</h3>
+        <p>Design final, développement, itérations avec revue hebdo. Environnement de préproduction accessible en continu.</p>
+        <span class="dur">4 à 10 semaines</span>
+      </div>
+      <div class="proc">
+        <div class="num">04</div>
+        <h3>Lancement &amp; suivi</h3>
+        <p>Mise en ligne, formation, guide de marque livré. Retour d'expérience à 30 et 90 jours.</p>
+        <span class="dur">1 semaine + suivi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <span class="sec-head-eyebrow" style="display:inline-block;font-family:var(--display);font-weight:500;color:var(--lime);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px;">Contact</span>
+        <h2>Un projet en tête ?<br><em>On répond en 48h.</em></h2>
+        <p>Décrivez brièvement le contexte, le calendrier, et on vous rappelle pour un premier échange sans engagement.</p>
+        <ul class="contact-info">
+          <li><b>Email</b><span>bonjour@atelier-nova.example</span></li>
+          <li><b>Téléphone</b><span>01 23 45 67 89</span></li>
+          <li><b>Studio</b><span>Ouvert Lun–Ven · 10h–19h</span></li>
+          <li><b>Budgets à partir de</b><span>sur devis · projets ≥ 15 XX K</span></li>
+          <li><b>Prochain démarrage</b><span>Juin 2026</span></li>
+        </ul>
+      </div>
+
+      <form class="form" onsubmit="event.preventDefault(); alert('Merci — cette maquette de démonstration ne traite pas les envois.');">
+        <label for="name">Prénom &amp; Nom</label>
+        <input id="name" type="text" placeholder="Alex Dupont" required />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="alex@marque.example" required />
+
+        <label>Type de projet</label>
+        <div class="radio-group">
+          <input type="radio" name="type" id="t1" checked><label for="t1">Identité</label>
+          <input type="radio" name="type" id="t2"><label for="t2">Site / produit</label>
+          <input type="radio" name="type" id="t3"><label for="t3">Campagne</label>
+          <input type="radio" name="type" id="t4"><label for="t4">Autre</label>
+        </div>
+
+        <label for="msg">Décrivez brièvement</label>
+        <textarea id="msg" placeholder="Contexte, objectifs, calendrier idéal…"></textarea>
+
+        <button class="btn btn-primary" type="submit">Envoyer le brief</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="row1">
+      Maquette de démonstration réalisée par <a href="../index.html">Rey Dedy Pangou</a> — voir plus de démos sur <a href="../exemples.html">/exemples</a>.
+    </div>
+    <div class="row2">
+      Atelier Nova est un studio fictif. Aucune coordonnée n'est réelle.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

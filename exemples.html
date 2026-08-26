@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exemples — Maquettes de démonstration · Rey Dedy Pangou</title>
-  <meta name="description" content="Six maquettes de démonstration illustrant les types de sites que je peux concevoir : restaurant, boutique, cabinet médical, portfolio créatif, startup, refonte. Ce ne sont pas des livraisons client." />
+  <meta name="description" content="Seize maquettes de démonstration, regroupées par secteur (restauration, commerce, santé, éducation, créatif, startup, refonte, sur-mesure). Ce ne sont pas des livraisons client." />
   <meta name="theme-color" content="#07070b" />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
@@ -80,10 +80,48 @@
     .grid-demo {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      padding: 24px 0 60px;
+      padding: 12px 0 0;
     }
     @media (max-width: 860px) { .grid-demo { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .grid-demo { grid-template-columns: 1fr; } }
+
+    /* Rubriques sectorielles */
+    .rubrique { margin-top: 44px; padding-bottom: 12px; }
+    .rubrique:first-of-type { margin-top: 16px; }
+    .rubrique-head {
+      display: flex; align-items: baseline; gap: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .rubrique-head .kicker {
+      font-family: var(--mono); font-size: 10.5px;
+      color: var(--gold); letter-spacing: 0.24em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .rubrique-head h3 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(20px, 2.4vw, 26px);
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .rubrique-head .count {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-dim); letter-spacing: 0.1em;
+      margin-left: auto;
+    }
+    .rubrique-desc {
+      color: var(--text-muted);
+      font-size: 14px; line-height: 1.6;
+      max-width: 62ch;
+      margin: 10px 0 4px;
+    }
+    .rubrique-last { padding-bottom: 60px; }
+    @media (max-width: 560px) {
+      .rubrique-head { flex-direction: column; gap: 4px; align-items: flex-start; }
+      .rubrique-head .count { margin-left: 0; }
+    }
 
     .card-demo {
       position: relative;
@@ -125,8 +163,24 @@
       font-size: 13.5px; color: var(--text-muted);
       line-height: 1.6; flex: 1;
     }
+    .card-demo .demo-price {
+      margin-top: 14px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: inline-flex; align-items: baseline; gap: 6px;
+      align-self: flex-start;
+    }
+    .card-demo .demo-price b {
+      font-weight: 500;
+      color: var(--gold-light);
+      letter-spacing: 0.3px;
+    }
     .card-demo .link {
-      margin-top: 18px;
+      margin-top: 14px;
       font-family: var(--mono); font-size: 12px;
       color: var(--gold);
       display: inline-flex; align-items: center; gap: 7px;
@@ -231,10 +285,10 @@
     <div class="notice reveal">
       <span class="ico">✦</span>
       <p>
-        <strong>Ces six pages sont des maquettes de démonstration.</strong> Elles illustrent
-        les types de projets que je peux concevoir — pas des sites livrés à des clients.
-        Pour mes réalisations en production, voir <a href="realisations.html">Réalisations</a>
-        (Joseph Yusuf, Lets-Travel, Neo4flix, et quatre autres systèmes).
+        <strong>Les pages ci-dessous sont des maquettes de démonstration.</strong> Elles illustrent
+        les types de projets que je peux concevoir — pas des sites livrés à des clients. Les
+        noms, coordonnées et lieux sont fictifs. Pour mes réalisations en production, voir
+        <a href="realisations.html">Réalisations</a> (Joseph Yusuf, Lets-Travel, Neo4flix, Xpertiz et d'autres).
       </p>
     </div>
   </div>
@@ -244,83 +298,282 @@
 <section style="padding-top: 24px;">
   <div class="wrap-wide">
     <div class="section-head reveal">
-      <span class="eyebrow">Par métier</span>
+      <span class="eyebrow">Par secteur</span>
       <h2>Trouvez le vôtre</h2>
       <p>Chaque rubrique mène à une démo réelle et cliquable — pas une image, un vrai site que vous pouvez manipuler.</p>
     </div>
 
-    <div class="grid-demo">
+    <!-- Rubrique — Restauration -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">01 — Restauration</span>
+        <h3>Vitrine &amp; réservation en ligne</h3>
+        <span class="count">2 démos</span>
+      </div>
+      <p class="rubrique-desc">Restaurants, cafés, traiteurs — convertir le passant en client dès le téléphone.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/restaurant.html">
+          <div class="row-top">
+            <span class="num">01 · Restaurant</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Vitrine &amp; réservation</h3>
+          <p class="desc">Menu en ligne, galerie de plats, réservation en 30 secondes depuis le téléphone. Pensé pour convertir le passant en client.</p>
+          <span class="demo-price">À partir de <b>1 200 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
 
-      <a class="card-demo reveal" href="demos/restaurant.html">
-        <div class="row-top">
-          <span class="num">01 · Restaurant</span>
-          <span class="tag-demo">Démo</span>
-        </div>
-        <h3>Vitrine &amp; réservation</h3>
-        <p class="desc">Menu en ligne, galerie de plats, réservation en 30 secondes depuis le téléphone. Pensé pour convertir le passant en client.</p>
-        <span class="link">Voir la démo <span class="arrow">→</span></span>
-      </a>
+        <a class="card-demo" href="demos/cafe.html">
+          <div class="row-top">
+            <span class="num">02 · Café &amp; salon de thé</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Café-pâtisserie</h3>
+          <p class="desc">Ambiance chaleureuse, carte courte et saisonnière, horaires, click &amp; collect, privatisation pour événements. L'autre visage de la restauration.</p>
+          <span class="demo-price">À partir de <b>700 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
 
-      <a class="card-demo reveal" href="demos/boutique.html">
-        <div class="row-top">
-          <span class="num">02 · Commerce</span>
-          <span class="tag-demo">Démo</span>
-        </div>
-        <h3>Boutique en ligne</h3>
-        <p class="desc">Catalogue, panier, paiement Wave / Orange Money, tableau de bord vendeur. Votre boutique ouverte 24h/24.</p>
-        <span class="link">Voir la démo <span class="arrow">→</span></span>
-      </a>
+    <!-- Rubrique — Commerce -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">02 — Commerce</span>
+        <h3>Boutique en ligne &amp; marques</h3>
+        <span class="count">2 démos</span>
+      </div>
+      <p class="rubrique-desc">Boutiques, artisans, revendeurs, marques — du catalogue large au produit iconique.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/boutique.html">
+          <div class="row-top">
+            <span class="num">03 · Commerce</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Boutique en ligne</h3>
+          <p class="desc">Catalogue, panier, paiement mobile &amp; carte bancaire, tableau de bord vendeur. Votre boutique ouverte 24h/24.</p>
+          <span class="demo-price">À partir de <b>1 200 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
 
-      <a class="card-demo reveal" href="demos/cabinet.html">
-        <div class="row-top">
-          <span class="num">03 · Libéral</span>
-          <span class="tag-demo">Démo</span>
-        </div>
-        <h3>Profession &amp; RDV</h3>
-        <p class="desc">Médecin, avocat, coach : présentation claire, prise de rendez-vous en ligne, notifications automatiques.</p>
-        <span class="link">Voir la démo <span class="arrow">→</span></span>
-      </a>
+        <a class="card-demo" href="demos/marque.html">
+          <div class="row-top">
+            <span class="num">04 · Marque mono-produit</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Marque &amp; produit iconique</h3>
+          <p class="desc">Storytelling, bénéfices, tunnel d'achat court, avis vérifiés. L'inverse du catalogue large — une seule chose, très bien racontée.</p>
+          <span class="demo-price">À partir de <b>700 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
 
-      <a class="card-demo reveal" href="demos/portfolio.html">
-        <div class="row-top">
-          <span class="num">04 · Créatif</span>
-          <span class="tag-demo">Démo</span>
-        </div>
-        <h3>Portfolio visuel</h3>
-        <p class="desc">Galerie immersive et filtrable pour designers, photographes, vidéastes. Votre travail enfin hors d'Instagram.</p>
-        <span class="link">Voir la démo <span class="arrow">→</span></span>
-      </a>
+    <!-- Rubrique — Santé -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">03 — Santé</span>
+        <h3>Cabinets médicaux &amp; centres de soins</h3>
+        <span class="count">4 démos</span>
+      </div>
+      <p class="rubrique-desc">Médecine générale, dentaire, ophtalmologie, kinésithérapie — présentation rassurante, plateau technique, prise de rendez-vous, suivi patient.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/cabinet.html">
+          <div class="row-top">
+            <span class="num">05 · Médecine générale</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Cabinet médical &amp; RDV</h3>
+          <p class="desc">Consultations, suivi des maladies chroniques et téléconsultation. Présentation du praticien et prise de rendez-vous automatisée.</p>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
 
-      <a class="card-demo reveal" href="demos/startup.html">
-        <div class="row-top">
-          <span class="num">05 · Startup</span>
-          <span class="tag-demo">Démo</span>
-        </div>
-        <h3>Page de lancement</h3>
-        <p class="desc">Landing produit qui capture vos premiers utilisateurs : accroche, démo, inscription, FAQ. Valider avant de tout construire.</p>
-        <span class="link">Voir la démo <span class="arrow">→</span></span>
-      </a>
+        <a class="card-demo" href="demos/dentaire.html">
+          <div class="row-top">
+            <span class="num">06 · Dentaire</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Cabinet dentaire</h3>
+          <p class="desc">Détartrage, implants, orthodontie, blanchiment. Équipe pluridisciplinaire, prise de RDV visible, avis patients — l'ADN d'un site qui rassure.</p>
+          <span class="demo-price">À partir de <b>1 200 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
 
-      <a class="card-demo reveal" href="demos/refonte.html">
-        <div class="row-top">
-          <span class="num">06 · Refonte</span>
-          <span class="tag-demo">Démo</span>
-        </div>
-        <h3>Avant / Après</h3>
-        <p class="desc">Site lent, daté, invisible sur Google ? Modernisation complète : performance, mobile, sécurité, référencement.</p>
-        <span class="link">Voir la démo <span class="arrow">→</span></span>
-      </a>
+        <a class="card-demo" href="demos/ophtalmo.html">
+          <div class="row-top">
+            <span class="num">07 · Ophtalmologie</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Centre ophtalmologique</h3>
+          <p class="desc">Consultation, chirurgie réfractive, dépistage glaucome &amp; DMLA. Le plateau technique mis en avant comme argument différenciant.</p>
+          <span class="demo-price">À partir de <b>1 200 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
 
-      <a class="card-demo featured reveal" href="realisations.html">
-        <div class="row-top">
-          <span class="num">07 · Sur-mesure</span>
-          <span class="tag-demo">Réel</span>
-        </div>
-        <h3>Plateforme &amp; SaaS</h3>
-        <p class="desc">Application web, microservices, architecture. Quand le besoin dépasse la vitrine — voici mes systèmes en production réelle.</p>
-        <span class="link">Voir les réalisations <span class="arrow">→</span></span>
-      </a>
+        <a class="card-demo" href="demos/kine.html">
+          <div class="row-top">
+            <span class="num">08 · Kinésithérapie</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Cabinet de kinésithérapie</h3>
+          <p class="desc">Rééducation, séances récurrentes, équipe pluridisciplinaire, espace patient avec suivi entre les séances. La logique du soin dans la durée, pas de l'acte ponctuel.</p>
+          <span class="demo-price">À partir de <b>1 200 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
 
+    <!-- Rubrique — Éducation -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">04 — Éducation</span>
+        <h3>Établissements scolaires &amp; formations</h3>
+        <span class="count">2 démos</span>
+      </div>
+      <p class="rubrique-desc">Écoles primaires, collèges, lycées, enseignement supérieur, formation professionnelle — recruter des élèves et rassurer les familles.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/ecole.html">
+          <div class="row-top">
+            <span class="num">09 · École</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Établissement scolaire</h3>
+          <p class="desc">Cycles, corps enseignant, taux de réussite, vie scolaire, inscriptions. Générique — adaptable de la maternelle au supérieur.</p>
+          <span class="demo-price">À partir de <b>1 500 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+
+        <a class="card-demo" href="demos/formation.html">
+          <div class="row-top">
+            <span class="num">10 · Formation pro &amp; e-learning</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Organisme de formation</h3>
+          <p class="desc">Catalogue de cours, formats (présentiel, distanciel, hybride), inscription adulte, certification vérifiable. Le pendant « après-scolaire » du parcours éducatif.</p>
+          <span class="demo-price">À partir de <b>1 500 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Rubrique — Créatif -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">05 — Créatif</span>
+        <h3>Portfolios, studios &amp; agences</h3>
+        <span class="count">2 démos</span>
+      </div>
+      <p class="rubrique-desc">Designers, photographes, vidéastes, studios &amp; agences — du portfolio individuel à la vitrine d'équipe.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/portfolio.html">
+          <div class="row-top">
+            <span class="num">11 · Créatif solo</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Portfolio visuel</h3>
+          <p class="desc">Galerie immersive et filtrable pour designers, photographes, vidéastes. Votre travail enfin hors d'Instagram.</p>
+          <span class="demo-price">À partir de <b>700 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+
+        <a class="card-demo" href="demos/studio.html">
+          <div class="row-top">
+            <span class="num">12 · Studio &amp; agence</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Studio créatif</h3>
+          <p class="desc">Équipe, études de cas, services, brief de prise de contact. Le site qui vend une équipe, pas un individu.</p>
+          <span class="demo-price">À partir de <b>700 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Rubrique — Startup / Produit -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">06 — Startup &amp; produit</span>
+        <h3>Landing pages &amp; sites SaaS</h3>
+        <span class="count">2 démos</span>
+      </div>
+      <p class="rubrique-desc">Fondateurs, product managers — de la landing de validation au site produit avec grille tarifaire.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/startup.html">
+          <div class="row-top">
+            <span class="num">13 · Landing produit</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Page de lancement</h3>
+          <p class="desc">Landing produit qui capture vos premiers utilisateurs : accroche, démo, inscription, FAQ. Valider avant de tout construire.</p>
+          <span class="demo-price">À partir de <b>900 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+
+        <a class="card-demo" href="demos/saas.html">
+          <div class="row-top">
+            <span class="num">14 · SaaS &amp; pricing</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Site SaaS avec pricing</h3>
+          <p class="desc">Proposition de valeur, fonctionnalités, grille tarifaire mensuel/annuel, FAQ, essai gratuit. Le vrai site produit, pas juste la landing de capture.</p>
+          <span class="demo-price">À partir de <b>900 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Rubrique — Refonte -->
+    <div class="rubrique reveal">
+      <div class="rubrique-head">
+        <span class="kicker">07 — Refonte</span>
+        <h3>Modernisation de site existant</h3>
+        <span class="count">1 démo</span>
+      </div>
+      <p class="rubrique-desc">Site lent, daté, invisible sur Google — passer d'une vitrine morte à un système qui travaille pour vous.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/refonte.html">
+          <div class="row-top">
+            <span class="num">15 · Refonte</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Avant / Après</h3>
+          <p class="desc">Site lent, daté, invisible sur Google ? Modernisation complète : performance, mobile, sécurité, référencement.</p>
+          <span class="demo-price">À partir de <b>900 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Rubrique — Sur-mesure -->
+    <div class="rubrique rubrique-last reveal">
+      <div class="rubrique-head">
+        <span class="kicker">08 — Sur-mesure</span>
+        <h3>Plateformes, SaaS &amp; applications métier</h3>
+        <span class="count">1 démo · cas réels</span>
+      </div>
+      <p class="rubrique-desc">Quand le besoin dépasse la vitrine — interfaces applicatives, tableaux de bord, back-office, systèmes en production.</p>
+      <div class="grid-demo">
+        <a class="card-demo" href="demos/dashboard.html">
+          <div class="row-top">
+            <span class="num">16 · Dashboard SaaS</span>
+            <span class="tag-demo">Démo</span>
+          </div>
+          <h3>Espace client &amp; tableau de bord</h3>
+          <p class="desc">Interface applicative : navigation latérale, KPIs, tableaux de données, graphiques, statuts. Illustre la capacité à concevoir des interfaces métier — la preuve d'architecture réelle est à côté.</p>
+          <span class="demo-price">À partir de <b>2 500 €</b></span>
+          <span class="link">Voir la démo <span class="arrow">→</span></span>
+        </a>
+
+        <a class="card-demo featured" href="realisations.html">
+          <div class="row-top">
+            <span class="num">17 · Sur-mesure</span>
+            <span class="tag-demo">Réel</span>
+          </div>
+          <h3>Plateforme &amp; SaaS</h3>
+          <p class="desc">Application web, microservices, architecture. Voici mes systèmes en production réelle : Joseph Yusuf, Lets-Travel, Neo4flix, Xpertiz et d'autres.</p>
+          <span class="link">Voir les réalisations <span class="arrow">→</span></span>
+        </a>
+      </div>
     </div>
 
     <div class="manifesto reveal">

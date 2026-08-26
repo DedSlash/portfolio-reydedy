@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Northwind — Dashboard SaaS &amp; espace client · Maquette de démonstration</title>
+<meta name="description" content="Maquette de démonstration — interface applicative fictive. Navigation latérale, KPIs, tableaux de données, graphiques factices." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
+<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b0d14;
+    --bg-2: #12141d;
+    --panel: #171923;
+    --panel-2: #1e212d;
+    --line: #262a36;
+    --line-2: #313545;
+    --text: #e6e8ef;
+    --text-2: #b2b6c4;
+    --muted: #7a7f92;
+    --brand: #6c8fff;
+    --brand-2: #4d6ef0;
+    --brand-soft: rgba(108,143,255,0.14);
+    --good: #34d399;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --violet: #a78bfa;
+    --cyan: #22d3ee;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--text); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.01em; line-height: 1.15; }
+  button { font-family: inherit; }
+  ::selection { background: var(--brand); color: var(--bg); }
+
+  .back-badge {
+    position: fixed; top: 14px; left: 14px; z-index: 90;
+    font-size: 12px; letter-spacing: 0.4px;
+    background: var(--panel); color: var(--text);
+    padding: 8px 14px; border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    border: 1px solid var(--line);
+    font-weight: 500;
+  }
+  .back-badge:hover { background: var(--brand-soft); color: var(--brand); border-color: var(--brand); }
+
+  .demo-ribbon {
+    background: var(--brand);
+    color: var(--bg);
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.4px;
+  }
+  .demo-ribbon strong { font-weight: 800; }
+
+  /* App layout */
+  .app {
+    display: grid; grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 34px);
+  }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } }
+
+  /* Sidebar */
+  .side {
+    background: var(--bg-2);
+    border-right: 1px solid var(--line);
+    padding: 20px 14px;
+    display: flex; flex-direction: column;
+    position: sticky; top: 34px; height: calc(100vh - 34px);
+    overflow-y: auto;
+  }
+  @media (max-width: 900px) { .side { position: static; height: auto; } }
+  .side-brand {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 8px 22px;
+    font-weight: 700; font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .side-brand .logo-mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--violet) 100%);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px;
+    box-shadow: 0 4px 10px rgba(108,143,255,0.4);
+  }
+  .side-brand small {
+    display: block; font-family: var(--mono); font-size: 9.5px; color: var(--muted);
+    font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px;
+  }
+  .side-search {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 8px 12px; border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 13px; color: var(--muted);
+  }
+  .side-search .kbd {
+    margin-left: auto;
+    font-family: var(--mono); font-size: 10.5px;
+    background: var(--panel-2); padding: 2px 6px; border-radius: 4px;
+    border: 1px solid var(--line-2);
+  }
+
+  .side-group {
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 12px 8px 6px;
+    font-weight: 500;
+  }
+  .side-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 10px; border-radius: 8px;
+    font-size: 13.5px; color: var(--text-2);
+    cursor: pointer;
+    transition: background .12s ease, color .12s ease;
+    margin-bottom: 1px;
+  }
+  .side-item:hover { background: var(--panel); color: var(--text); }
+  .side-item.active { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+  .side-item .ic {
+    width: 18px; height: 18px; opacity: 0.8;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 15px;
+  }
+  .side-item .pill {
+    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    background: var(--panel-2); padding: 2px 7px; border-radius: 999px;
+    color: var(--muted);
+  }
+  .side-item.active .pill { background: var(--brand); color: var(--bg); }
+  .side-user {
+    margin-top: auto; padding: 14px 8px 4px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .side-user .av {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet), var(--brand));
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .side-user b { display: block; font-size: 13px; }
+  .side-user span { font-size: 11.5px; color: var(--muted); }
+
+  /* Main */
+  main { padding: 26px 32px 60px; overflow-x: hidden; }
+  @media (max-width: 700px) { main { padding: 20px 18px 40px; } }
+
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 26px; gap: 20px; flex-wrap: wrap;
+  }
+  .topbar h1 { font-size: 22px; }
+  .topbar h1 span { color: var(--muted); font-weight: 400; }
+  .topbar .actions { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 8px;
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    border: 1px solid transparent; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .btn-primary { background: var(--brand); color: var(--bg); }
+  .btn-primary:hover { background: var(--brand-2); }
+  .btn-ghost { background: var(--panel); border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--line-2); background: var(--panel-2); }
+  .btn-icon { padding: 8px 10px; }
+
+  /* KPIs */
+  .kpis {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-bottom: 22px;
+  }
+  @media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .kpis { grid-template-columns: 1fr; } }
+  .kpi {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::before {
+    content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 3px;
+    background: var(--brand);
+  }
+  .kpi.k2::before { background: var(--violet); }
+  .kpi.k3::before { background: var(--good); }
+  .kpi.k4::before { background: var(--cyan); }
+  .kpi .lbl {
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted);
+    letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
+  }
+  .kpi .val {
+    font-family: var(--sans); font-size: 30px; font-weight: 700;
+    color: var(--text); margin-top: 4px; letter-spacing: -0.02em;
+  }
+  .kpi .delta {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+    margin-top: 8px;
+  }
+  .kpi .delta.up { color: var(--good); }
+  .kpi .delta.down { color: var(--bad); }
+  .kpi .delta span { color: var(--muted); font-weight: 400; margin-left: 4px; }
+  .kpi .spark {
+    position: absolute; right: 14px; bottom: 14px;
+    width: 90px; height: 32px;
+  }
+
+  /* Two cols */
+  .row {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 14px; margin-bottom: 22px;
+  }
+  @media (max-width: 1000px) { .row { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .card-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 18px; gap: 12px;
+  }
+  .card-head h3 { font-size: 15px; font-weight: 600; }
+  .card-head p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .card-head .tabs { display: flex; gap: 4px; background: var(--panel-2); padding: 3px; border-radius: 8px; }
+  .card-head .tabs button {
+    background: transparent; border: none; color: var(--muted);
+    padding: 5px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 500; cursor: pointer;
+  }
+  .card-head .tabs button.active { background: var(--panel); color: var(--text); }
+
+  /* Chart */
+  .chart-wrap { height: 260px; position: relative; }
+  .chart-wrap svg { width: 100%; height: 100%; }
+  .chart-legend {
+    display: flex; gap: 20px; margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--muted);
+  }
+  .chart-legend b {
+    display: inline-block; width: 10px; height: 10px; border-radius: 3px;
+    margin-right: 6px; vertical-align: middle;
+  }
+
+  /* Donut */
+  .donut-wrap {
+    display: flex; align-items: center; gap: 20px;
+    padding: 8px 0;
+  }
+  .donut { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
+  .donut .center {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .donut .center b { font-family: var(--sans); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+  .donut .center span { font-family: var(--mono); font-size: 10.5px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+  .donut-list { flex: 1; }
+  .donut-list li {
+    list-style: none;
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; font-size: 13px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .donut-list li:last-child { border-bottom: none; }
+  .donut-list .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .donut-list b { font-weight: 500; flex: 1; }
+  .donut-list span { font-family: var(--mono); font-size: 12.5px; color: var(--muted); font-weight: 500; }
+
+  /* Table */
+  .card-full { margin-bottom: 22px; }
+  .table-wrap { overflow-x: auto; margin: 0 -20px; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead th {
+    text-align: left; padding: 12px 20px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  tbody td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  tbody tr { transition: background .12s ease; }
+  tbody tr:hover { background: var(--panel-2); }
+  tbody tr:last-child td { border-bottom: none; }
+  td .cell-name { display: flex; align-items: center; gap: 12px; }
+  td .cell-name .av {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-weight: 600; font-size: 12px; color: var(--bg);
+    flex-shrink: 0;
+  }
+  td .cell-name b { font-weight: 500; }
+  td .cell-name span { display: block; font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  td .amount { font-family: var(--mono); font-weight: 500; }
+  td .amount.pos { color: var(--good); }
+  td .amount.neg { color: var(--bad); }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px; border-radius: 999px;
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.5px;
+  }
+  .status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+  .st-ok { background: rgba(52,211,153,0.14); color: var(--good); }
+  .st-ok::before { background: var(--good); }
+  .st-wait { background: rgba(251,191,36,0.14); color: var(--warn); }
+  .st-wait::before { background: var(--warn); }
+  .st-fail { background: rgba(248,113,113,0.14); color: var(--bad); }
+  .st-fail::before { background: var(--bad); }
+  .st-info { background: var(--brand-soft); color: var(--brand); }
+  .st-info::before { background: var(--brand); }
+
+  .table-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 0 16px; gap: 12px; flex-wrap: wrap;
+  }
+  .table-toolbar .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-chip {
+    background: var(--panel-2); border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 999px;
+    font-family: var(--mono); font-size: 11.5px; color: var(--text-2); font-weight: 500;
+    cursor: pointer;
+  }
+  .filter-chip.active { background: var(--brand-soft); color: var(--brand); border-color: rgba(108,143,255,0.35); }
+
+  /* Activity */
+  .activity {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin-bottom: 22px;
+  }
+  @media (max-width: 1000px) { .activity { grid-template-columns: 1fr; } }
+  .feed li {
+    list-style: none;
+    display: flex; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .feed li:last-child { border-bottom: none; padding-bottom: 0; }
+  .feed .av {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--bg);
+    flex-shrink: 0;
+  }
+  .feed .body b { font-weight: 500; }
+  .feed .body { line-height: 1.5; }
+  .feed .body p { color: var(--text-2); font-size: 12.5px; margin-top: 2px; }
+  .feed .body time { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+
+  .goals li {
+    list-style: none;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .goals li:last-child { border-bottom: none; padding-bottom: 0; }
+  .goals .goal-head { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13.5px; }
+  .goals .goal-head b { font-weight: 500; }
+  .goals .goal-head span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .goals .bar { height: 6px; background: var(--panel-2); border-radius: 999px; overflow: hidden; }
+  .goals .bar b { display: block; height: 100%; border-radius: 999px; }
+  .goals .g1 { background: linear-gradient(90deg, var(--brand), var(--violet)); }
+  .goals .g2 { background: linear-gradient(90deg, var(--good), var(--cyan)); }
+  .goals .g3 { background: linear-gradient(90deg, var(--warn), #f97316); }
+  .goals .g4 { background: linear-gradient(90deg, var(--violet), var(--brand)); }
+
+  footer {
+    background: var(--bg-2); border-top: 1px solid var(--line);
+    padding: 30px 32px 24px; text-align: center; font-size: 12.5px;
+    color: var(--muted);
+  }
+  footer .row1 { margin-bottom: 8px; color: var(--text-2); }
+  footer .row2 { font-size: 11.5px; }
+  footer a { color: var(--brand); border-bottom: 1px dotted rgba(108,143,255,0.4); }
+  footer a:hover { color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+  /* Meta portfolio — bandeau prix */
+  .demo-price-strip {
+    background: #f4efe4;
+    color: #2a1e18;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; line-height: 1.45;
+    display: flex; justify-content: center; align-items: center;
+    gap: 8px 16px; flex-wrap: wrap;
+  }
+  .demo-price-strip .lbl { color: #6a5748; }
+  .demo-price-strip b { font-weight: 700; color: #8d5828; letter-spacing: 0.2px; }
+  .demo-price-strip .sep { color: #c4b7a2; }
+  .demo-price-strip a {
+    color: #2a1e18; text-decoration: none;
+    border-bottom: 1px solid rgba(141,88,40,0.4);
+    padding-bottom: 1px; font-weight: 600;
+  }
+  .demo-price-strip a:hover { border-bottom-color: #8d5828; color: #8d5828; }
+</style>
+</head>
+<body>
+
+<a class="back-badge" href="../exemples.html">← Réalisé par Rey Dedy Pangou</a>
+
+<div class="demo-price-strip">
+  <span class="lbl">Réalisation de ce type — à partir de <b>2 500 €</b></span>
+  <span class="sep">·</span>
+  <a href="../devis.html">Demander un devis →</a>
+</div>
+
+<div class="demo-ribbon">
+  <strong>Maquette de démonstration</strong> — Produit fictif, données factices. Illustre un dashboard SaaS / espace client.
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="side-brand">
+      <div class="logo-mark">N</div>
+      <div>Northwind<small>v4.2 · Production</small></div>
+    </div>
+
+    <div class="side-search">
+      <span>⌕</span>
+      <span>Rechercher…</span>
+      <span class="kbd">⌘K</span>
+    </div>
+
+    <div class="side-group">Navigation</div>
+    <div class="side-item active"><span class="ic">◧</span>Tableau de bord</div>
+    <div class="side-item"><span class="ic">◈</span>Clients<span class="pill">248</span></div>
+    <div class="side-item"><span class="ic">◇</span>Projets<span class="pill">36</span></div>
+    <div class="side-item"><span class="ic">≡</span>Facturation</div>
+    <div class="side-item"><span class="ic">↯</span>Automations</div>
+    <div class="side-item"><span class="ic">☰</span>Rapports</div>
+
+    <div class="side-group">Opérations</div>
+    <div class="side-item"><span class="ic">✦</span>Événements<span class="pill">4</span></div>
+    <div class="side-item"><span class="ic">◐</span>Intégrations</div>
+    <div class="side-item"><span class="ic">⚙</span>Paramètres</div>
+    <div class="side-item"><span class="ic">?</span>Support &amp; docs</div>
+
+    <div class="side-user">
+      <div class="av">RM</div>
+      <div>
+        <b>Rachel Moreau</b>
+        <span>Admin · rachel@example</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <div class="topbar">
+      <div>
+        <h1>Vue d'ensemble <span>· septembre 2026</span></h1>
+        <p style="color:var(--muted);font-size:13px;margin-top:2px;">Comparaison sur les 30 derniers jours vs. période précédente.</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost">🕐 30 derniers jours</button>
+        <button class="btn btn-ghost btn-icon" title="Filtres">⇅</button>
+        <button class="btn btn-ghost btn-icon" title="Exporter">↓</button>
+        <button class="btn btn-primary">＋ Nouveau projet</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis">
+      <div class="kpi k1">
+        <div class="lbl">Chiffre d'affaires</div>
+        <div class="val">128 400 XX</div>
+        <div class="delta up">↑ 12,4 %<span>vs. période préc.</span></div>
+        <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none">
+          <path d="M0,26 L14,22 L28,24 L42,18 L56,14 L70,16 L84,8 L100,4" stroke="#6c8fff" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <div class="kpi k2">
+        <div class="lbl">Nouveaux clients</div>
+        <div class="val">36</div>
+        <div class="delta up">↑ 8,1 %<span>vs. période préc.</span></div>
+        <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none">
+          <path d="M0,20 L14,24 L28,18 L42,22 L56,14 L70,10 L84,14 L100,8" stroke="#a78bfa" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <div class="kpi k3">
+        <div class="lbl">Taux de conversion</div>
+        <div class="val">4,7 %</div>
+        <div class="delta down">↓ 0,3 pt<span>vs. période préc.</span></div>
+        <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none">
+          <path d="M0,10 L14,14 L28,12 L42,18 L56,16 L70,22 L84,20 L100,24" stroke="#34d399" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <div class="kpi k4">
+        <div class="lbl">Rétention 30j</div>
+        <div class="val">92 %</div>
+        <div class="delta up">↑ 1,4 pt<span>vs. période préc.</span></div>
+        <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none">
+          <path d="M0,18 L14,14 L28,16 L42,12 L56,14 L70,8 L84,10 L100,6" stroke="#22d3ee" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Chart + Donut -->
+    <div class="row">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3>Revenu quotidien</h3>
+            <p>Évolution des 30 derniers jours · comparaison période précédente</p>
+          </div>
+          <div class="tabs">
+            <button class="active">Revenu</button>
+            <button>Commandes</button>
+            <button>Panier moyen</button>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 800 260" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="grad1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#6c8fff" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#6c8fff" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="grad2" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.22"/>
+                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid -->
+            <g stroke="#262a36" stroke-width="1">
+              <line x1="0" y1="50" x2="800" y2="50"/>
+              <line x1="0" y1="110" x2="800" y2="110"/>
+              <line x1="0" y1="170" x2="800" y2="170"/>
+              <line x1="0" y1="230" x2="800" y2="230"/>
+            </g>
+            <!-- Previous period (dashed) -->
+            <path d="M0,190 C60,170 120,180 180,160 C240,140 300,150 360,130 C420,120 480,140 540,120 C600,105 660,115 720,100 L800,90"
+              stroke="#a78bfa" stroke-width="2" stroke-dasharray="5 5" fill="none" opacity="0.6"/>
+            <!-- Current period -->
+            <path d="M0,180 C60,155 120,165 180,140 C240,120 300,130 360,105 C420,95 480,110 540,85 C600,70 660,80 720,55 L800,40 L800,260 L0,260 Z"
+              fill="url(#grad1)"/>
+            <path d="M0,180 C60,155 120,165 180,140 C240,120 300,130 360,105 C420,95 480,110 540,85 C600,70 660,80 720,55 L800,40"
+              stroke="#6c8fff" stroke-width="2.5" fill="none"/>
+            <!-- Data points -->
+            <g fill="#6c8fff" stroke="#0b0d14" stroke-width="2">
+              <circle cx="180" cy="140" r="4"/>
+              <circle cx="360" cy="105" r="4"/>
+              <circle cx="540" cy="85" r="4"/>
+              <circle cx="720" cy="55" r="4"/>
+            </g>
+            <!-- X labels -->
+            <g fill="#7a7f92" font-family="JetBrains Mono" font-size="10">
+              <text x="0" y="252">1 sept</text>
+              <text x="180" y="252">8 sept</text>
+              <text x="360" y="252">15 sept</text>
+              <text x="540" y="252">22 sept</text>
+              <text x="720" y="252">29 sept</text>
+            </g>
+          </svg>
+        </div>
+        <div class="chart-legend">
+          <span><b style="background:#6c8fff;"></b>Période actuelle · 128 400 XX</span>
+          <span><b style="background:#a78bfa;opacity:0.6;"></b>Période précédente · 114 200 XX</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3>Répartition par plan</h3>
+            <p>Sur les 248 clients actifs</p>
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <div class="donut">
+            <svg viewBox="0 0 42 42" style="width:100%;height:100%;transform:rotate(-90deg);">
+              <circle cx="21" cy="21" r="15.915" fill="none" stroke="#262a36" stroke-width="3"/>
+              <circle cx="21" cy="21" r="15.915" fill="none" stroke="#6c8fff" stroke-width="3"
+                stroke-dasharray="52 48" stroke-dashoffset="0"/>
+              <circle cx="21" cy="21" r="15.915" fill="none" stroke="#a78bfa" stroke-width="3"
+                stroke-dasharray="28 72" stroke-dashoffset="-52"/>
+              <circle cx="21" cy="21" r="15.915" fill="none" stroke="#22d3ee" stroke-width="3"
+                stroke-dasharray="16 84" stroke-dashoffset="-80"/>
+              <circle cx="21" cy="21" r="15.915" fill="none" stroke="#fbbf24" stroke-width="3"
+                stroke-dasharray="4 96" stroke-dashoffset="-96"/>
+            </svg>
+            <div class="center"><b>248</b><span>Clients</span></div>
+          </div>
+          <ul class="donut-list">
+            <li><span class="dot" style="background:#6c8fff;"></span><b>Business</b><span>129 · 52 %</span></li>
+            <li><span class="dot" style="background:#a78bfa;"></span><b>Starter</b><span>69 · 28 %</span></li>
+            <li><span class="dot" style="background:#22d3ee;"></span><b>Enterprise</b><span>40 · 16 %</span></li>
+            <li><span class="dot" style="background:#fbbf24;"></span><b>Free</b><span>10 · 4 %</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card card-full">
+      <div class="card-head">
+        <div>
+          <h3>Transactions récentes</h3>
+          <p>Les 8 derniers événements de facturation</p>
+        </div>
+        <button class="btn btn-ghost">Tout voir →</button>
+      </div>
+
+      <div class="table-toolbar">
+        <div class="filters">
+          <span class="filter-chip active">Toutes</span>
+          <span class="filter-chip">Payées</span>
+          <span class="filter-chip">En attente</span>
+          <span class="filter-chip">Échouées</span>
+        </div>
+        <div style="font-family:var(--mono);font-size:11.5px;color:var(--muted);">Rafraîchi il y a 34 s</div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Référence</th>
+              <th>Plan</th>
+              <th>Statut</th>
+              <th style="text-align:right;">Montant</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#6c8fff,#a78bfa);">AT</div><div><b>Atlas Studio</b><span>hello@atlas.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8471</span></td>
+              <td>Enterprise</td>
+              <td><span class="status-pill st-ok">Payée</span></td>
+              <td style="text-align:right;"><span class="amount pos">+ 2 890 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">27 sept · 14:22</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#34d399,#22d3ee);">FB</div><div><b>Fabrique Bureau</b><span>compta@fabrique.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8470</span></td>
+              <td>Business</td>
+              <td><span class="status-pill st-ok">Payée</span></td>
+              <td style="text-align:right;"><span class="amount pos">+ 480 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">27 sept · 11:04</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#fbbf24,#f97316);">NP</div><div><b>Northpeak</b><span>ops@northpeak.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8469</span></td>
+              <td>Business</td>
+              <td><span class="status-pill st-wait">En attente</span></td>
+              <td style="text-align:right;"><span class="amount">480 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">26 sept · 18:47</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#a78bfa,#6c8fff);">MR</div><div><b>Meridian Ltd</b><span>billing@meridian.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8468</span></td>
+              <td>Enterprise</td>
+              <td><span class="status-pill st-ok">Payée</span></td>
+              <td style="text-align:right;"><span class="amount pos">+ 3 200 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">26 sept · 09:12</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#f87171,#fbbf24);">RV</div><div><b>Rive</b><span>hello@rive.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8467</span></td>
+              <td>Starter</td>
+              <td><span class="status-pill st-fail">Échec paiement</span></td>
+              <td style="text-align:right;"><span class="amount neg">180 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">25 sept · 22:03</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#22d3ee,#6c8fff);">AB</div><div><b>Ambr Co.</b><span>rachel@ambr.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8466</span></td>
+              <td>Business</td>
+              <td><span class="status-pill st-info">Remboursée</span></td>
+              <td style="text-align:right;"><span class="amount">— 480 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">25 sept · 16:41</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#6c8fff,#22d3ee);">SC</div><div><b>Studio&amp;Co</b><span>hello@studio.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8465</span></td>
+              <td>Business</td>
+              <td><span class="status-pill st-ok">Payée</span></td>
+              <td style="text-align:right;"><span class="amount pos">+ 480 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">25 sept · 08:20</td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="av" style="background:linear-gradient(135deg,#a78bfa,#f87171);">HB</div><div><b>Habit Lab</b><span>finance@habit.example</span></div></div></td>
+              <td><span style="font-family:var(--mono);color:var(--text-2);">#INV-8464</span></td>
+              <td>Starter</td>
+              <td><span class="status-pill st-ok">Payée</span></td>
+              <td style="text-align:right;"><span class="amount pos">+ 180 XX</span></td>
+              <td style="color:var(--muted);font-size:12.5px;">24 sept · 15:58</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Activity + Goals -->
+    <div class="activity">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3>Activité récente</h3>
+            <p>Événements des dernières 24 heures</p>
+          </div>
+        </div>
+        <ul class="feed">
+          <li>
+            <div class="av" style="background:linear-gradient(135deg,#6c8fff,#a78bfa);">AT</div>
+            <div class="body"><b>Atlas Studio</b> a mis à niveau son plan vers <b>Enterprise</b>. <br><time>Il y a 12 min</time></div>
+          </li>
+          <li>
+            <div class="av" style="background:linear-gradient(135deg,#f87171,#fbbf24);">RV</div>
+            <div class="body"><b>Rive</b> a subi un échec de paiement. Relance automatique lancée. <br><time>Il y a 34 min</time></div>
+          </li>
+          <li>
+            <div class="av" style="background:linear-gradient(135deg,#34d399,#22d3ee);">FB</div>
+            <div class="body"><b>Fabrique Bureau</b> a invité 3 nouveaux utilisateurs. <br><time>Il y a 1 h</time></div>
+          </li>
+          <li>
+            <div class="av" style="background:linear-gradient(135deg,#a78bfa,#6c8fff);">SY</div>
+            <div class="body">Nouvelle intégration <b>Slack</b> connectée par Rachel. <br><time>Il y a 3 h</time></div>
+          </li>
+          <li>
+            <div class="av" style="background:linear-gradient(135deg,#22d3ee,#a78bfa);">HB</div>
+            <div class="body"><b>Habit Lab</b> a validé son onboarding. <br><time>Il y a 5 h</time></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3>Objectifs du trimestre</h3>
+            <p>Progression vs. cible</p>
+          </div>
+        </div>
+        <ul class="goals">
+          <li>
+            <div class="goal-head"><b>Chiffre d'affaires</b><span>128 K / 150 K XX</span></div>
+            <div class="bar"><b class="g1" style="width:85%;"></b></div>
+          </li>
+          <li>
+            <div class="goal-head"><b>Nouveaux clients</b><span>36 / 40</span></div>
+            <div class="bar"><b class="g2" style="width:90%;"></b></div>
+          </li>
+          <li>
+            <div class="goal-head"><b>Réduction du churn</b><span>2,4 % / 2,0 %</span></div>
+            <div class="bar"><b class="g3" style="width:62%;"></b></div>
+          </li>
+          <li>
+            <div class="goal-head"><b>NPS moyen</b><span>52 / 60</span></div>
+            <div class="bar"><b class="g4" style="width:78%;"></b></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="row1">
+    Maquette de démonstration réalisée par <a href="../index.html">Rey Dedy Pangou</a> — voir plus de démos sur <a href="../exemples.html">/exemples</a>.
+  </div>
+  <div class="row2">
+    Northwind est un produit fictif. Toutes les données affichées sont factices.
+  </div>
+</footer>
+
+<script>
+  // Sidebar item switcher (visuel seulement)
+  document.querySelectorAll('.side-item').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.side-item').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+  // Tabs
+  document.querySelectorAll('.card-head .tabs').forEach(g => {
+    g.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => {
+        g.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      });
+    });
+  });
+  // Filter chips
+  document.querySelectorAll('.filter-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
